@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   chart!: any;
   datas: any[] = [];
 
-  routes = [
+  routesAdmin = [
     {
       title: 'Estadísticas',
       route: '/statistics',
@@ -38,7 +38,24 @@ export class HomePage implements OnInit {
       title: 'Ver Jugadores',
       route: '/table-players',
     },
+    {
+      title: 'Asistente Virtual',
+      route: '/chat-bot',
+    },
   ]
+
+  routesUser = [
+    {
+      title: 'Estadísticas',
+      route: '/statistics',
+    },
+    {
+      title: 'Asistente Virtual',
+      route: '/chat-bot',
+    },
+  ]
+
+  profile: any;
 
   constructor(
     private authService: AuthService,
@@ -47,7 +64,9 @@ export class HomePage implements OnInit {
     public form: FormBuilder,
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
-  ) { }
+  ) {
+    this.profile = authService.getProfile()
+  }
 
   ngOnInit() {
     this.player()

@@ -17,7 +17,7 @@
           <div formGroupName="player">
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Nombre</ion-label>
-              <ion-input placeholder="Ej: Alan Walker" (keypress)="validateText($event)" formControlName="name"
+              <ion-input placeholder="Ej: Salomón Rondón" (input)="checkText('player.name')" (keypress)="validateText($event)" formControlName="name"
                 maxlength="50"></ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('player.name')?.hasError('required') && addPlayerForm.get('player.name')?.touched">
@@ -35,7 +35,7 @@
 
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Nombres</ion-label>
-              <ion-input placeholder="Ej: Alan Olav" (keypress)="validateText($event)" formControlName="firstname"
+              <ion-input placeholder="Ej: José Salomón" (input)="checkText('player.firstname')" (keypress)="validateText($event)" formControlName="firstname"
                 maxlength="50"></ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('player.firstname')?.hasError('required') && addPlayerForm.get('player.firstname')?.touched">
@@ -53,7 +53,7 @@
 
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Apellidos</ion-label>
-              <ion-input placeholder="Ej: Walker" (keypress)="validateText($event)" formControlName="lastname"
+              <ion-input placeholder="Ej: Rondón Giménez" (input)="checkText('player.lastname')" (keypress)="validateText($event)" formControlName="lastname"
                 maxlength="50"></ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('player.lastname')?.hasError('required') && addPlayerForm.get('player.lastname')?.touched">
@@ -115,7 +115,7 @@
 
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Nacionalidad</ion-label>
-              <ion-input placeholder="Ej: Veneco" (keypress)="validateText($event)" formControlName="nationality"
+              <ion-input placeholder="Ej: Venezuela" (input)="checkText('player.nationality')" (keypress)="validateText($event)" formControlName="nationality"
                 maxlength="20">
               </ion-input>
               <ion-note slot="error" style="color: white;"
@@ -281,7 +281,7 @@
 
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Posición</ion-label>
-              <ion-input placeholder="Ej: Attacker" (keypress)="validateText($event)" formControlName="position"
+              <ion-input placeholder="Ej: Delantero" (input)="checkText('game.position')" (keypress)="validateText($event)" formControlName="position"
                 maxlength="20">
               </ion-input>
               <ion-note slot="error" style="color: white;"
