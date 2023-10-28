@@ -17,8 +17,8 @@
           <div formGroupName="player">
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Nombre</ion-label>
-              <ion-input placeholder="Ej: Salomón Rondón" (input)="checkText('player.name')" (keypress)="validateText($event)" formControlName="name"
-                maxlength="50"></ion-input>
+              <ion-input placeholder="Ej: Salomón Rondón" (input)="checkText('player.name')"
+                (keypress)="validateText($event)" formControlName="name" maxlength="50"></ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('player.name')?.hasError('required') && addPlayerForm.get('player.name')?.touched">
                 {{ 'REQUIRED' | translate }}
@@ -35,8 +35,8 @@
 
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Nombres</ion-label>
-              <ion-input placeholder="Ej: José Salomón" (input)="checkText('player.firstname')" (keypress)="validateText($event)" formControlName="firstname"
-                maxlength="50"></ion-input>
+              <ion-input placeholder="Ej: José Salomón" (input)="checkText('player.firstname')"
+                (keypress)="validateText($event)" formControlName="firstname" maxlength="50"></ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('player.firstname')?.hasError('required') && addPlayerForm.get('player.firstname')?.touched">
                 {{ 'REQUIRED' | translate }}
@@ -53,8 +53,8 @@
 
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Apellidos</ion-label>
-              <ion-input placeholder="Ej: Rondón Giménez" (input)="checkText('player.lastname')" (keypress)="validateText($event)" formControlName="lastname"
-                maxlength="50"></ion-input>
+              <ion-input placeholder="Ej: Rondón Giménez" (input)="checkText('player.lastname')"
+                (keypress)="validateText($event)" formControlName="lastname" maxlength="50"></ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('player.lastname')?.hasError('required') && addPlayerForm.get('player.lastname')?.touched">
                 {{ 'REQUIRED' | translate }}
@@ -115,8 +115,8 @@
 
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Nacionalidad</ion-label>
-              <ion-input placeholder="Ej: Venezuela" (input)="checkText('player.nationality')" (keypress)="validateText($event)" formControlName="nationality"
-                maxlength="20">
+              <ion-input placeholder="Ej: Venezuela" (input)="checkText('player.nationality')"
+                (keypress)="validateText($event)" formControlName="nationality" maxlength="20">
               </ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('player.nationality')?.hasError('required') && addPlayerForm.get('player.nationality')?.touched">
@@ -281,8 +281,8 @@
 
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Posición</ion-label>
-              <ion-input placeholder="Ej: Delantero" (input)="checkText('game.position')" (keypress)="validateText($event)" formControlName="position"
-                maxlength="20">
+              <ion-input placeholder="Ej: Delantero" (input)="checkText('game.position')"
+                (keypress)="validateText($event)" formControlName="position" maxlength="20">
               </ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('game.position')?.hasError('required') && addPlayerForm.get('game.position')?.touched">
@@ -955,6 +955,49 @@
               </ion-note>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('penalty.saved')?.hasError('pattern')">
+                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+              </ion-note>
+            </ion-item>
+          </div>
+        </form>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide>
+      <ion-card class="jugador-card" color="primary">
+        <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+        <h2>Valor de mercado</h2>
+        <form [formGroup]="addPlayerForm">
+          <div formGroupName="market">
+            <ion-item counter="true" class="full-width">
+              <ion-label position="floating">Fecha</ion-label>
+              <ion-input [maskito]="maskitoOptions" [maskitoElement]="maskPredicate" placeholder="Ej: 19/07/2023"
+                type="number" formControlName="date">
+              </ion-input>
+              <ion-note slot="error" style="color: white;"
+                *ngIf="addPlayerForm.get('market.date')?.hasError('required') && addPlayerForm.get('market.date')?.touched">
+                {{ 'REQUIRED' | translate }}
+              </ion-note>
+              <ion-note slot="error" style="color: white;"
+                *ngIf="addPlayerForm.get('market.date')?.hasError('pattern')">
+                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+              </ion-note>
+            </ion-item>
+
+            <ion-item counter="true" class="full-width">
+              <ion-label position="floating">Valor del mercado</ion-label>
+              <ion-input placeholder="Ej: 350" type="number" formControlName="marketValue">
+              </ion-input>
+              <ion-note slot="error" style="color: white;"
+                *ngIf="addPlayerForm.get('market.marketValue')?.hasError('required') && addPlayerForm.get('market.marketValue')?.touched">
+                {{ 'REQUIRED' | translate }}
+              </ion-note>
+              <ion-note slot="error" style="color: white;"
+                *ngIf="addPlayerForm.get('market.marketValue')?.hasError('maxDigitsExceeded')">
+                Penalti cometidos no debe exceder los 4 caracteres.
+              </ion-note>
+              <ion-note slot="error" style="color: white;"
+                *ngIf="addPlayerForm.get('market.marketValue')?.hasError('pattern')">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
             </ion-item>

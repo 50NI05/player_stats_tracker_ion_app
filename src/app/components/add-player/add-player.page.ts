@@ -114,6 +114,10 @@ export class AddPlayerPage implements OnInit {
         missed: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         saved: new FormControl('', [Validators.required, this.validateMaxDigits(2)])
       }),
+      market: new FormGroup({
+        date: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(this.birthPattern)]),
+        marketValue: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
+      }),
     })
   }
 
@@ -235,6 +239,8 @@ export class AddPlayerPage implements OnInit {
       scored: parseInt(this.addPlayerForm.controls['penalty'].value.scored),
       missed: parseInt(this.addPlayerForm.controls['penalty'].value.missed),
       saved: parseInt(this.addPlayerForm.controls['penalty'].value.saved),
+      date: new Date(this.addPlayerForm.controls['market'].value.date),
+      market_value: this.addPlayerForm.controls['market'].value.marketValue,
       name: this.addPlayerForm.controls['player'].value.name,
       firstname: this.addPlayerForm.controls['player'].value.firstname,
       lastname: this.addPlayerForm.controls['player'].value.lastname,
