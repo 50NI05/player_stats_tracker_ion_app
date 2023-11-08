@@ -114,7 +114,12 @@ interface Players1 {
     scored: any,
     missed: any,
     saved: any
-  }
+  },
+  market_value: {
+    market_value: any,
+    date: any,
+    market_value_currency: any
+  },
 }
 
 interface Players2 {
@@ -193,6 +198,11 @@ interface Players2 {
     missed: any,
     saved: any
   }
+  market_value: {
+    market_value: any,
+    date: any,
+    market_value_currency: any
+  },
 }
 
 @Component({
@@ -671,7 +681,8 @@ export class StatisticsPage implements OnInit {
               dribble: { attempts: any; success: any; past: any };
               foul: { drawn: any; committed: any; };
               card: { yellow: any, yellowred: any; red: any; };
-              penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
+              penalty: { won: any, committed: any, scored: any, missed: any, saved: any };
+              market_value: { market_value: any, date: any, market_value_currency: any }
             }) => {
             this.players1.push({
               id: response.data.player.id,
@@ -748,7 +759,12 @@ export class StatisticsPage implements OnInit {
                 scored: e.penalty.scored,
                 missed: e.penalty.missed,
                 saved: e.penalty.saved
-              }
+              },
+              market_value: {
+                market_value: response.data.market_value.market_value,
+                date: response.data.market_value.date,
+                market_value_currency: response.data.market_value.market_value_currency
+              },
             })
           },
           )
@@ -811,7 +827,8 @@ export class StatisticsPage implements OnInit {
               dribble: { attempts: any; success: any; past: any };
               foul: { drawn: any; committed: any; };
               card: { yellow: any, yellowred: any; red: any; };
-              penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
+              penalty: { won: any, committed: any, scored: any, missed: any, saved: any };
+              market_value: { market_value: any, date: any, market_value_currency: any }
             }) => {
             this.players2.push({
               id: response.data.player.id,
@@ -888,7 +905,12 @@ export class StatisticsPage implements OnInit {
                 scored: e.penalty.scored,
                 missed: e.penalty.missed,
                 saved: e.penalty.saved
-              }
+              },
+              market_value: {
+                market_value: response.data.market_value.market_value,
+                date: response.data.market_value.date,
+                market_value_currency: response.data.market_value.market_value_currency
+              },
             })
           })
           this.loadingCtrl.dismiss()
