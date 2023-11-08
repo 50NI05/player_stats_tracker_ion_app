@@ -271,6 +271,8 @@ export class AddPlayerPage implements OnInit {
             alertController: this.alertController
           })
 
+          this.addPlayerForm.reset()
+
           this.loadingCtrl.dismiss();
 
         } else if (response.status === 'ERROR') {

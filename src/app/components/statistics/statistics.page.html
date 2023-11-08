@@ -140,6 +140,25 @@
             </div>
           </ion-row>
 
+          <!-- VALOR DEL MERCADO -->
+          <div>Valor de Mercado</div>
+          <ion-row>
+            <div *ngFor="let player of players1">Valor actual: {{ player.market_value.market_value === null ? 0 :
+              player.market_value.market_value
+              }} mil {{ player.market_value.market_value_currency }}</div>
+            <div *ngFor="let player of players2">Valor actual: {{ player.market_value.market_value === null ? 0 :
+              player.market_value.market_value
+              }} mil {{ player.market_value.market_value_currency }}</div>
+          </ion-row>
+          <ion-row>
+            <div *ngFor="let player of players1">Última revisión: {{ player.market_value.date === null ? 0 :
+              player.market_value.date }}
+            </div>
+            <div *ngFor="let player of players2">Última revisión: {{ player.market_value.date === null ? 0 :
+              player.market_value.date }}
+            </div>
+          </ion-row>
+
           <!-- Disparos -->
           <div>Disparos</div>
           <ion-row>
