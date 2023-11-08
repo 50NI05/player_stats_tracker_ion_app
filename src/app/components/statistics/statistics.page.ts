@@ -761,9 +761,9 @@ export class StatisticsPage implements OnInit {
                 saved: e.penalty.saved
               },
               market_value: {
-                market_value: response.data.market_value.market_value,
-                date: response.data.market_value.date,
-                market_value_currency: response.data.market_value.market_value_currency
+                market_value: response.data.market_value === undefined ? 0 : response.data.market_value.market_value,
+                date: response.data.market_value === undefined ? 0 : response.data.market_value.date,
+                market_value_currency: response.data.market_value === undefined ? '€' : response.data.market_value.market_value_currency
               },
             })
           },
@@ -907,9 +907,9 @@ export class StatisticsPage implements OnInit {
                 saved: e.penalty.saved
               },
               market_value: {
-                market_value: response.data.market_value.market_value,
-                date: response.data.market_value.date,
-                market_value_currency: response.data.market_value.market_value_currency
+                market_value: response.data.market_value === undefined ? 0 : response.data.market_value.market_value,
+                date: response.data.market_value === undefined ? 0 : response.data.market_value.date,
+                market_value_currency: response.data.market_value === undefined ? '€' : response.data.market_value.market_value_currency
               },
             })
           })

@@ -210,6 +210,9 @@ export class PlayerDetailsPage implements OnInit {
     this.form.get('penalty.committed')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.committed)
     this.form.get('penalty.saved')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.saved)
     this.form.get('penalty.scored')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.scored)
+
+    this.form.get('market.date')!.setValue(this.navParams.get('detailsPlayer')[0].market_value.date)
+    this.form.get('market.marketValue')!.setValue(this.navParams.get('detailsPlayer')[0].market_value.market_value)
   }
 
   getAllTeams() {

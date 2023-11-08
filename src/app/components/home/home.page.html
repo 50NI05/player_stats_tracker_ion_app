@@ -59,8 +59,8 @@
                 <h2><strong>Posición:</strong> {{ data.statistics[0].game.position }}</h2>
                 <h2><strong>Liga:</strong> {{ data.statistics[0].league.name }}</h2>
                 <h2><strong>Nacionalidad:</strong> {{ data.player.nationality }}</h2>
-                <h2><strong>Pases:</strong> {{ data.statistics[0].dribble.success === null ? 0 :
-                  data.statistics[0].dribble.success }}</h2>
+                <h2><strong>Valor de Mercado:</strong> {{ data.market_value.market_value === null ? 0 :
+                  data.market_value.market_value }} mil {{ data.market_value.market_value_currency }}</h2>
               </div>
               <div style="position: relative; margin: auto; height: 300;">
                 <canvas id="chart" #chart></canvas>

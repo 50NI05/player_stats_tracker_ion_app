@@ -84,7 +84,7 @@ export class HomePage implements OnInit {
 
     const random = Math.floor(Math.random() * 10) + 1;
 
-    this.authService.call(null, `getPlayer/${random}`, 'GET', true).subscribe({
+    this.authService.call(null, `getPlayer/${12}`, 'GET', true).subscribe({
       next: (response) => {
         this.datas = []
         if (response.status === Constant.SUCCESS) {
