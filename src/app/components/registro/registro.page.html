@@ -27,6 +27,9 @@
               slot="error">
               {{ 'REQUIRED' | translate }}
             </ion-note>
+            <ion-note *ngIf="formularioRegistro.controls['firstname'].hasError('pattern')" slot="error">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
           </ion-item>
 
           <ion-item counter="true" fill="outline" class="registerForm">
@@ -37,6 +40,9 @@
               *ngIf="formularioRegistro.controls['lastname'].hasError('required') && formularioRegistro.get('lastname')?.touched"
               slot="error">
               {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note *ngIf="formularioRegistro.controls['lastname'].hasError('pattern')" slot="error">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
             </ion-note>
           </ion-item>
 
