@@ -959,7 +959,8 @@
           <ion-col>
             <ion-item counter="true" class="full-width">
               <ion-label position="floating">Fecha</ion-label>
-              <ion-input placeholder="Ej: 19/07/2023" type="number" formControlName="date">
+              <ion-input [maskito]="maskitoOptions" [maskitoElement]="maskPredicate" placeholder="Ej: 19/07/2023"
+                type="text" formControlName="date">
               </ion-input>
               <ion-note slot="error" style="color: white;"
                 *ngIf="form.get('market.date')?.hasError('required') && form.get('market.date')?.touched">
