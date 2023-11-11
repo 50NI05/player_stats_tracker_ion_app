@@ -68,6 +68,12 @@
           <h3>{{ team.name }}</h3>
           <p>{{ team.country }}</p>
         </ion-label>
+        <ion-label slot="end">
+          <ion-buttons style="display: flex; flex-direction: row; justify-content: center;">
+            <ion-button (click)="openModal(team.id)" fill="clear"><ion-icon
+                name="create-outline"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-label>
       </ion-item>
     </ion-list>
   </ion-card>
