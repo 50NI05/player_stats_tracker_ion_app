@@ -18,6 +18,11 @@
 </ion-content>
 
 <ion-footer>
+  <ion-list class="question-list">
+    <ion-item *ngFor="let question of questions" class="question" (click)="message(question)">
+      {{ question }}
+    </ion-item>
+  </ion-list>
   <ion-toolbar [formGroup]="form">
     <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje..." class="message-input"
       (keyup.enter)="assistant()" formControlName="prompt"></ion-input>

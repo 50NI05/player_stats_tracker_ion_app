@@ -1,7 +1,17 @@
+.question-list {
+  // background-color: #dcf8c6;
+  padding: 10px;
+}
+
+.question {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
 .message-list {
   padding-top: 10px;
   padding-bottom: 0;
-  /* Elimina el espacio en la parte inferior */
 }
 
 .message {

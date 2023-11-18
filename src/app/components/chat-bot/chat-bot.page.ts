@@ -13,6 +13,7 @@ import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 })
 export class ChatBotPage implements OnInit {
   form: FormGroup;
+  questions = []
 
   constructor(
     private authService: AuthService,
@@ -28,6 +29,7 @@ export class ChatBotPage implements OnInit {
   }
 
   ngOnInit() {
+    this.listQuestions()
   }
 
   messages: { text: string; isSender: boolean }[] = [];
@@ -50,6 +52,8 @@ export class ChatBotPage implements OnInit {
       // this.form.controls['prompt'].setValue('');
 
       await loadingSpinner(this.loadingCtrl)
+
+      this.form.reset()
 
       let data = {
         prompt: this.form.controls['prompt'].value.trim()
@@ -102,5 +106,110 @@ export class ChatBotPage implements OnInit {
         }
       })
     }
+  }
+
+  async message(prompt: any) {
+    if (prompt !== '') {
+      this.messages.push({ text: prompt, isSender: true });
+
+      await loadingSpinner(this.loadingCtrl)
+
+      let data = {
+        prompt: prompt
+      }
+
+      this.authService.call(data, 'message', 'POST', true).subscribe({
+        next: (response) => {
+          console.log(response)
+          if (response.status === Constant.SUCCESS) {
+            setTimeout(() => {
+              this.messages.push({
+                text: response.data,
+                isSender: false,
+              });
+            }, 1000);
+
+            this.loadingCtrl.dismiss()
+          } else {
+            console.log(response)
+            this.loadingCtrl.dismiss()
+
+            alertModal({
+              title: response.status,
+              text: response.data,
+              button: [
+                {
+                  cssClass: 'alert-button-cancel',
+                  text: 'Cerrar',
+                }
+              ],
+              alertController: this.alertController
+            })
+          }
+        },
+        error: (error) => {
+          console.log(error)
+          this.loadingCtrl.dismiss()
+
+          alertModal({
+            title: 'Error',
+            text: 'Falla en el servidor',
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
+        }
+      })
+    }
+  }
+
+  async listQuestions() {
+    await loadingSpinner(this.loadingCtrl)
+
+    this.authService.call(null, 'listQuestions', 'GET', true).subscribe({
+      next: (response) => {
+        console.log(response)
+        if (response.status === Constant.SUCCESS) {
+          this.questions = response.data
+
+          this.loadingCtrl.dismiss()
+        } else {
+          console.log(response)
+          this.loadingCtrl.dismiss()
+
+          alertModal({
+            title: response.status,
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
+        }
+      },
+      error: (error) => {
+        console.log(error)
+        this.loadingCtrl.dismiss()
+
+        alertModal({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
+          alertController: this.alertController
+        })
+      }
+    })
   }
 }
