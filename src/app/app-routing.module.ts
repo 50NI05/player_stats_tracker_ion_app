@@ -74,6 +74,10 @@ const routes: Routes = [
   {
     path: 'player-details',
     loadChildren: () => import('./components/player-details/player-details.module').then( m => m.PlayerDetailsPageModule)
+  },
+  {
+    path: 'team-details',
+    loadChildren: () => import('./components/team-details/team-details.module').then( m => m.TeamDetailsPageModule)
   }
 
 ];
