@@ -13,6 +13,7 @@ import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 })
 export class TeamDetailsPage implements OnInit {
   form: FormGroup;
+  logo: any;
 
   constructor(
     private authService: AuthService,
@@ -32,6 +33,7 @@ export class TeamDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.logo = this.navParams.get('team').logo
     this.setInformation()
   }
 
