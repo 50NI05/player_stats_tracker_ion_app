@@ -8,13 +8,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-list class="message-list">
-    <ion-item *ngFor="let message of messages" class="message">
-      <div [ngClass]="{'message-sender': message.isSender, 'message-receiver': !message.isSender}">
-        {{ message.text }}
-      </div>
-    </ion-item>
-  </ion-list>
+  <div class="message-background">
+    <div class="overlay"></div>
+    <ion-list class="message-list">
+      <ion-item *ngFor="let message of messages" class="message">
+        <div [ngClass]="{'message-sender': message.isSender, 'message-receiver': !message.isSender}">
+          {{ message.text }}
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
 
 <ion-footer>

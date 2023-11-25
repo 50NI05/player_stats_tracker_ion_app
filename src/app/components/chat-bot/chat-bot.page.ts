@@ -53,11 +53,11 @@ export class ChatBotPage implements OnInit {
 
       await loadingSpinner(this.loadingCtrl)
 
-      this.form.reset()
-
       let data = {
         prompt: this.form.controls['prompt'].value.trim()
       }
+
+      this.form.reset()
 
       this.authService.call(data, 'assistant', 'POST', true).subscribe({
         next: (response) => {
@@ -105,6 +105,8 @@ export class ChatBotPage implements OnInit {
           })
         }
       })
+
+      this.listQuestions()
     }
   }
 
@@ -163,7 +165,10 @@ export class ChatBotPage implements OnInit {
             alertController: this.alertController
           })
         }
+
       })
+
+      this.listQuestions()
     }
   }
 
@@ -173,6 +178,7 @@ export class ChatBotPage implements OnInit {
     this.authService.call(null, 'listQuestions', 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
+        this.questions = []
         if (response.status === Constant.SUCCESS) {
           this.questions = response.data
 
