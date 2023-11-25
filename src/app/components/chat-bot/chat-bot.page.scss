@@ -1,13 +1,53 @@
-.message-list {
-  padding-top: 10px;
-  padding-bottom: 0;
-  /* Elimina el espacio en la parte inferior */
+ion-content {
+  background-color: transparent;
 }
 
-.message {
-  display: flex;
-  justify-content: flex-start;
+.message-background {
+  background: url('../../../assets/icon/vinotinto_venezuela.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  height: 100vh;
+  position: relative;
 }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+ion-list.message-list {
+  padding: 0;
+  background-color: transparent;
+}
+
+ion-item.message {
+  --background: transparent;
+  margin-bottom: 10px;
+}
+
+.question-list {
+  padding: 10px;
+}
+
+.question {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+// .message-list {
+//   padding-top: 10px;
+//   padding-bottom: 0;
+// }
+
+// .message {
+//   display: flex;
+//   justify-content: flex-start;
+// }
 
 .message-sender {
   margin-left: auto;

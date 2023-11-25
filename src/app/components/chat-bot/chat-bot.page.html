@@ -3,21 +3,29 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Asistentes de Chat</ion-title>
+    <ion-title>Asistente Virtual</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list class="message-list">
-    <ion-item *ngFor="let message of messages" class="message">
-      <div [ngClass]="{'message-sender': message.isSender, 'message-receiver': !message.isSender}">
-        {{ message.text }}
-      </div>
-    </ion-item>
-  </ion-list>
+  <div class="message-background">
+    <div class="overlay"></div>
+    <ion-list class="message-list">
+      <ion-item *ngFor="let message of messages" class="message">
+        <div [ngClass]="{'message-sender': message.isSender, 'message-receiver': !message.isSender}">
+          {{ message.text }}
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
 
 <ion-footer>
+  <ion-list class="question-list">
+    <ion-item *ngFor="let question of questions" class="question" (click)="message(question)">
+      {{ question }}
+    </ion-item>
+  </ion-list>
   <ion-toolbar [formGroup]="form">
     <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje..." class="message-input"
       (keyup.enter)="assistant()" formControlName="prompt"></ion-input>
