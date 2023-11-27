@@ -6,8 +6,11 @@ ion-content {
   background: url('../../../assets/icon/vinotinto_venezuela.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
-  height: 100vh;
+  height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .overlay {
@@ -22,6 +25,8 @@ ion-content {
 ion-list.message-list {
   padding: 0;
   background-color: transparent;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 ion-item.message {
@@ -30,24 +35,23 @@ ion-item.message {
 }
 
 .question-list {
-  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  background-color: transparent;
+  // padding: 10px;
+  // margin: 10px;
 }
 
-.question {
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+.question{
+  margin: 5px;
+  color: white;
+  background: #5e2129;
+  width: 100%;
+  height: 50px;
+  // font-size: 20px;
 }
-
-// .message-list {
-//   padding-top: 10px;
-//   padding-bottom: 0;
-// }
-
-// .message {
-//   display: flex;
-//   justify-content: flex-start;
-// }
 
 .message-sender {
   margin-left: auto;
@@ -73,4 +77,8 @@ ion-item.message {
 
 ion-button {
   border-radius: 50%;
+}
+
+div {
+  font-size: 20px;
 }

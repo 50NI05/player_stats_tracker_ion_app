@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="dark">
+  <ion-toolbar style="background: #5e2129;">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -17,15 +17,17 @@
         </div>
       </ion-item>
     </ion-list>
+    <div>
+      <ion-list class="question-list">
+        <ion-chip *ngFor="let question of questions" class="question" (click)="message(question)">
+          {{ question }}
+        </ion-chip>
+      </ion-list>
+    </div>
   </div>
 </ion-content>
 
 <ion-footer>
-  <ion-list class="question-list">
-    <ion-item *ngFor="let question of questions" class="question" (click)="message(question)">
-      {{ question }}
-    </ion-item>
-  </ion-list>
   <ion-toolbar [formGroup]="form">
     <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje..." class="message-input"
       (keyup.enter)="assistant()" formControlName="prompt"></ion-input>

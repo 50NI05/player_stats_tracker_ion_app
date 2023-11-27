@@ -105,7 +105,7 @@ export class ChatBotPage implements OnInit {
           })
         }
       })
-
+      
       this.listQuestions()
     }
   }
