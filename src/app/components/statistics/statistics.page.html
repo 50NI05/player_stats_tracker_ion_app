@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="danger">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,10 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-  <div>
+<ion-content>
+  <div class="wallpaper">
     <form [formGroup]="formTeams">
-      <ion-card color="danger" style="border-radius: 15px;">
+      <ion-card class="statistics">
         <div>Equipo</div>
         <ion-row>
           <ion-col col-6>
@@ -18,10 +18,6 @@
               <ion-select placeholder="Seleccionar equipo" formControlName="idTeams1">
                 <ion-select-option *ngFor="let team of teams1" [value]="team.id">{{team.name}}</ion-select-option>
               </ion-select>
-              <!-- <ion-note *ngIf="formTeams.controls['idTeams'].hasError('required') && formTeams.get('idTeams')?.touched"
-                      slot="error">
-                      Equipo es requerido
-                    </ion-note> -->
             </ion-item>
           </ion-col>
 
@@ -30,16 +26,12 @@
               <ion-select placeholder="Seleccionar equipo" formControlName="idTeams2">
                 <ion-select-option *ngFor="let team of teams2" [value]="team.id">{{team.name}}</ion-select-option>
               </ion-select>
-              <!-- <ion-note *ngIf="formTeams.controls['idTeams'].hasError('required') && formTeams.get('idTeams')?.touched"
-                      slot="error">
-                      Equipo es requerido
-                    </ion-note> -->
             </ion-item>
           </ion-col>
         </ion-row>
       </ion-card>
 
-      <ion-card color="danger" *ngIf="squads1.length !== 0 || squads2.length !== 0" style="border-radius: 15px;">
+      <ion-card *ngIf="squads1.length !== 0 || squads2.length !== 0" class="statistics">
         <div>Jugador</div>
         <ion-row>
           <ion-col col-6 *ngIf="squads1.length !== 0">
@@ -48,10 +40,6 @@
                 <ion-select-option *ngFor="let squad of squads1" [value]="squad.id">{{squad.number}} {{
                   squad.name }}</ion-select-option>
               </ion-select>
-              <!-- <ion-note *ngIf="formTeams.controls['idSquad'].hasError('required') && formTeams.get('idSquad')?.touched"
-                      slot="error">
-                      Equipo es requerido
-                    </ion-note> -->
             </ion-item>
           </ion-col>
 
@@ -61,17 +49,13 @@
                 <ion-select-option *ngFor="let squad of squads2" [value]="squad.id">{{squad.number}}
                   {{squad.name}}</ion-select-option>
               </ion-select>
-              <!-- <ion-note *ngIf="formTeams.controls['idSquad'].hasError('required') && formTeams.get('idSquad')?.touched"
-                      slot="error">
-                      Equipo es requerido
-                    </ion-note> -->
             </ion-item>
           </ion-col>
         </ion-row>
       </ion-card>
 
 
-      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" color="danger" style="border-radius: 15px;">
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
         <ion-card-header>
           <ion-row>
             <ion-card-title *ngFor="let player of players1">{{ player.name }}</ion-card-title>
@@ -418,7 +402,7 @@
         </ion-card-content>
       </ion-card>
 
-      <ion-card color="danger" style="border-radius: 15px;" *ngIf="players1.length !== 0 || players2.length !== 0">
+      <ion-card class="statistics" *ngIf="players1.length !== 0 || players2.length !== 0">
         <ion-buttons color="light">
           <ion-button (click)="chart('bar')">
             <ion-icon name="stats-chart-outline"></ion-icon>
