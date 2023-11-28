@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
+import { DatePipe } from '@angular/common';
 
 interface selectTeam1 {
   id: number;
@@ -232,6 +233,7 @@ export class StatisticsPage implements OnInit {
     public form: FormBuilder,
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
+    private datePipe: DatePipe,
   ) {
     this.formTeams = this.form.group({
       idTeams1: new FormControl('', [Validators.required, e => this.loadSquads1(e)]),
@@ -333,12 +335,50 @@ export class StatisticsPage implements OnInit {
       type: type,
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
-        datasets: [{
-          label: this.players1.map(e => e.name)[0],
-          data: dataChart,
-          // borderWidth: 1
-        }]
+        datasets: [
+          {
+            label: this.players1.map(e => e.name)[0],
+            data: dataChart,
+            borderColor: '#C69310',
+            backgroundColor: '#C69310',
+            borderWidth: 1
+          },
+        ]
       },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: "white", 
+              font: {
+                size: 18 
+              }
+            }
+          }
+        },
+        scales: {
+          y: { 
+            ticks: {
+              color: "white", 
+              font: {
+                size: 18, 
+              },
+              stepSize: 1,
+              beginAtZero: false
+            }
+          },
+          x: {  
+            ticks: {
+              color: "white",
+              font: {
+                size: 18
+              },
+              stepSize: 1,
+              beginAtZero: true
+            }
+          }
+        }
+      }
     });
   }
 
@@ -360,9 +400,46 @@ export class StatisticsPage implements OnInit {
         datasets: [{
           label: this.players2.map(e => e.name)[0],
           data: dataChart2,
-          // borderWidth: 1
-        }]
+          borderColor: '#C69310',
+          backgroundColor: '#C69310',
+          borderWidth: 1
+        },
+        ]
       },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: "white",
+              font: {
+                size: 18
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              color: "white",
+              font: {
+                size: 18,
+              },
+              stepSize: 1,
+              beginAtZero: false
+            }
+          },
+          x: {
+            ticks: {
+              color: "white",
+              font: {
+                size: 18
+              },
+              stepSize: 1,
+              beginAtZero: true
+            }
+          }
+        }
+      }
     });
   }
 
@@ -762,7 +839,7 @@ export class StatisticsPage implements OnInit {
               },
               market_value: {
                 market_value: response.data.market_value === undefined ? 0 : response.data.market_value.market_value,
-                date: response.data.market_value === undefined ? 0 : response.data.market_value.date,
+                date: response.data.market_value === undefined ? 0 : this.datePipe.transform(response.data.market_value.date, 'dd/MM/yyyy', '+0000', 'en-US'),
                 market_value_currency: response.data.market_value === undefined ? '€' : response.data.market_value.market_value_currency
               },
             })
@@ -908,7 +985,7 @@ export class StatisticsPage implements OnInit {
               },
               market_value: {
                 market_value: response.data.market_value === undefined ? 0 : response.data.market_value.market_value,
-                date: response.data.market_value === undefined ? 0 : response.data.market_value.date,
+                date: response.data.market_value === undefined ? 0 : this.datePipe.transform(response.data.market_value.date, 'dd/MM/yyyy', '+0000', 'en-US'),
                 market_value_currency: response.data.market_value === undefined ? '€' : response.data.market_value.market_value_currency
               },
             })

@@ -1,21 +1,21 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Jugador</ion-title>
+    <ion-title style="font-size: 25px;">Jugador</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <swiper-container navigation="true" pagination="true">
+  <swiper-container navigation="true" pagination="true" class="wallpaper">
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Jugador</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="player">
-            <ion-item counter="true" class="full-width">
+            <ion-item counter="true" class="full-width" fill="solid">
               <ion-label position="floating">Nombre</ion-label>
               <ion-input placeholder="Ej: Salomón Rondón" (input)="checkText('player.name')"
                 (keypress)="validateText($event)" formControlName="name" maxlength="50"></ion-input>
@@ -205,7 +205,7 @@
         </ion-card> -->
     </swiper-slide>
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos del Partido</h2>
         <form [formGroup]="addPlayerForm">
@@ -333,7 +333,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Sustitutos</h2>
         <form [formGroup]="addPlayerForm">
@@ -397,7 +397,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Disparos</h2>
         <form [formGroup]="addPlayerForm">
@@ -441,7 +441,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Goles</h2>
         <form [formGroup]="addPlayerForm">
@@ -521,7 +521,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Passes</h2>
         <form [formGroup]="addPlayerForm">
@@ -584,7 +584,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Entradas</h2>
         <form [formGroup]="addPlayerForm">
@@ -648,7 +648,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Duelos</h2>
         <form [formGroup]="addPlayerForm">
@@ -692,7 +692,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Regates</h2>
         <form [formGroup]="addPlayerForm">
@@ -756,7 +756,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Faltas</h2>
         <form [formGroup]="addPlayerForm">
@@ -801,7 +801,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Cartas</h2>
         <form [formGroup]="addPlayerForm">
@@ -864,7 +864,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Datos Penaltis</h2>
         <form [formGroup]="addPlayerForm">
@@ -964,7 +964,7 @@
     </swiper-slide>
 
     <swiper-slide>
-      <ion-card class="jugador-card" color="primary">
+      <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
         <h2>Valor de mercado</h2>
         <form [formGroup]="addPlayerForm">

@@ -54,353 +54,443 @@
         </ion-row>
       </ion-card>
 
-
       <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
-        <ion-card-header>
-          <ion-row>
-            <ion-card-title *ngFor="let player of players1">{{ player.name }}</ion-card-title>
-            <ion-card-title *ngFor="let player of players2">{{ player.name }}</ion-card-title>
-          </ion-row>
-        </ion-card-header>
         <ion-card-content>
+          <div class="title">Jugador</div>
           <ion-row>
-            <div *ngFor="let player of players1">Edad: {{ player.age }}</div>
-            <div *ngFor="let player of players2">Edad: {{ player.age }}</div>
+            <div *ngFor="let player of players1">{{ player.name }}</div>
+            <div *ngFor="let player of players2">{{ player.name }}</div>
           </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Altura: {{ player.height }}</div>
-            <div *ngFor="let player of players2">Altura: {{ player.height }}</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.age }}</div>
+            <div class="text-middle-20">Edad</div>
+            <div *ngFor="let player of players2">{{ player.age }}</div>
           </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Peso: {{ player.weight }}</div>
-            <div *ngFor="let player of players2">Peso: {{ player.weight }}</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.height }}</div>
+            <div class="text-middle-20">Altura</div>
+            <div *ngFor="let player of players2">{{ player.height }}</div>
           </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Liga: {{ player.league.name }}</div>
-            <div *ngFor="let player of players2">Liga: {{ player.league.name }}</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.weight }}</div>
+            <div class="text-middle-20">Peso</div>
+            <div *ngFor="let player of players2">{{ player.weight }}</div>
           </ion-row>
-
-          <!-- Posición -->
-          <ion-row>
-            <div *ngFor="let player of players1">Patidos jugados: {{ player.game.appearences }}
-            </div>
-            <div *ngFor="let player of players2">Patidos jugados: {{ player.game.appearences }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Titularidades: {{ player.game.lineups }}
-            </div>
-            <div *ngFor="let player of players2">Titularidades: {{ player.game.lineups }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Minutos jugados: {{ player.game.minutes }}
-            </div>
-            <div *ngFor="let player of players2">Minutos jugados: {{ player.game.minutes }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Dorsal: {{ player.game.number }}
-            </div>
-            <div *ngFor="let player of players2">Dorsal: {{ player.game.number }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Posición: {{ player.game.position }}
-            </div>
-            <div *ngFor="let player of players2">Posición: {{ player.game.position }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Valoración: {{ player.game.rating }}
-            </div>
-            <div *ngFor="let player of players2">Valoración: {{ player.game.rating }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Capitan: {{ player.game.captain === false ? 'No' : 'Si' }}
-            </div>
-            <div *ngFor="let player of players2">Capitan: {{ player.game.captain === false ? 'No' : 'Si' }}
-            </div>
-          </ion-row>
-
-          <!-- VALOR DEL MERCADO -->
-          <div>Valor de Mercado</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Valor actual: {{ player.market_value.market_value === null ? 0 :
-              player.market_value.market_value
-              }} mil {{ player.market_value.market_value_currency }}</div>
-            <div *ngFor="let player of players2">Valor actual: {{ player.market_value.market_value === null ? 0 :
-              player.market_value.market_value
-              }} mil {{ player.market_value.market_value_currency }}</div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Última revisión: {{ player.market_value.date === null ? 0 :
-              player.market_value.date }}
-            </div>
-            <div *ngFor="let player of players2">Última revisión: {{ player.market_value.date === null ? 0 :
-              player.market_value.date }}
-            </div>
-          </ion-row>
-
-          <!-- Disparos -->
-          <div>Disparos</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Disparos totales: {{ player.shot.total === null ? 0 : player.shot.total
-              }}</div>
-            <div *ngFor="let player of players2">Disparos totales: {{ player.shot.total === null ? 0 : player.shot.total
-              }}</div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Disparos al arcos: {{ player.shot.on === null ? 0 : player.shot.on }}
-            </div>
-            <div *ngFor="let player of players2">Disparos al arcos: {{ player.shot.on === null ? 0 : player.shot.on }}
-            </div>
-          </ion-row>
-
-          <!-- Goles -->
-          <div>Goles</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Goles totales: {{ player.goal.total === null ? 0 : player.goal.total }}
-            </div>
-            <div *ngFor="let player of players2">Goles totales: {{ player.goal.total === null ? 0 : player.goal.total }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Asistencias: {{ player.goal.assists === null ? 0 : player.goal.assists
-              }}
-            </div>
-            <div *ngFor="let player of players2">Asistencias: {{ player.goal.assists === null ? 0 : player.goal.assists
-              }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Recibidos: {{ player.goal.conceded === null ? 0 : player.goal.conceded
-              }}
-            </div>
-            <div *ngFor="let player of players2">Recibidos: {{ player.goal.conceded === null ? 0 : player.goal.conceded
-              }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Salvados: {{ player.goal.saves === null ? 0 : player.goal.saves }}
-            </div>
-            <div *ngFor="let player of players2">Salvados: {{ player.goal.saves === null ? 0 : player.goal.saves }}
-            </div>
-          </ion-row>
-
-          <!-- Sustitutos -->
-          <div>Sustitutos</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Ingresos: {{ player.substitute.in === null ? 0 : player.substitute.in
-              }}
-            </div>
-            <div *ngFor="let player of players2">Ingresos: {{ player.substitute.in === null ? 0 : player.substitute.in
-              }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Sustituidos: {{ player.substitute.out === null ? 0 :
-              player.substitute.out }}
-            </div>
-            <div *ngFor="let player of players2">Sustituidos: {{ player.substitute.out === null ? 0 :
-              player.substitute.out }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Banqueados: {{ player.substitute.bench === null ? 0 :
-              player.substitute.bench }}
-            </div>
-            <div *ngFor="let player of players2">Banqueados {{ player.substitute.bench === null ? 0 :
-              player.substitute.bench }}
-            </div>
-          </ion-row>
-
-          <!-- Pases -->
-          <div>Pases</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Pases totales: {{ player.passe.total === null ? 0 : player.passe.total
-              }}
-            </div>
-            <div *ngFor="let player of players2">Pases totales: {{ player.passe.total === null ? 0 : player.passe.total
-              }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Pases claves: {{ player.passe.key === null ? 0 : player.passe.key }}
-            </div>
-            <div *ngFor="let player of players2">Pases claves: {{ player.passe.key === null ? 0 : player.passe.key }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Precisión del pase: {{ player.passe.accuracy === null ? 0 :
-              player.passe.accuracy }}
-            </div>
-            <div *ngFor="let player of players2">Precisión del pase {{ player.passe.accuracy === null ? 0 :
-              player.passe.accuracy }}
-            </div>
-          </ion-row>
-
-          <!-- Entradas -->
-          <div>Entradas</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Totales: {{ player.tackle.total === null ? 0 :
-              player.tackle.total }}
-            </div>
-            <div *ngFor="let player of players2">Totales: {{ player.tackle.total === null ? 0 :
-              player.tackle.total }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Bloqueadas: {{ player.tackle.blocks === null ? 0 :
-              player.tackle.blocks }}
-            </div>
-            <div *ngFor="let player of players2">Bloqueadas: {{ player.tackle.blocks === null ? 0 :
-              player.tackle.blocks }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Intercepción: {{ player.tackle.interceptions === null ? 0 :
-              player.tackle.interceptions }}
-            </div>
-            <div *ngFor="let player of players2">Intercepción: {{ player.tackle.interceptions === null ? 0 :
-              player.tackle.interceptions }}
-            </div>
-          </ion-row>
-
-          <!-- Regates -->
-          <div>Regates</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Intentos de regate: {{ player.dribble.attempts === null ? 0 :
-              player.dribble.attempts }}
-            </div>
-            <div *ngFor="let player of players2">Intentos de regate: {{ player.dribble.attempts === null ? 0 :
-              player.dribble.attempts }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Regates exitosos: {{ player.dribble.success === null ? 0 :
-              player.dribble.success }}
-            </div>
-            <div *ngFor="let player of players2">Regates exitosos: {{ player.dribble.success === null ? 0 :
-              player.dribble.success }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Regates pasados: {{ player.dribble.past === null ? 0 :
-              player.dribble.past }}
-            </div>
-            <div *ngFor="let player of players2">Regates pasados: {{ player.dribble.past === null ? 0 :
-              player.dribble.past }}
-            </div>
-          </ion-row>
-
-          <!-- Duelos -->
-          <div>Duelos</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Totales: {{ player.duel.total === null ? 0 : player.duel.total
-              }}
-            </div>
-            <div *ngFor="let player of players2">Totales: {{ player.duel.total === null ? 0 : player.duel.total
-              }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Ganados: {{ player.duel.won === null ? 0 :
-              player.duel.won }}
-            </div>
-            <div *ngFor="let player of players2">Ganados: {{ player.duel.won === null ? 0 :
-              player.duel.won }}
-            </div>
-          </ion-row>
-
-          <!-- Faltas -->
-          <div>Faltas</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Faltas sucia: {{ player.foul.drawn === null ? 0 : player.foul.drawn }}
-            </div>
-            <div *ngFor="let player of players2">Faltas sucia: {{ player.foul.drawn === null ? 0 : player.foul.drawn }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Faltas cometidas: {{ player.foul.committed === null ? 0 :
-              player.foul.committed }}
-            </div>
-            <div *ngFor="let player of players2">Faltas cometidas: {{ player.foul.committed === null ? 0 :
-              player.foul.committed }}
-            </div>
-          </ion-row>
-
-          <!-- Tarjetas -->
-          <div>Tarjetas</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Amarilla: {{ player.card.yellow === null ? 0 :
-              player.card.yellow }}
-            </div>
-            <div *ngFor="let player of players2">Amarilla: {{ player.card.yellow === null ? 0 :
-              player.card.yellow }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Doble amarilla: {{ player.card.yellowred === null ? 0 :
-              player.card.yellowred }}
-            </div>
-            <div *ngFor="let player of players2">Doble amarilla: {{ player.card.yellowred === null ? 0 :
-              player.card.yellowred }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Rojas: {{ player.card.red === null ? 0 : player.card.red }}
-            </div>
-            <div *ngFor="let player of players2">Rojas: {{ player.card.red === null ? 0 : player.card.red }}
-            </div>
-          </ion-row>
-
-          <!-- Penaltis -->
-          <div>Penaltis</div>
-          <ion-row>
-            <div *ngFor="let player of players1">Ganados: {{ player.penalty.won === null ? 0 :
-              player.penalty.won }}
-            </div>
-            <div *ngFor="let player of players2">Ganados: {{ player.penalty.won === null ? 0 :
-              player.penalty.won }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Cometidos: {{ player.penalty.committed === null ? 0 :
-              player.penalty.committed }}
-            </div>
-            <div *ngFor="let player of players2">Cometidos: {{ player.penalty.committed === null ? 0 :
-              player.penalty.committed }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Marcados: {{ player.penalty.scored === null ? 0 :
-              player.penalty.scored }}
-            </div>
-            <div *ngFor="let player of players2">Marcados: {{ player.penalty.scored === null ? 0 :
-              player.penalty.scored }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Fallados: {{ player.penalty.missed === null ? 0 :
-              player.penalty.missed }}
-            </div>
-            <div *ngFor="let player of players2">Fallados: {{ player.penalty.missed === null ? 0 :
-              player.penalty.missed }}
-            </div>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let player of players1">Parados: {{ player.penalty.saved === null ? 0 :
-              player.penalty.saved }}
-            </div>
-            <div *ngFor="let player of players2">Parados: {{ player.penalty.saved === null ? 0 :
-              player.penalty.saved }}
-            </div>
-          </ion-row>
-
+          <div class="text-justify">
+            <div *ngFor="let player of players1">{{ player.league.name }}</div>
+            <div class="text-middle-20">Liga</div>
+            <div *ngFor="let player of players2">{{ player.league.name }}</div>
+          </div>
         </ion-card-content>
       </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Posición -->
+          <div class="title">Top estadísticas</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.game.appearences }}</div>
+            <div class="text-middle-55">Partidos jugados</div>
+            <div *ngFor="let player of players2">{{ player.game.appearences }}</div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.game.lineups }}</div>
+            <div class="text-middle-40">Titularidades</div>
+            <div *ngFor="let player of players2">{{ player.game.lineups }}</div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.game.minutes }}</div>
+            <div class="text-middle-55">Minutos jugados</div>
+            <div *ngFor="let player of players2">{{ player.game.minutes }}</div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.game.number }}</div>
+            <div class="text-middle-30">Dorsal</div>
+            <div *ngFor="let player of players2">{{ player.game.number }}</div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.game.position }}</div>
+            <div class="text-middle-30">Posición</div>
+            <div *ngFor="let player of players2">{{ player.game.position }}</div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.game.rating }}</div>
+            <div class="text-middle-40">Valoración</div>
+            <div *ngFor="let player of players2">{{ player.game.rating }}</div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.game.captain === false ? 'No' : 'Si' }}</div>
+            <div class="text-middle-30">Capitán</div>
+            <div *ngFor="let player of players2">{{ player.game.captain === false ? 'No' : 'Si' }}</div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- VALOR DEL MERCADO -->
+          <div class="title">Valor de Mercado</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.market_value.market_value === null ? 0 :
+              player.market_value.market_value
+              }} mil {{ player.market_value.market_value_currency }}
+            </div>
+            <div class="text-middle-40">Valor actual</div>
+            <div *ngFor="let player of players2">{{ player.market_value.market_value === null ? 0 :
+              player.market_value.market_value
+              }} mil {{ player.market_value.market_value_currency }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.market_value.date === null ? 0 :
+              player.market_value.date }}
+            </div>
+            <div class="text-middle-40">Última revisión</div>
+            <div *ngFor="let player of players2">{{ player.market_value.date === null ? 0 :
+              player.market_value.date }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Disparos -->
+          <div class="title">Disparos</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.shot.total === null ? 0 : player.shot.total }}
+            </div>
+            <div class="text-middle-55">Disparos totales</div>
+            <div *ngFor="let player of players2">
+              {{ player.shot.total === null ? 0 : player.shot.total }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.shot.on === null ? 0 : player.shot.on }}
+            </div>
+            <div class="text-middle-55">Disparos al arcos</div>
+            <div *ngFor="let player of players2">
+              {{ player.shot.on === null ? 0 : player.shot.on }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Goles -->
+          <div class="title">Goles</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.goal.total === null ? 0 : player.goal.total }}
+            </div>
+            <div class="text-middle-40">Goles totales</div>
+            <div *ngFor="let player of players2">
+              {{ player.goal.total === null ? 0 : player.goal.total }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.goal.assists === null ? 0 : player.goal.assists }}
+            </div>
+            <div class="text-middle-40">Asistencias</div>
+            <div *ngFor="let player of players2">
+              {{ player.goal.assists === null ? 0 : player.goal.assists }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.goal.conceded === null ? 0 : player.goal.conceded }}
+            </div>
+            <div class="text-middle-40">Recibidos</div>
+            <div *ngFor="let player of players2">
+              {{ player.goal.conceded === null ? 0 : player.goal.conceded }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.goal.saves === null ? 0 : player.goal.saves }}
+            </div>
+            <div class="text-middle-40">Salvados</div>
+            <div *ngFor="let player of players2">
+              {{ player.goal.saves === null ? 0 : player.goal.saves }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Sustitutos -->
+          <div class="title">Sustitutos</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.substitute.in === null ? 0 : player.substitute.in }}
+            </div>
+            <div class="text-middle-40">Ingresos</div>
+            <div *ngFor="let player of players2">
+              {{ player.substitute.in === null ? 0 : player.substitute.in }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.substitute.out === null ? 0 : player.substitute.out }}
+            </div>
+            <div class="text-middle-40">Sustituidos</div>
+            <div *ngFor="let player of players2">
+              {{ player.substitute.out === null ? 0 : player.substitute.out }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.substitute.bench === null ? 0 : player.substitute.bench }}
+            </div>
+            <div class="text-middle-40">Banqueados</div>
+            <div *ngFor="let player of players2">
+              {{ player.substitute.bench === null ? 0 : player.substitute.bench }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Pases -->
+          <div class="title">Pases</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.passe.total === null ? 0 : player.passe.total }}
+            </div>
+            <div class="text-middle-55">Pases totales</div>
+            <div *ngFor="let player of players2">
+              {{ player.passe.total === null ? 0 : player.passe.total }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">{{ player.passe.key === null ? 0 : player.passe.key }}
+            </div>
+            <div class="text-middle-55">Pases claves</div>
+            <div *ngFor="let player of players2">{{ player.passe.key === null ? 0 : player.passe.key }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.passe.accuracy === null ? 0 : player.passe.accuracy }}
+            </div>
+            <div class="text-middle-55">Pases precisos</div>
+            <div *ngFor="let player of players2">
+              {{ player.passe.accuracy === null ? 0 : player.passe.accuracy }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Entradas -->
+          <div class="title">Entradas</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.tackle.total === null ? 0 : player.tackle.total }}
+            </div>
+            <div class="text-middle-55">Entradas totales</div>
+            <div *ngFor="let player of players2">
+              {{ player.tackle.total === null ? 0 : player.tackle.total }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.tackle.blocks === null ? 0 : player.tackle.blocks }}
+            </div>
+            <div class="text-middle-55">Bloqueadas</div>
+            <div *ngFor="let player of players2">
+              {{ player.tackle.blocks === null ? 0 : player.tackle.blocks }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.tackle.interceptions === null ? 0 : player.tackle.interceptions }}
+            </div>
+            <div class="text-middle-55">Intercepción</div>
+            <div *ngFor="let player of players2">
+              {{ player.tackle.interceptions === null ? 0 : player.tackle.interceptions }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Regates -->
+          <div class="title">Regates</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.dribble.attempts === null ? 0 : player.dribble.attempts }}
+            </div>
+            <div class="text-middle-55">Intentos de regate</div>
+            <div *ngFor="let player of players2">
+              {{ player.dribble.attempts === null ? 0 : player.dribble.attempts }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.dribble.success === null ? 0 : player.dribble.success }}
+            </div>
+            <div class="text-middle-55">Regates exitosos</div>
+            <div *ngFor="let player of players2">
+              {{ player.dribble.success === null ? 0 : player.dribble.success }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.dribble.past === null ? 0 : player.dribble.past }}
+            </div>
+            <div class="text-middle-55">Regates pasados</div>
+            <div *ngFor="let player of players2">
+              {{ player.dribble.past === null ? 0 : player.dribble.past }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Duelos -->
+          <div class="title">Duelos</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.duel.total === null ? 0 : player.duel.total}}
+            </div>
+            <div class="text-middle-55">Duelos totales</div>
+            <div *ngFor="let player of players2">
+              {{ player.duel.total === null ? 0 : player.duel.total}}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.duel.won === null ? 0 : player.duel.won }}
+            </div>
+            <div class="text-middle-55">Duelos ganados</div>
+            <div *ngFor="let player of players2">
+              {{ player.duel.won === null ? 0 : player.duel.won }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Faltas -->
+          <div class="title">Faltas</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.foul.drawn === null ? 0 : player.foul.drawn }}
+            </div>
+            <div class="text-middle-55">Faltas duras</div>
+            <div *ngFor="let player of players2">
+              {{ player.foul.drawn === null ? 0 : player.foul.drawn }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.foul.committed === null ? 0 : player.foul.committed }}
+            </div>
+            <div class="text-middle-55">Faltas cometidas</div>
+            <div *ngFor="let player of players2">
+              {{ player.foul.committed === null ? 0 : player.foul.committed }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Tarjetas -->
+          <div class="title">Tarjetas</div>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.card.yellow === null ? 0 : player.card.yellow }}
+            </div>
+            <div class="text-middle-55">Tarjetas amarillas</div>
+            <div *ngFor="let player of players2">
+              {{ player.card.yellow === null ? 0 : player.card.yellow }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.card.yellowred === null ? 0 : player.card.yellowred }}
+            </div>
+            <div class="text-middle-55">Doble amarillas</div>
+            <div *ngFor="let player of players2">
+              {{ player.card.yellowred === null ? 0 : player.card.yellowred }}
+            </div>
+          </ion-row>
+          <ion-row class="text-justify">
+            <div *ngFor="let player of players1">
+              {{ player.card.red === null ? 0 : player.card.red }}
+            </div>
+            <div class="text-middle-55">Tarjetas rojas</div>
+            <div *ngFor="let player of players2">
+              {{ player.card.red === null ? 0 : player.card.red }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
+        <ion-card-content>
+          <!-- Penaltis -->
+          <div class="title">Penaltis</div>
+          <ion-row>
+            <div *ngFor="let player of players1">
+              {{ player.penalty.won === null ? 0 : player.penalty.won }}
+            </div>
+            <div class="text-middle-40">Ganados</div>
+            <div *ngFor="let player of players2">
+              {{ player.penalty.won === null ? 0 : player.penalty.won }}
+            </div>
+          </ion-row>
+          <ion-row>
+            <div *ngFor="let player of players1">
+              {{ player.penalty.committed === null ? 0 : player.penalty.committed }}
+            </div>
+            <div class="text-middle-40">Cometidos</div>
+            <div *ngFor="let player of players2">
+              {{ player.penalty.committed === null ? 0 : player.penalty.committed }}
+            </div>
+          </ion-row>
+          <ion-row>
+            <div *ngFor="let player of players1">
+              {{ player.penalty.scored === null ? 0 : player.penalty.scored }}
+            </div>
+            <div class="text-middle-40">Marcados</div>
+            <div *ngFor="let player of players2">
+              {{ player.penalty.scored === null ? 0 : player.penalty.scored }}
+            </div>
+          </ion-row>
+          <ion-row>
+            <div *ngFor="let player of players1">
+              {{ player.penalty.missed === null ? 0 : player.penalty.missed }}
+            </div>
+            <div class="text-middle-40">Fallados</div>
+            <div *ngFor="let player of players2">
+              {{ player.penalty.missed === null ? 0 : player.penalty.missed }}
+            </div>
+          </ion-row>
+          <ion-row>
+            <div *ngFor="let player of players1">
+              {{ player.penalty.saved === null ? 0 : player.penalty.saved }}
+            </div>
+            <div class="text-middle-40">Parados</div>
+            <div *ngFor="let player of players2">
+              {{ player.penalty.saved === null ? 0 : player.penalty.saved }}
+            </div>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      
 
       <ion-card class="statistics" *ngIf="players1.length !== 0 || players2.length !== 0">
         <ion-buttons color="light">
