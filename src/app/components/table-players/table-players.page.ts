@@ -90,7 +90,12 @@ interface Player {
     scored: any,
     missed: any,
     saved: any
-  }
+  },
+  market_value: {
+    market_value: any,
+    date: any,
+    market_value_currency: any
+  },
 }
 
 @Component({
@@ -240,7 +245,12 @@ export class TablePlayersPage implements OnInit {
                   scored: e.penalty.scored,
                   missed: e.penalty.missed,
                   saved: e.penalty.saved
-                }
+                },
+                market_value: {
+                  market_value: response.data.market_value === undefined ? 0 : response.data.market_value.market_value,
+                  date: response.data.market_value === undefined ? 0 : response.data.market_value.date,
+                  market_value_currency: response.data.market_value === undefined ? '€' : response.data.market_value.market_value_currency
+                },
               })
             },
             )

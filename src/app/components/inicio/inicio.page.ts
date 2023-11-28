@@ -15,7 +15,7 @@ register();
 })
 export class InicioPage implements OnInit {
 
-  sliders = [
+  slidersAdmin = [
     {
       img: 'assets/icon/welcome.jpg',
       title: '¡Bienvenido!',
@@ -48,6 +48,27 @@ export class InicioPage implements OnInit {
     },
   ]
 
+  
+  slidersUser = [
+    {
+      img: 'assets/icon/welcome.jpg',
+      title: '¡Bienvenido!',
+      description: 'Aprende a aprovechar al máximo nuestra aplicación en este tutorial de introducción. Te guiaremos por las funciones clave para que te familiarices con la experiencia.',
+    },
+    {
+      img: 'assets/icon/statistics.jpg',
+      title: 'Comparación de Estadísticas',
+      description: 'Aprende a comparar estadísticas entre jugadores y jugadores. Obtén poderosos análisis en nuestra aplicación.',
+    },
+    {
+      img: 'assets/icon/ia.jpg',
+      title: 'Inteligencia Artificial',
+      description: 'Utiliza la potencia de la inteligencia artificial para obtener información relacionada con el fútbol. ¡Habla con nuestro asistente virtual y obtén datos precisos y relevantes sobre tu deporte favorito!',
+    },
+  ]
+
+  profile: any;
+
   constructor(
     private authService: AuthService,
     public loadingCtrl: LoadingController,
@@ -56,6 +77,7 @@ export class InicioPage implements OnInit {
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
   ) {
+    this.profile = authService.getProfile()
   }
 
   ngOnInit() {

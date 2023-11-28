@@ -62,3 +62,30 @@ button.alert-button.alert-button-cancel {
   padding-right: 0;
   padding-top: 0;
 }
+
+:root {
+  ion-item {
+    font-size: 20px;
+  }
+
+  ion-tab-button {
+    font-size: 16px;
+  }
+
+  ion-button {
+    font-size: 16px;
+  }
+
+  ion-chip {
+    font-size: 20px;
+  }
+
+  ion-title {
+    background: #5e2129;
+  }
+
+  ion-toolbar {
+    --background: #5e2129;
+    color: white;
+  }
+}

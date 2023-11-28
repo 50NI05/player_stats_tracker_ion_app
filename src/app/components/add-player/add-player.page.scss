@@ -43,9 +43,9 @@ swiper-slide {
 }
 
 .jugador-card {
-  // background-color: black;
+  background: rgb(94, 33, 41, 0.5);
   color: white;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 20px;
   margin: 20px;
   // overflow-y: scroll;
@@ -98,4 +98,25 @@ ion-modal {
     background-color: transparent;
     border-bottom: 1px solid white;
   }
+}
+
+.wallpaper {
+  background: url('../../../assets/icon/BG.jpg') no-repeat fixed;
+  background-position: 85% 50%;
+  background-size: cover;
+}
+
+ion-note {
+  font-size: 20px;
+}
+
+ion-item::part(native) {
+  background-color: rgb(255, 255, 255, 0.8);
+  border-radius: 15px;
+}
+
+.item-counter::part(native) {
+  color: var(--ion-color-step-550, white) !important; 
+  white-space: nowrap;
+  padding-inline-start: 16px;
 }
