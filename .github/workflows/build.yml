@@ -1,57 +1,104 @@
 name: Build Android
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
-  build:
-    name: Build APK
-    runs-on: windows-latest
+  version:
+    name: Create version number
+    runs-on: macos-latest
+    permissions: write-all
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v1
+    - name: Fetch all history for all tags and branches
+      run: |
+        git config remote.origin.url https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git fetch --prune --depth=10000
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.7
+      with:
+        versionSpec: "5.x"
+    - name: Use GitVersion
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.7
+    - name: Create version.txt with nuGetVersion
+      run: echo ${{ steps.gitversion.outputs.nuGetVersion  }} > version.txt
+    - name: Upload version.txt
+      uses: actions/upload-artifact@v2
+      with:
+        name: gitversion
+        path: version.txt
 
-      - name: Setup java
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
+  build:
+    name: Build APK and Create release
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 18.x
+    needs: [version]
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get version.txt
+      uses: actions/download-artifact@v2
+      with:
+        name: gitversion
+    - name: Create new file without newline char from version.txt
+      run: tr -d '\n' < version.txt > version1.txt
+    - name: Read version
+      id: version
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: version1.txt
 
-      - name: Install Ionic
-        run: npm install -g @ionic/cli
+    - name: Checkout source
+      uses: actions/checkout@v3
 
-      - name: Install app dependencies
-        run: npm install
+    - name: Setup java
+      uses: actions/setup-java@v3
+      with:
+        java-version: "17"
+        distribution: "temurin"
+        cache: "gradle"
 
-      - name: Build Ionic App
-        run: ionic build
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 18.x
 
-      - name: Copy Android
-        run: ionic capacitor copy android
+    - name: Install Ionic
+      run: npm install -g @ionic/cli
 
-      - name: Build Android Dev APK
-        run: ionic capacitor build android
+    - name: Install app dependencies
+      run: npm install
 
-      - name: Build Android Release APK
-        run: ionic capacitor build android --release --prod
+    - name: Build Android Dev APK
+      run: ionic capacitor build android
 
-      - name: Generate the Android App Bundle
-        working-directory: ./android/
-        run: ./gradlew bundle
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        gradle-version: current ### This version will be installed and added to PATH, so used for cache-cleanup
+        gradle-home-cache-cleanup: true
+        arguments: build
+        build-root-directory: android/
 
-      - name: Upload dev APK
-        uses: actions/upload-artifact@v1
-        with:
-          name: app-dev
-          path: apk/app-debug.apk
+      #    - name: Generate the Android Apk
+      #      run: |
+      #        gradle -v
+      #        ls -la
+      #        cd android && chmod +x ./gradlew build
 
+    - name: Upload dev APK
+      uses: actions/upload-artifact@v1
+      with:
+        name: app-dev
+        path: android/app/build/outputs/apk/debug/app-debug.apk
 
-      - name: Save release bundle as artifact
-        uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb # tag=v3
-        with:
-          name: app-release
-          path: |
-            ${{ github.workspace }}/packages/app/android/app/build/outputs/apk/release/*.apk
+    - uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true
+        artifacts: "android/app/build/outputs/apk/debug/*.apk"
+        token: ${{ secrets.GITHUB_TOKEN  }}
+        commit: ${{ github.sha }}
+        tag: ${{ steps.version.outputs.content }}
