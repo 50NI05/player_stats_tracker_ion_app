@@ -11,7 +11,7 @@
   <div class="wallpaper">
     <form [formGroup]="formTeams">
       <ion-card class="statistics">
-        <div>Equipo</div>
+        <div class="title-card-input">Equipo</div>
         <ion-row>
           <ion-col col-6>
             <ion-item fill="outline">
@@ -32,7 +32,7 @@
       </ion-card>
 
       <ion-card *ngIf="squads1.length !== 0 || squads2.length !== 0" class="statistics">
-        <div>Jugador</div>
+        <div class="title-card-input">Jugador</div>
         <ion-row>
           <ion-col col-6 *ngIf="squads1.length !== 0">
             <ion-item fill="outline">

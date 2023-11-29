@@ -49,7 +49,7 @@ ion-item.message {
   color: white;
   background: #5e2129;
   width: 100%;
-  height: 50px;
+  height: 75px;
   // font-size: 20px;
 }
 
@@ -81,4 +81,11 @@ ion-button {
 
 div {
   font-size: 20px;
+}
+
+.chat {
+  background: #5e2129;
+  border-radius: 20px;
+  height: 15%;
+  margin: 0px 5px;
 }

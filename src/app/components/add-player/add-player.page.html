@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title style="font-size: 25px;">Jugador</ion-title>
+    <ion-title>Jugador</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Jugador</h2>
+        <h2 class="title">Datos del Jugador</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="player">
             <ion-item counter="true" class="full-width" fill="solid">
@@ -180,7 +180,7 @@
             </ion-item>
 
             <ion-item counter="true" class="full-width">
-              <ion-select interface="popover" label="Equipos" placeholder="Selecciona un equipo"
+              <ion-select label="Equipos" placeholder="Selecciona un equipo"
                 formControlName="id_team">
                 <ion-select-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</ion-select-option>
               </ion-select>
@@ -207,7 +207,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos del Partido</h2>
+        <h2 class="title">Datos del Partido</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="game">
             <ion-item counter="true" class="full-width">
@@ -317,7 +317,7 @@
             </ion-item>
 
             <ion-item counter="true" class="full-width">
-              <ion-select interface="popover" label="Equipos" placeholder="¿Es el jugador un capitán?"
+              <ion-select label="Equipos" placeholder="¿Es el jugador un capitán?"
                 formControlName="captain">
                 <ion-select-option *ngFor="let captain of captainList"
                   [value]="captain.id">{{captain.description}}</ion-select-option>
@@ -335,7 +335,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Sustitutos</h2>
+        <h2 class="title">Datos Sustitutos</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="substitute">
             <ion-item counter="true" class="full-width">
@@ -399,7 +399,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Disparos</h2>
+        <h2 class="title">Datos Disparos</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="shot">
             <ion-item counter="true" class="full-width">
@@ -443,7 +443,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Goles</h2>
+        <h2 class="title">Datos Goles</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="goal">
             <ion-item counter="true" class="full-width">
@@ -523,7 +523,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Passes</h2>
+        <h2 class="title">Datos Pases</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="passe">
             <ion-item counter="true" class="full-width">
@@ -586,7 +586,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Entradas</h2>
+        <h2 class="title">Datos Entradas</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="tackle">
             <ion-item counter="true" class="full-width">
@@ -650,7 +650,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Duelos</h2>
+        <h2 class="title">Datos Duelos</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="duel">
             <ion-item counter="true" class="full-width">
@@ -694,7 +694,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Regates</h2>
+        <h2 class="title">Datos Regates</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="dribble">
             <ion-item counter="true" class="full-width">
@@ -758,7 +758,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Faltas</h2>
+        <h2 class="title">Datos Faltas</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="foul">
             <ion-item counter="true" class="full-width">
@@ -803,7 +803,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Cartas</h2>
+        <h2 class="title">Datos Cartas</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="card">
             <ion-item counter="true" class="full-width">
@@ -866,7 +866,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Datos Penaltis</h2>
+        <h2 class="title">Datos Penaltis</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="penalty">
             <ion-item counter="true" class="full-width">
@@ -966,7 +966,7 @@
     <swiper-slide>
       <ion-card class="jugador-card">
         <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-        <h2>Valor de mercado</h2>
+        <h2 class="title">Valor de Mercado</h2>
         <form [formGroup]="addPlayerForm">
           <div formGroupName="market">
             <ion-item counter="true" class="full-width">

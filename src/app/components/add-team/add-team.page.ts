@@ -59,9 +59,9 @@ export class AddTeamPage implements OnInit {
     this.getAllTeams()
   }
 
-  async openModal(idUser: any) {
-    await this.getTeam(idUser)
-    console.log('users', this.team);
+  async openModal(idTeam: any) {
+    await this.getTeam(idTeam)
+    console.log('team', this.team);
 
     const modal = await this.modalCtrl.create({
       component: TeamDetailsPage,
