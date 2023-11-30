@@ -107,7 +107,7 @@ export class UserInformationPage implements OnInit {
           console.log(response)
           this.loadingCtrl.dismiss()
 
-          alert({
+          alertModal({
             title: response.status,
             text: response.data,
             button: [
@@ -124,7 +124,7 @@ export class UserInformationPage implements OnInit {
         console.log(error)
         this.loadingCtrl.dismiss()
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: [

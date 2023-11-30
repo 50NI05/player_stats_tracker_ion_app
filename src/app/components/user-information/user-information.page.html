@@ -44,7 +44,7 @@
       </ion-item>
 
       <ion-item counter="true" fill="outline" class="form">
-        <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
+        <ion-label position="floating">Usuario</ion-label>
         <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
           maxlength="50"></ion-input>
         <ion-note *ngIf="updateUserForm.controls['email'].hasError('pattern')" slot="error">

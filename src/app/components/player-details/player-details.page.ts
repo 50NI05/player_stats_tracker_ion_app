@@ -117,6 +117,10 @@ export class PlayerDetailsPage implements OnInit {
         missed: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         saved: new FormControl('', [Validators.required, this.validateMaxDigits(2)])
       }),
+      market: new FormGroup({
+        date: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(Constant.Pattern.Form.Birthday)]),
+        marketValue: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
+      }),
     })
   }
 
@@ -206,6 +210,9 @@ export class PlayerDetailsPage implements OnInit {
     this.form.get('penalty.committed')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.committed)
     this.form.get('penalty.saved')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.saved)
     this.form.get('penalty.scored')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.scored)
+
+    this.form.get('market.date')!.setValue(this.navParams.get('detailsPlayer')[0].market_value.date)
+    this.form.get('market.marketValue')!.setValue(this.navParams.get('detailsPlayer')[0].market_value.market_value)
   }
 
   getAllTeams() {
@@ -301,6 +308,8 @@ export class PlayerDetailsPage implements OnInit {
       scored: parseInt(form.penalty.scored),
       missed: parseInt(form.penalty.missed),
       saved: parseInt(form.penalty.saved),
+      date: new Date(form.market.date),
+      market_value: form.market.marketValue,
       name: form.player.name,
       firstname: form.player.firstname,
       lastname: form.player.lastname,
@@ -372,8 +381,8 @@ export class PlayerDetailsPage implements OnInit {
   test() {
     console.log(this.form.value.player.birth);
     console.log(this.navParams.get('detailsPlayer')[0].birth);
-    
+
     console.log(new Date(this.form.value.player.birth));
-    console.log(new Date(this.navParams.get('detailsPlayer')[0].birth));    
+    console.log(new Date(this.navParams.get('detailsPlayer')[0].birth));
   }
 }
