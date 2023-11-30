@@ -40,6 +40,10 @@ export class UsersPage implements OnInit {
 
   users: Users[] = [];
   user: User[] = [];
+  label = {
+    username: 'Usuario',
+    profile: 'Perfil'
+  }
 
   constructor(
     private authService: AuthService,

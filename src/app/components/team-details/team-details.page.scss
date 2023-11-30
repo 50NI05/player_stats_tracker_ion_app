@@ -19,6 +19,11 @@ form {
   margin-top: 0;
 }
 
+.wallpaper-opacity {
+  background: rgb(94, 33, 41, 0.65);
+  height: 100%;
+}
+
 ion-item::part(native) {
   background-color: rgb(255, 255, 255, 0.8);
   border-radius: 15px;

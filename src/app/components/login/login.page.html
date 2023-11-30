@@ -26,7 +26,7 @@
       <form [formGroup]="formularioLogin">
         <ion-list style="background-color: transparent;">
           <ion-item fill="outline" class="loginForm">
-            <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
+            <ion-label position="floating">Usuario</ion-label>
             <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
               maxlength="50"></ion-input>
             <ion-icon name="mail-outline" slot="end" fill="clear" color="dark"></ion-icon>
