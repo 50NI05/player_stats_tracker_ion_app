@@ -27,6 +27,9 @@
               slot="error">
               {{ 'REQUIRED' | translate }}
             </ion-note>
+            <ion-note *ngIf="formularioRegistro.controls['firstname'].hasError('pattern')" slot="error">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
           </ion-item>
 
           <ion-item counter="true" fill="outline" class="registerForm">
@@ -38,10 +41,13 @@
               slot="error">
               {{ 'REQUIRED' | translate }}
             </ion-note>
+            <ion-note *ngIf="formularioRegistro.controls['lastname'].hasError('pattern')" slot="error">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
           </ion-item>
 
           <ion-item counter="true" fill="outline" class="registerForm">
-            <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
+            <ion-label position="floating">Usuario</ion-label>
             <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
               maxlength="15"></ion-input>
             <ion-note *ngIf="formularioRegistro.controls['email'].hasError('pattern')" slot="error">
