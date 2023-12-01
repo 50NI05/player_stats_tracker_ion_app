@@ -32,7 +32,7 @@ ion-row {
 }
 
 .statistics {
-  border-radius: 15px;
+  border-radius: 20px;
   background: rgb(94, 33, 41, 0.5);
   font-size: 20px;
 }
@@ -91,14 +91,14 @@ ion-button {
 
 ion-item::part(native) {
   background-color: rgb(255, 255, 255, 0.8);
-  border-radius: 15px;
+  border-radius: 20px;
 }
 
 .title-card-input {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-radius: 15px;
+  border-radius: 20px;
   background: rgb(198, 147, 16);
   color: white;
 }

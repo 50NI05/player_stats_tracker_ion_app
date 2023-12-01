@@ -26,5 +26,10 @@ form {
 
 ion-item::part(native) {
   background-color: rgb(255, 255, 255, 0.8);
-  border-radius: 15px;
+  border-radius: 20px;
+}
+
+ion-note {
+  font-size: 20px;
+  color: white;
 }
