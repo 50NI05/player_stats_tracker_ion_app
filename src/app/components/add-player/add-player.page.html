@@ -180,8 +180,7 @@
             </ion-item>
 
             <ion-item counter="true" class="full-width">
-              <ion-select label="Equipos" placeholder="Selecciona un equipo"
-                formControlName="id_team">
+              <ion-select label="Equipos" placeholder="Selecciona un equipo" formControlName="id_team">
                 <ion-select-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</ion-select-option>
               </ion-select>
               <ion-note slot="error" style="color: white;"
@@ -317,8 +316,7 @@
             </ion-item>
 
             <ion-item counter="true" class="full-width">
-              <ion-select label="Equipos" placeholder="¿Es el jugador un capitán?"
-                formControlName="captain">
+              <ion-select label="Equipos" placeholder="¿Es el jugador un capitán?" formControlName="captain">
                 <ion-select-option *ngFor="let captain of captainList"
                   [value]="captain.id">{{captain.description}}</ion-select-option>
               </ion-select>
@@ -1003,7 +1001,7 @@
             </ion-item>
           </div>
 
-          <ion-button expand="full" shape="round"  [disabled]="addPlayerForm.invalid" (click)="addPlayer()">Guardar
+          <ion-button expand="full" shape="round" [disabled]="addPlayerForm.invalid" (click)="addPlayer()">Guardar
           </ion-button>
         </form>
       </ion-card>

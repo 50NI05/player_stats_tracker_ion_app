@@ -16,7 +16,8 @@ swiper-slide {
   border-radius: 20px;
   padding: 20px;
   margin: 20px;
-  // overflow-y: scroll;
+  overflow-y: scroll;
+  overflow-x: scroll;
 
   .jugador-icon {
     font-size: 5rem;
@@ -84,7 +85,7 @@ ion-item::part(native) {
 }
 
 .item-counter::part(native) {
-  --color: var(--ion-color-step-550, white) !important; 
+  --color: var(--ion-color-step-550, white) !important;
   white-space: nowrap;
   padding-inline-start: 16px;
 }

@@ -6,16 +6,18 @@
         <div class="data-container">
           Bienvenido
         </div>
-        <div style="color: white; text-align: center; font-size: 20px;">
+        <div style="color: white; text-align: center; font-size: 15px; padding: 5px;">
           Inicia Sesión para continuar
         </div>
         <form [formGroup]="formularioLogin">
           <ion-list style="background-color: transparent;">
-            <ion-item fill="outline" class="loginForm">
+            <ion-item class="loginForm">
               <ion-label position="floating">Usuario</ion-label>
-              <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
-                maxlength="50"></ion-input>
-              <ion-icon style="font-size: 20px; margin-right: 12px;" name="mail-outline" slot="end" fill="clear"></ion-icon>
+              <div style="display: flex; flex-direction: row;">
+                <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+                  maxlength="15"></ion-input>
+                <ion-icon name="person-outline" fill="clear"></ion-icon>
+              </div>
               <ion-note *ngIf="formularioLogin.controls['email'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
@@ -25,16 +27,20 @@
                 {{ 'REQUIRED' | translate }}
               </ion-note>
             </ion-item>
-    
-            <ion-item fill="outline" class="loginForm">
+
+            <ion-item class="loginForm">
               <ion-label position="floating">Contraseña</ion-label>
-              <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
-                [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
-              </ion-input>
-              <ion-button slot="end" fill="clear" (click)="showPassword()">
-                <ion-icon style="font-size: 20px;" *ngIf="passwordVisibility === false" name="eye-outline" class="iconEye"></ion-icon>
-                <ion-icon style="font-size: 20px;" *ngIf="passwordVisibility === true" name="eye-off-outline" class="iconEye"></ion-icon>
-              </ion-button>
+
+              <div style="display: flex; flex-direction: row;">
+                <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
+                  [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
+                </ion-input>
+                <div (click)="showPassword()">
+                  <ion-icon fill="clear" *ngIf="passwordVisibility === false" name="eye-outline"></ion-icon>
+                  <ion-icon fill="clear" *ngIf="passwordVisibility === true" name="eye-off-outline"></ion-icon>
+                </div>
+              </div>
+
               <ion-note *ngIf="formularioLogin.controls['password'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
@@ -46,19 +52,21 @@
             </ion-item>
           </ion-list>
         </form>
-    
+
         <div class="forgot-password" [routerLink]="'/forgot-password'">
-          ¿Olvidaste la contraseña?
+          <div style="background: rgb(198, 147, 16); border-radius: 20px; padding: 0 10px;">
+            ¿Olvidaste la contraseña?
+          </div>
         </div>
-    
-        <ion-button shape="round" expand="full" [disabled]="formularioLogin.invalid" (click)="login(formularioLogin.value)" class="loginButton"
-          color="primary">Iniciar Sesión
+
+        <ion-button shape="round" expand="full" [disabled]="formularioLogin.invalid"
+          (click)="login(formularioLogin.value)" class="loginButton" color="primary">Iniciar Sesión
         </ion-button>
-    
+
         <div class="register">
           ¿No tienes una cuenta? <div class="register-text" [routerLink]="'/register'">Regístrate</div>
         </div>
-    
+
       </ion-card-content>
     </ion-card>
   </div>

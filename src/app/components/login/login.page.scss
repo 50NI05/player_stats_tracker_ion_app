@@ -1,7 +1,7 @@
-.iconEye {
-  font-size: 24px;
-  vertical-align: middle;
-}
+// .iconEye {
+//   font-size: 24px;
+//   vertical-align: middle;
+// }
 
 .loginButton {
   font-size: 20px;
@@ -16,7 +16,10 @@
   text-align: end;
   color: white;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
 }
 
 .register {
@@ -26,13 +29,17 @@
   flex-direction: row;
   justify-content: center;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .register-text {
   font-weight: bold;
   color: white;
   margin-left: 5px;
+  background: rgb(198, 147, 16);
+  border-radius: 20px;
+  font-size: 15px;
+  padding: 0 10px;
 }
 
 ion-card {
@@ -44,15 +51,17 @@ ion-card {
   height: 100%;
   background: rgb(94, 33, 41, 0.6);
   margin: 0;
+  border-radius: 20px;
   // margin-top: auto;
 }
 
 .data-container {
   justify-content: center;
-  font-size: 35px;
+  font-size: 30px;
   text-align: center;
   font-weight: bold;
   color: white;
+  padding: 10px 0;
 }
 
 .wallpaper {
@@ -68,4 +77,13 @@ ion-card {
 ion-item::part(native) {
   background-color: rgb(255, 255, 255, 0.8);
   border-radius: 20px;
+}
+
+ion-icon {
+  font-size: 30px;
+}
+
+ion-note {
+  font-size: 15px;
+  color: white;
 }
