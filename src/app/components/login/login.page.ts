@@ -99,11 +99,7 @@ export class LoginPage implements OnInit {
           if (this.authService.getLogged() === true) {
             this.navCtrl.navigateRoot('onboarding');
           } else {
-            if (response.data.profile.id === 1) {
-              this.navCtrl.navigateRoot('home');
-            } else {
-              this.navCtrl.navigateRoot('statistics');
-            }
+            this.navCtrl.navigateRoot('home');
           }
 
           this.loadingCtrl.dismiss();
