@@ -67,14 +67,14 @@
             <div *ngFor="let player of players2">{{ player.age }}</div>
           </ion-row>
           <ion-row class="text-justify">
-            <div *ngFor="let player of players1">{{ player.height }}</div>
+            <div *ngFor="let player of players1">{{ player.height }} cm</div>
             <div class="text-middle-20">Altura</div>
-            <div *ngFor="let player of players2">{{ player.height }}</div>
+            <div *ngFor="let player of players2">{{ player.height }} cm</div>
           </ion-row>
           <ion-row class="text-justify">
-            <div *ngFor="let player of players1">{{ player.weight }}</div>
+            <div *ngFor="let player of players1">{{ player.weight }} kg</div>
             <div class="text-middle-20">Peso</div>
-            <div *ngFor="let player of players2">{{ player.weight }}</div>
+            <div *ngFor="let player of players2">{{ player.weight }} kg</div>
           </ion-row>
           <div class="text-justify">
             <div *ngFor="let player of players1">{{ player.league.name }}</div>
@@ -490,7 +490,7 @@
           </ion-row>
         </ion-card-content>
       </ion-card>
-      
+
 
       <ion-card class="statistics" *ngIf="players1.length !== 0 || players2.length !== 0">
         <ion-buttons color="light">

@@ -28,7 +28,7 @@
 
 .equipos-list-card {
   color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 20px;
   margin: 20px;
   background: rgb(94, 33, 41, 0.5);
@@ -85,6 +85,7 @@
   text-align: center;
   border-radius: 20px;
   background: rgb(198, 147, 16);
+  margin-bottom: 15px;
 }
 
 ion-item::part(native) {
@@ -93,5 +94,5 @@ ion-item::part(native) {
 }
 
 ion-note {
-  font-size: 20px;
+  font-size: 15px;
 }

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()" color="dark">
+      <ion-button (click)="cancel()">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -10,991 +10,999 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Jugador</h2>
-    <form [formGroup]="form">
-      <div formGroupName="player">
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input placeholder="Ej: Alan Walker" (keypress)="validateText($event)" formControlName="name"
-            maxlength="50"></ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('player.name')?.hasError('required') && form.get('player.name')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('player.name')?.hasError('maxlength')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('player.name')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+  <div class="wallpaper">
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Jugador</h3>
+      <form [formGroup]="form">
+        <div formGroupName="player">
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input placeholder="Ej: Alan Walker" (keypress)="validateText($event)" formControlName="name"
+              maxlength="50"></ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('player.name')?.hasError('required') && form.get('player.name')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('player.name')?.hasError('maxlength')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('player.name')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Nombres</ion-label>
-          <ion-input placeholder="Ej: Alan Olav" (keypress)="validateText($event)" formControlName="firstname"
-            maxlength="50"></ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('player.firstname')?.hasError('required') && form.get('player.firstname')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('player.firstname')?.hasError('maxlength')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('player.firstname')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Nombres</ion-label>
+            <ion-input placeholder="Ej: Alan Olav" (keypress)="validateText($event)" formControlName="firstname"
+              maxlength="50"></ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('player.firstname')?.hasError('required') && form.get('player.firstname')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('player.firstname')?.hasError('maxlength')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('player.firstname')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Apellidos</ion-label>
-          <ion-input placeholder="Ej: Walker" (keypress)="validateText($event)" formControlName="lastname"
-            maxlength="50"></ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('player.lastname')?.hasError('required') && form.get('player.lastname')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('player.lastname')?.hasError('maxlength')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('player.lastname')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
-
-
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Edad</ion-label>
-              <ion-input placeholder="Ej: 20" type="number" formControlName="age" maxlength="2">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('player.age')?.hasError('required') && form.get('player.age')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('player.age')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('player.age')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Fecha de Nacimiento</ion-label>
-              <ion-input [maskito]="maskitoOptions" [maskitoElement]="maskPredicate" fill="outline"
-                placeholder="Ej: 12/02/2022" type="text" formControlName="birth" maxlength="10">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('player.birth')?.hasError('required') && form.get('player.birth')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('player.birth')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('player.birth')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Apellidos</ion-label>
+            <ion-input placeholder="Ej: Walker" (keypress)="validateText($event)" formControlName="lastname"
+              maxlength="50"></ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('player.lastname')?.hasError('required') && form.get('player.lastname')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('player.lastname')?.hasError('maxlength')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('player.lastname')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Nacionalidad</ion-label>
-          <ion-input placeholder="Ej: Veneco" (keypress)="validateText($event)" formControlName="nationality"
-            maxlength="20">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('player.nationality')?.hasError('required') && form.get('player.nationality')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('player.nationality')?.hasError('maxlength')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('player.nationality')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Edad</ion-label>
+                <ion-input placeholder="Ej: 20" type="number" formControlName="age" maxlength="2">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('player.age')?.hasError('required') && form.get('player.age')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('player.age')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('player.age')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Fecha de Nacimiento</ion-label>
+                <ion-input [maskito]="maskitoOptions" [maskitoElement]="maskPredicate" fill="outline"
+                  placeholder="Ej: 12/02/2022" type="text" formControlName="birth" maxlength="10">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('player.birth')?.hasError('required') && form.get('player.birth')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('player.birth')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('player.birth')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Altura (cm)</ion-label>
-              <ion-input placeholder="Ej: 1.20" type="number" formControlName="height" maxlength="4">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('player.height')?.hasError('required') && form.get('player.height')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('player.height')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('player.height')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Peso</ion-label>
-              <ion-input placeholder="Ej: 82" type="number" formControlName="weight" maxlength="4">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('player.weight')?.hasError('required') && form.get('player.weight')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('player.weight')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('player.weight')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">URL imagen</ion-label>
-          <ion-input placeholder="Ej: https://google.com" formControlName="photo" maxlength="50">
-          </ion-input>
-        </ion-item>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Nacionalidad</ion-label>
+            <ion-input placeholder="Ej: Veneco" (keypress)="validateText($event)" formControlName="nationality"
+              maxlength="20">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('player.nationality')?.hasError('required') && form.get('player.nationality')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('player.nationality')?.hasError('maxlength')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('player.nationality')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-        <ion-item counter="true" class="full-width">
-          <ion-select interface="popover" label="Equipos" placeholder="Selecciona un equipo" formControlName="id_team">
-            <ion-select-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</ion-select-option>
-          </ion-select>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('player.id_team')?.hasError('required') && form.get('player.id_team')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-        </ion-item>
-      </div>
-    </form>
-  </ion-card>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Altura (cm)</ion-label>
+                <ion-input placeholder="Ej: 1.20" type="number" formControlName="height" maxlength="4">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('player.height')?.hasError('required') && form.get('player.height')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('player.height')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('player.height')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Peso</ion-label>
+                <ion-input placeholder="Ej: 82" type="number" formControlName="weight" maxlength="4">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('player.weight')?.hasError('required') && form.get('player.weight')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('player.weight')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('player.weight')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos del Partido</h2>
-    <form [formGroup]="form">
-      <div formGroupName="game">
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Partidos jugados</ion-label>
-              <ion-input placeholder="Ej: 12" type="number" formControlName="appearences" maxlength="3"></ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.appearences')?.hasError('required') && form.get('game.appearences')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.appearences')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('game.appearences')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Minutos jugados</ion-label>
-              <ion-input placeholder="Ej: 521" type="number" formControlName="minutes" maxlength="5"></ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.minutes')?.hasError('required') && form.get('game.minutes')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.minutes')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('game.minutes')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">URL imagen</ion-label>
+            <ion-input placeholder="Ej: https://google.com" formControlName="photo" maxlength="50">
+            </ion-input>
+          </ion-item>
 
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Titularidades</ion-label>
-              <ion-input placeholder="Ej: 20" type="number" formControlName="lineups" maxlength="3"></ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.lineups')?.hasError('required') && form.get('game.lineups')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.lineups')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('game.lineups')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">¿Es capitán?</ion-label>
-              <ion-select interface="popover" label="Equipos" formControlName="captain">
-                <ion-select-option *ngFor="let captain of captainList"
-                  [value]="captain.id">{{captain.description}}</ion-select-option>
-              </ion-select>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.captain')?.hasError('required') && form.get('game.captain')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+          <ion-item counter="true" class="full-width">
+            <ion-select interface="popover" label="Equipos" placeholder="Selecciona un equipo"
+              formControlName="id_team">
+              <ion-select-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</ion-select-option>
+            </ion-select>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('player.id_team')?.hasError('required') && form.get('player.id_team')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+          </ion-item>
+        </div>
+      </form>
+    </ion-card>
 
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Dorsal</ion-label>
-              <ion-input placeholder="Ej: 20" type="number" formControlName="number" maxlength="2">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.number')?.hasError('required') && form.get('game.number')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.number')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('game.number')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Posición</ion-label>
-              <ion-input placeholder="Ej: Attacker" (keypress)="validateText($event)" formControlName="position"
-                maxlength="20">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('game.position')?.hasError('required') && form.get('game.position')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('game.position')?.hasError('maxlength')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('game.position')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos del Partido</h3>
+      <form [formGroup]="form">
+        <div formGroupName="game">
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Partidos jugados</ion-label>
+                <ion-input placeholder="Ej: 12" type="number" formControlName="appearences" maxlength="3"></ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.appearences')?.hasError('required') && form.get('game.appearences')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.appearences')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('game.appearences')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Minutos jugados</ion-label>
+                <ion-input placeholder="Ej: 521" type="number" formControlName="minutes" maxlength="5"></ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.minutes')?.hasError('required') && form.get('game.minutes')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.minutes')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('game.minutes')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Valoración por partidos</ion-label>
-          <ion-input placeholder="Ej: 2" type="number" formControlName="rating" maxlength="2">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('game.rating')?.hasError('required') && form.get('game.rating')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('game.rating')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('game.rating')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
-      </div>
-    </form>
-  </ion-card>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Titularidades</ion-label>
+                <ion-input placeholder="Ej: 20" type="number" formControlName="lineups" maxlength="3"></ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.lineups')?.hasError('required') && form.get('game.lineups')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.lineups')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('game.lineups')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">¿Es capitán?</ion-label>
+                <ion-select interface="popover" label="Equipos" formControlName="captain">
+                  <ion-select-option *ngFor="let captain of captainList"
+                    [value]="captain.id">{{captain.description}}</ion-select-option>
+                </ion-select>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.captain')?.hasError('required') && form.get('game.captain')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Sustitutos</h2>
-    <form [formGroup]="form">
-      <div formGroupName="substitute">
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Ingresos</ion-label>
-          <ion-input placeholder="Ej: 1" type="number" formControlName="in" maxlength="2">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('substitute.in')?.hasError('required') && form.get('substitute.in')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('substitute.in')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('substitute.in')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Dorsal</ion-label>
+                <ion-input placeholder="Ej: 20" type="number" formControlName="number" maxlength="2">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.number')?.hasError('required') && form.get('game.number')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.number')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('game.number')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Posición</ion-label>
+                <ion-input placeholder="Ej: Attacker" (keypress)="validateText($event)" formControlName="position"
+                  maxlength="20">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('game.position')?.hasError('required') && form.get('game.position')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('game.position')?.hasError('maxlength')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('game.position')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Sustituidos</ion-label>
-          <ion-input placeholder="Ej: 3" type="number" formControlName="out" maxlength="2">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('substitute.out')?.hasError('required') && form.get('substitute.out')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('substitute.out')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('substitute.out')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Valoración por partidos</ion-label>
+            <ion-input placeholder="Ej: 2" type="number" formControlName="rating" maxlength="2">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('game.rating')?.hasError('required') && form.get('game.rating')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('game.rating')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('game.rating')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
+        </div>
+      </form>
+    </ion-card>
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Banqueados</ion-label>
-          <ion-input placeholder="Ej: 5" type="number" formControlName="bench" maxlength="2">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('substitute.bench')?.hasError('required') && form.get('substitute.bench')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('substitute.bench')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('substitute.bench')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
-      </div>
-    </form>
-  </ion-card>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Sustitutos</h3>
+      <form [formGroup]="form">
+        <div formGroupName="substitute">
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Ingresos</ion-label>
+            <ion-input placeholder="Ej: 1" type="number" formControlName="in" maxlength="2">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('substitute.in')?.hasError('required') && form.get('substitute.in')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('substitute.in')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('substitute.in')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Disparos</h2>
-    <form [formGroup]="form">
-      <div formGroupName="shot">
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Total disparos</ion-label>
-              <ion-input placeholder="Ej: 12" type="number" formControlName="total" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('shot.total')?.hasError('required') && form.get('shot.total')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('shot.total')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('shot.total')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Al arco</ion-label>
-              <ion-input placeholder="Ej: 3" type="number" formControlName="on" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('shot.on')?.hasError('required') && form.get('shot.on')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('shot.on')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('shot.on')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </div>
-    </form>
-  </ion-card>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Sustituidos</ion-label>
+            <ion-input placeholder="Ej: 3" type="number" formControlName="out" maxlength="2">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('substitute.out')?.hasError('required') && form.get('substitute.out')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('substitute.out')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('substitute.out')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Goles</h2>
-    <form [formGroup]="form">
-      <div formGroupName="goal">
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Total goles</ion-label>
-              <ion-input placeholder="Ej: 4" type="number" formControlName="total" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('goal.total')?.hasError('required') && form.get('goal.total')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('goal.total')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('goal.total')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Asistencias</ion-label>
-              <ion-input placeholder="Ej: 1" type="number" formControlName="assists" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('goal.assists')?.hasError('required') && form.get('goal.assists')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('goal.assists')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('goal.assists')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Banqueados</ion-label>
+            <ion-input placeholder="Ej: 5" type="number" formControlName="bench" maxlength="2">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('substitute.bench')?.hasError('required') && form.get('substitute.bench')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('substitute.bench')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('substitute.bench')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
+        </div>
+      </form>
+    </ion-card>
 
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Goles recibidos</ion-label>
-              <ion-input placeholder="Ej: 2" type="number" formControlName="conceded" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('goal.conceded')?.hasError('required') && form.get('goal.conceded')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('goal.conceded')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('goal.conceded')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Goles salvados</ion-label>
-              <ion-input placeholder="Ej: 0" type="number" formControlName="saves" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('goal.saves')?.hasError('required') && form.get('goal.saves')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('goal.saves')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('goal.saves')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </div>
-    </form>
-  </ion-card>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Disparos</h3>
+      <form [formGroup]="form">
+        <div formGroupName="shot">
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Total disparos</ion-label>
+                <ion-input placeholder="Ej: 12" type="number" formControlName="total" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('shot.total')?.hasError('required') && form.get('shot.total')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('shot.total')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('shot.total')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Al arco</ion-label>
+                <ion-input placeholder="Ej: 3" type="number" formControlName="on" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('shot.on')?.hasError('required') && form.get('shot.on')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('shot.on')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('shot.on')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </ion-card>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Passes</h2>
-    <form [formGroup]="form">
-      <div formGroupName="passe">
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Total pases</ion-label>
-          <ion-input placeholder="Ej: 50" type="number" formControlName="total" maxlength="3">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('passe.total')?.hasError('required') && form.get('passe.total')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.total')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.total')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Goles</h3>
+      <form [formGroup]="form">
+        <div formGroupName="goal">
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Total goles</ion-label>
+                <ion-input placeholder="Ej: 4" type="number" formControlName="total" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('goal.total')?.hasError('required') && form.get('goal.total')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('goal.total')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('goal.total')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Asistencias</ion-label>
+                <ion-input placeholder="Ej: 1" type="number" formControlName="assists" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('goal.assists')?.hasError('required') && form.get('goal.assists')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('goal.assists')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('goal.assists')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Pases claves</ion-label>
-              <ion-input placeholder="Ej: 5" type="number" formControlName="key" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('passe.key')?.hasError('required') && form.get('passe.key')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.key')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.key')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Precisión del pase</ion-label>
-              <ion-input placeholder="Ej: 7" type="number" formControlName="accuracy" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('passe.accuracy')?.hasError('required') && form.get('passe.accuracy')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('passe.accuracy')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.accuracy')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </div>
-    </form>
-  </ion-card>
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Entradas</h2>
-    <form [formGroup]="form">
-      <div formGroupName="tackle">
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Total entradas</ion-label>
-          <ion-input placeholder="Ej: 6" type="number" formControlName="total" maxlength="3">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('tackle.total')?.hasError('required') && form.get('tackle.total')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('tackle.total')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('tackle.total')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Goles recibidos</ion-label>
+                <ion-input placeholder="Ej: 2" type="number" formControlName="conceded" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('goal.conceded')?.hasError('required') && form.get('goal.conceded')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('goal.conceded')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('goal.conceded')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Goles salvados</ion-label>
+                <ion-input placeholder="Ej: 0" type="number" formControlName="saves" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('goal.saves')?.hasError('required') && form.get('goal.saves')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('goal.saves')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('goal.saves')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </ion-card>
 
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Entrada bloqueadas</ion-label>
-              <ion-input placeholder="Ej: 4" type="number" formControlName="blocks" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('tackle.blocks')?.hasError('required') && form.get('tackle.blocks')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('tackle.blocks')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('tackle.blocks')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Intercepción del pase</ion-label>
-              <ion-input placeholder="Ej: 3" type="number" formControlName="interceptions" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('tackle.interceptions')?.hasError('required') && form.get('tackle.interceptions')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('tackle.interceptions')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('tackle.interceptions')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </div>
-    </form>
-  </ion-card>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Passes</h3>
+      <form [formGroup]="form">
+        <div formGroupName="passe">
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Total pases</ion-label>
+            <ion-input placeholder="Ej: 50" type="number" formControlName="total" maxlength="3">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('passe.total')?.hasError('required') && form.get('passe.total')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.total')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.total')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Duelos</h2>
-    <form [formGroup]="form">
-      <div formGroupName="duel">
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Total duelos</ion-label>
-              <ion-input placeholder="Ej: 2" type="number" formControlName="total" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('duel.total')?.hasError('required') && form.get('duel.total')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('duel.total')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('duel.total')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Duelos ganados</ion-label>
-              <ion-input placeholder="Ej: 1" type="number" formControlName="won" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('duel.won')?.hasError('required') && form.get('duel.won')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('duel.won')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('duel.won')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </div>
-    </form>
-  </ion-card>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Pases claves</ion-label>
+                <ion-input placeholder="Ej: 5" type="number" formControlName="key" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('passe.key')?.hasError('required') && form.get('passe.key')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('passe.key')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.key')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Precisión del pase</ion-label>
+                <ion-input placeholder="Ej: 7" type="number" formControlName="accuracy" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('passe.accuracy')?.hasError('required') && form.get('passe.accuracy')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('passe.accuracy')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('passe.accuracy')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </ion-card>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Entradas</h3>
+      <form [formGroup]="form">
+        <div formGroupName="tackle">
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Total entradas</ion-label>
+            <ion-input placeholder="Ej: 6" type="number" formControlName="total" maxlength="3">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('tackle.total')?.hasError('required') && form.get('tackle.total')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('tackle.total')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('tackle.total')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Regates</h2>
-    <form [formGroup]="form">
-      <div formGroupName="dribble">
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Total regates</ion-label>
-          <ion-input placeholder="Ej: 8" type="number" formControlName="attempts" maxlength="3">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('dribble.attempts')?.hasError('required') && form.get('dribble.attempts')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('dribble.attempts')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('dribble.attempts')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Entrada bloqueadas</ion-label>
+                <ion-input placeholder="Ej: 4" type="number" formControlName="blocks" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('tackle.blocks')?.hasError('required') && form.get('tackle.blocks')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('tackle.blocks')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('tackle.blocks')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Intercepción del pase</ion-label>
+                <ion-input placeholder="Ej: 3" type="number" formControlName="interceptions" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('tackle.interceptions')?.hasError('required') && form.get('tackle.interceptions')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('tackle.interceptions')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('tackle.interceptions')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </ion-card>
 
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Regate exitosos</ion-label>
-              <ion-input placeholder="Ej: 7" type="number" formControlName="success" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('dribble.success')?.hasError('required') && form.get('dribble.success')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('dribble.success')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('dribble.success')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Regate pasados</ion-label>
-              <ion-input placeholder="Ej: 4" type="number" formControlName="past" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('dribble.past')?.hasError('required') && form.get('dribble.past')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('dribble.past')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('dribble.past')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </div>
-    </form>
-  </ion-card>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Duelos</h3>
+      <form [formGroup]="form">
+        <div formGroupName="duel">
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Total duelos</ion-label>
+                <ion-input placeholder="Ej: 2" type="number" formControlName="total" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('duel.total')?.hasError('required') && form.get('duel.total')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('duel.total')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('duel.total')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Duelos ganados</ion-label>
+                <ion-input placeholder="Ej: 1" type="number" formControlName="won" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('duel.won')?.hasError('required') && form.get('duel.won')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('duel.won')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('duel.won')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </ion-card>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Faltas</h2>
-    <form [formGroup]="form">
-      <div formGroupName="foul">
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Faltas fuertes</ion-label>
-              <ion-input placeholder="Ej: 7" type="number" formControlName="drawn" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('foul.drawn')?.hasError('required') && form.get('foul.drawn')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('foul.drawn')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('foul.drawn')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Faltas cometidas</ion-label>
-              <ion-input placeholder="Ej: 0" type="number" formControlName="committed" maxlength="3">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('foul.committed')?.hasError('required') && form.get('foul.committed')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('foul.committed')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('foul.committed')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </div>
-    </form>
-  </ion-card>
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Cartas</h2>
-    <form [formGroup]="form">
-      <div formGroupName="card">
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Tarjetas amarilla</ion-label>
-              <ion-input placeholder="Ej: 5" type="number" formControlName="yellow" maxlength="2">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('card.yellow')?.hasError('required') && form.get('card.yellow')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('card.yellow')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('card.yellow')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Doble amarillas</ion-label>
-              <ion-input placeholder="Ej: 1" type="number" formControlName="yellowred" maxlength="2">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('card.yellowred')?.hasError('required') && form.get('card.yellowred')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('card.yellowred')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('card.yellowred')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Regates</h3>
+      <form [formGroup]="form">
+        <div formGroupName="dribble">
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Total regates</ion-label>
+            <ion-input placeholder="Ej: 8" type="number" formControlName="attempts" maxlength="3">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('dribble.attempts')?.hasError('required') && form.get('dribble.attempts')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('dribble.attempts')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('dribble.attempts')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Tarjetas rojas</ion-label>
-          <ion-input placeholder="Ej: 2" type="number" formControlName="red" maxlength="2">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('card.red')?.hasError('required') && form.get('card.red')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('card.red')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('card.red')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
-      </div>
-    </form>
-  </ion-card>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Regate exitosos</ion-label>
+                <ion-input placeholder="Ej: 7" type="number" formControlName="success" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('dribble.success')?.hasError('required') && form.get('dribble.success')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('dribble.success')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('dribble.success')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Regate pasados</ion-label>
+                <ion-input placeholder="Ej: 4" type="number" formControlName="past" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('dribble.past')?.hasError('required') && form.get('dribble.past')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('dribble.past')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('dribble.past')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </ion-card>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Datos Penaltis</h2>
-    <form [formGroup]="form">
-      <div formGroupName="penalty">
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Penalti ganados</ion-label>
-              <ion-input placeholder="Ej: 3" type="number" formControlName="won" maxlength="2">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('penalty.won')?.hasError('required') && form.get('penalty.won')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('penalty.won')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.won')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Penalti fallados</ion-label>
-              <ion-input placeholder="Ej: 9" type="number" formControlName="missed" maxlength="2">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('penalty.missed')?.hasError('required') && form.get('penalty.missed')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('penalty.missed')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.missed')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Faltas</h3>
+      <form [formGroup]="form">
+        <div formGroupName="foul">
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Faltas fuertes</ion-label>
+                <ion-input placeholder="Ej: 7" type="number" formControlName="drawn" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('foul.drawn')?.hasError('required') && form.get('foul.drawn')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('foul.drawn')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('foul.drawn')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Faltas cometidas</ion-label>
+                <ion-input placeholder="Ej: 0" type="number" formControlName="committed" maxlength="3">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('foul.committed')?.hasError('required') && form.get('foul.committed')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('foul.committed')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('foul.committed')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </ion-card>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Cartas</h3>
+      <form [formGroup]="form">
+        <div formGroupName="card">
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Tarjetas amarilla</ion-label>
+                <ion-input placeholder="Ej: 5" type="number" formControlName="yellow" maxlength="2">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('card.yellow')?.hasError('required') && form.get('card.yellow')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('card.yellow')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('card.yellow')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Doble amarillas</ion-label>
+                <ion-input placeholder="Ej: 1" type="number" formControlName="yellowred" maxlength="2">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('card.yellowred')?.hasError('required') && form.get('card.yellowred')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('card.yellowred')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('card.yellowred')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Penalti cometidos</ion-label>
-              <ion-input placeholder="Ej: 6" type="number" formControlName="committed" maxlength="2">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('penalty.committed')?.hasError('required') && form.get('penalty.committed')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('penalty.committed')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.committed')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Penalti salvados</ion-label>
-              <ion-input placeholder="Ej: 7" type="number" formControlName="saved" maxlength="2">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('penalty.saved')?.hasError('required') && form.get('penalty.saved')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('penalty.saved')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.saved')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Tarjetas rojas</ion-label>
+            <ion-input placeholder="Ej: 2" type="number" formControlName="red" maxlength="2">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('card.red')?.hasError('required') && form.get('card.red')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('card.red')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('card.red')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
+        </div>
+      </form>
+    </ion-card>
 
-        <ion-item counter="true" class="full-width">
-          <ion-label position="floating">Penalti anotados</ion-label>
-          <ion-input placeholder="Ej: 2" type="number" formControlName="scored" maxlength="2">
-          </ion-input>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('penalty.scored')?.hasError('required') && form.get('penalty.scored')?.touched">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;"
-            *ngIf="form.get('penalty.scored')?.hasError('maxDigitsExceeded')">
-            {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-          </ion-note>
-          <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.scored')?.hasError('pattern')">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
-      </div>
-    </form>
-  </ion-card>
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Datos Penaltis</h3>
+      <form [formGroup]="form">
+        <div formGroupName="penalty">
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Penalti ganados</ion-label>
+                <ion-input placeholder="Ej: 3" type="number" formControlName="won" maxlength="2">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('penalty.won')?.hasError('required') && form.get('penalty.won')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('penalty.won')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.won')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Penalti fallados</ion-label>
+                <ion-input placeholder="Ej: 9" type="number" formControlName="missed" maxlength="2">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('penalty.missed')?.hasError('required') && form.get('penalty.missed')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('penalty.missed')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.missed')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-  <ion-card class="jugador-card" color="primary">
-    <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-    <h2>Valor de mercado</h2>
-    <form [formGroup]="form">
-      <div formGroupName="market">
-        <ion-row class="margin-input">
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Fecha</ion-label>
-              <ion-input [maskito]="maskitoOptions" [maskitoElement]="maskPredicate" placeholder="Ej: 19/07/2023"
-                type="text" formControlName="date">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('market.date')?.hasError('required') && form.get('market.date')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('market.date')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item counter="true" class="full-width">
-              <ion-label position="floating">Valor del mercado</ion-label>
-              <ion-input placeholder="Ej: 350" type="number" formControlName="marketValue">
-              </ion-input>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('market.marketValue')?.hasError('required') && form.get('market.marketValue')?.touched">
-                {{ 'REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;"
-                *ngIf="form.get('market.marketValue')?.hasError('maxDigitsExceeded')">
-                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
-              </ion-note>
-              <ion-note slot="error" style="color: white;" *ngIf="form.get('market.marketValue')?.hasError('pattern')">
-                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-              </ion-note>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Penalti cometidos</ion-label>
+                <ion-input placeholder="Ej: 6" type="number" formControlName="committed" maxlength="2">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('penalty.committed')?.hasError('required') && form.get('penalty.committed')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('penalty.committed')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.committed')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Penalti salvados</ion-label>
+                <ion-input placeholder="Ej: 7" type="number" formControlName="saved" maxlength="2">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('penalty.saved')?.hasError('required') && form.get('penalty.saved')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('penalty.saved')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.saved')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-        <ion-button (click)="updatePlayer(form.value)" color="dark" [disabled]="form.invalid"
-          style="width: 100%;">Guardar
-        </ion-button>
-      </div>
-    </form>
-  </ion-card>
+          <ion-item counter="true" class="full-width">
+            <ion-label position="floating">Penalti anotados</ion-label>
+            <ion-input placeholder="Ej: 2" type="number" formControlName="scored" maxlength="2">
+            </ion-input>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('penalty.scored')?.hasError('required') && form.get('penalty.scored')?.touched">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="form.get('penalty.scored')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="form.get('penalty.scored')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
+        </div>
+      </form>
+    </ion-card>
+
+    <ion-card class="jugador-card">
+      <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
+      <h3>Valor de mercado</h3>
+      <form [formGroup]="form">
+        <div formGroupName="market">
+          <ion-row class="margin-input">
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Fecha</ion-label>
+                <ion-input [maskito]="maskitoOptions" [maskitoElement]="maskPredicate" placeholder="Ej: 19/07/2023"
+                  type="text" formControlName="date">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('market.date')?.hasError('required') && form.get('market.date')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="form.get('market.date')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item counter="true" class="full-width">
+                <ion-label position="floating">Valor del mercado</ion-label>
+                <ion-input placeholder="Ej: 350" type="number" formControlName="marketValue">
+                </ion-input>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('market.marketValue')?.hasError('required') && form.get('market.marketValue')?.touched">
+                  {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('market.marketValue')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="form.get('market.marketValue')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+                </ion-note>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-button expand="full" shape="round" (click)="updatePlayer(form.value)" [disabled]="form.invalid"
+            style="width: 100%;">Guardar
+          </ion-button>
+        </div>
+      </form>
+    </ion-card>
+  </div>
 </ion-content>

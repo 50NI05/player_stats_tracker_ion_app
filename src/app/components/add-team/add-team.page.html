@@ -11,17 +11,18 @@
   <div class="wallpaper">
     <ion-card class="equipo-card">
       <!-- <ion-icon name="football" class="equipo-icon"></ion-icon> -->
-      <h2 class="title">Agregar Equipo</h2>
+      <h3 class="title">Agregar Equipo</h3>
       <form [formGroup]="addTeamForm">
         <ion-item>
           <ion-label position="floating">Nombre del Equipo</ion-label>
           <ion-input formControlName="teamName" maxlength="50"></ion-input>
-          <ion-note *ngIf="addTeamForm.controls['teamName'].hasError('required') && addTeamForm.get('teamName')?.touched"
+          <ion-note
+            *ngIf="addTeamForm.controls['teamName'].hasError('required') && addTeamForm.get('teamName')?.touched"
             slot="error" style="color: white;">
             {{ 'REQUIRED' | translate }}
           </ion-note>
         </ion-item>
-    
+
         <ion-row style="margin: 0 -5px;">
           <ion-col>
             <ion-item>
@@ -46,20 +47,21 @@
             </ion-item>
           </ion-col>
         </ion-row>
-    
+
         <ion-item>
           <ion-label position="floating">Logo URL</ion-label>
           <ion-input formControlName="teamLogoUrl" maxlength="100"></ion-input>
         </ion-item>
-    
-        <ion-button expand="full" color="primary" shape="round" [disabled]="addTeamForm.invalid" (click)="addTeam(addTeamForm.value)">
+
+        <ion-button expand="full" color="primary" shape="round" [disabled]="addTeamForm.invalid"
+          (click)="addTeam(addTeamForm.value)">
           Agregar Equipo
         </ion-button>
       </form>
     </ion-card>
-    
+
     <ion-card class="equipos-list-card">
-      <h2 class="title">Equipos de Fútbol</h2>
+      <h3 class="title">Equipos de Fútbol</h3>
       <ion-list>
         <ion-item *ngFor="let team of allTeams">
           <ion-avatar slot="start">
@@ -72,7 +74,8 @@
           </ion-label>
           <ion-label slot="end">
             <ion-buttons style="display: flex; flex-direction: row; justify-content: center;">
-              <ion-button style="color: rgb(198, 147, 16); font-size: 20px;" (click)="openModal(team.id)" fill="clear"><ion-icon name="create-outline"></ion-icon></ion-button>
+              <ion-button style="color: rgb(198, 147, 16); font-size: 15px;" (click)="openModal(team.id)"
+                fill="clear"><ion-icon name="create-outline"></ion-icon></ion-button>
             </ion-buttons>
           </ion-label>
         </ion-item>

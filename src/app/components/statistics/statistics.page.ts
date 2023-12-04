@@ -339,8 +339,8 @@ export class StatisticsPage implements OnInit {
           {
             label: this.players1.map(e => e.name)[0],
             data: dataChart,
-            borderColor: '#C69310',
-            backgroundColor: '#C69310',
+            ...type !== 'pie' && { borderColor: '#C69310' },
+            ...type !== 'pie' && { backgroundColor: '#C69310' },
             borderWidth: 1
           },
         ]
@@ -349,25 +349,25 @@ export class StatisticsPage implements OnInit {
         plugins: {
           legend: {
             labels: {
-              color: "white", 
+              color: "white",
               font: {
-                size: 18 
+                size: 18
               }
             }
           }
         },
         scales: {
-          y: { 
+          y: {
             ticks: {
-              color: "white", 
+              color: "white",
               font: {
-                size: 18, 
+                size: 18,
               },
               stepSize: 1,
               beginAtZero: false
             }
           },
-          x: {  
+          x: {
             ticks: {
               color: "white",
               font: {
@@ -380,6 +380,7 @@ export class StatisticsPage implements OnInit {
         }
       }
     });
+
   }
 
   generateChartPlayer2(type: any) {
@@ -392,7 +393,6 @@ export class StatisticsPage implements OnInit {
       this.players2.map(e => e.tackle.total === null ? 5 : e.tackle.total)[0],
       this.players2.map(e => e.dribble.success === null ? 3 : e.dribble.success)[0]
     ]
-
     this.chart2 = new Chart(ctx, {
       type: type,
       data: {
@@ -400,8 +400,8 @@ export class StatisticsPage implements OnInit {
         datasets: [{
           label: this.players2.map(e => e.name)[0],
           data: dataChart2,
-          borderColor: '#C69310',
-          backgroundColor: '#C69310',
+          ...type !== 'pie' && { borderColor: '#C69310' },
+          ...type !== 'pie' && { backgroundColor: '#C69310' },
           borderWidth: 1
         },
         ]

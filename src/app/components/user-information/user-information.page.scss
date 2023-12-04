@@ -2,7 +2,7 @@
   margin-top: 30px;
   // background: rgb(198, 147, 16);
   // border-radius: 20px;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 form {
@@ -22,6 +22,7 @@ form {
 .wallpaper-opacity {
   background: rgb(94, 33, 41, 0.65);
   height: 100%;
+  overflow-y: scroll;
 }
 
 ion-item::part(native) {
@@ -30,6 +31,6 @@ ion-item::part(native) {
 }
 
 ion-note {
-  font-size: 20px;
+  font-size: 15px;
   color: white;
 }
