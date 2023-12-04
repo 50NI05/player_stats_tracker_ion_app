@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
+import { TeamDetailsPage } from '../team-details/team-details.page';
 
 @Component({
   selector: 'app-add-team',
@@ -13,7 +14,7 @@ import { Constant } from 'src/app/shared/constant/constant.component';
 })
 export class AddTeamPage implements OnInit {
 
-  
+
   // ngOnInit(): void {
   // }
 
@@ -37,12 +38,14 @@ export class AddTeamPage implements OnInit {
 
   addTeamForm: FormGroup;
   allTeams: any = [];
+  team: any[] = [];
 
   constructor(
     public form: FormBuilder,
     private authService: AuthService,
     public loadingCtrl: LoadingController,
     public alertController: AlertController,
+    private modalCtrl: ModalController,
   ) {
     this.addTeamForm = this.form.group({
       teamName: new FormControl('', [Validators.required]),
@@ -54,6 +57,60 @@ export class AddTeamPage implements OnInit {
 
   ngOnInit() {
     this.getAllTeams()
+  }
+
+  async openModal(idTeam: any) {
+    await this.getTeam(idTeam)
+    console.log('team', this.team);
+
+    const modal = await this.modalCtrl.create({
+      component: TeamDetailsPage,
+      componentProps: {
+        team: this.team
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role) {
+      this.getAllTeams()
+    }
+  }
+
+  async getTeam(id: any) {
+    await loadingSpinner(this.loadingCtrl)
+    return new Promise<void>((resolve, reject) => {
+      this.authService.call(null, `getTeam/${id}`, 'GET', false).subscribe({
+        next: (response) => {
+          if (response.status === Constant.SUCCESS) {
+            this.team = []
+            this.team = response.data
+          }
+
+          console.log(this.team);
+
+          resolve();
+          this.loadingCtrl.dismiss()
+        },
+        error: (error) => {
+          console.log(error)
+          this.loadingCtrl.dismiss()
+
+          alertModal({
+            title: 'Error',
+            text: 'Falla en el servidor',
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
+        },
+      })
+    })
   }
 
 

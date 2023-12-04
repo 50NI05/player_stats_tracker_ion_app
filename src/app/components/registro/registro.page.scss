@@ -1,92 +1,38 @@
-.registerButton {
-  align-items: center;
-  justify-content: center;
-  display: grid;
-  grid-template-columns: 100%;
-}
-
-.iconEye {
-  font-size: 24px;
-  vertical-align: middle;
-}
-
 .registerForm {
   margin-bottom: 10px;
 }
 
 .register-text {
-  text-align: center;
-  font-weight: bold;
-  color: black;
-}
-
-.card-subtitle {
-  text-align: center;
-}
-
-// * {
-//   font-family: 'segoeui';
-// }
-
-.ion-text-center {
-  font-size: 31px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .card-subtitle {
   font-size: 16px;
-}
-
-ion-popover {
-  --width: 80px;
+  color: white;
 }
 
 ion-card {
-  margin-top: auto;
+  margin: 0;
+  overflow-y: scroll;
+  // height: 100%;
+  background: rgb(94, 33, 41, 0.6);
+  border-radius: 20px;
+  height: 100%;
 }
 
 ion-card-title {
-
   padding: 10px;
-
-  margin: auto;
-
-  width: 200px;
-
-  border-radius: 10px;
-
-
-}
-
-ion-title {
-
+  font-size: 31px;
   color: white;
-
-  width: 90px;
-
-  margin-left: auto;
-
-  margin-right: 8px;
 }
 
-/*********************************************/
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
-
-body {
-  font-family: "Work Sans", sans-serif;
-  letter-spacing: 2vmin;
-  background: rgb(0, 0, 0);
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  align-items: center;
-  justify-content: center;
-
-}
-
-h2 {
-  font-size: 9vmin;
-  position: absolute;
-
+ion-card-subtitle {
+  text-align: center;
+  //   font-size: 15px;
 }
 
 .border {
@@ -98,99 +44,35 @@ h2 {
     1px 1px 0 rgb(1, 1, 1);
 }
 
-.wave {
-  color: rgb(255, 255, 255);
-  animation: wave 3s ease-in-out infinite;
+.wallpaper {
+  // padding: 10px;
+  height: 100%;
+  background: url('../../../assets/icon/seleccion-futbol.jpeg') no-repeat fixed;
+  background-position: 35% 50%;
+  background-size: cover;
+  color: #fff;
+  position: relative;
 }
 
-.two {
-  transform: translateY(0.8em);
+.wallpaper-opacity {
+  background: rgb(94, 33, 41, 0.3);
+  height: 100%;
 }
 
-.three {
-  transform: translateY(-0.8em);
+ion-item::part(native) {
+  background-color: rgb(255, 255, 255, 0.8);
+  border-radius: 20px;
 }
 
-@keyframes wave {
-
-  0%,
-  100% {
-    clip-path: polygon(0% 47%, 10% 48%, 33% 54%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
-  }
-
-  50% {
-    clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
-  }
+ion-icon {
+  font-size: 30px;
 }
 
-
-.data-container {
-  height: 20vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.contenedor {
-  display: flex;
-  width: 400px;
-  height: 40px;
+ion-note {
+  font-size: 15px;
   color: white;
-  // font-size: 28px;
-  line-height: 40px;
-  overflow: hidden;
-  // justify-content: center;
 }
 
-ul {
-  list-style: none;
-  padding-left: 10px;
-  animation: cambiar 20s infinite;
-}
-
-li {
-  font-size: 20px;
-}
-
-ul,
 p {
-  margin: 0;
-}
-
-@keyframes cambiar {
-
-  0% {
-    margin-top: 0;
-  }
-
-  20% {
-    margin-top: 0;
-  }
-
-  25% {
-    margin-top: -40px;
-  }
-
-  50% {
-    margin-top: -40px;
-  }
-
-  55% {
-    margin-top: -80px;
-  }
-
-  80% {
-    margin-top: -80px;
-  }
-
-  85% {
-    margin-top: -40px;
-  }
-
-  95% {
-    margin-top: -40px;
-  }
-
-
+  font-size: 15px;
 }

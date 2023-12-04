@@ -1,26 +1,70 @@
-.message-list {
-  padding-top: 10px;
-  padding-bottom: 0;
-  /* Elimina el espacio en la parte inferior */
+ion-content {
+  background-color: transparent;
 }
 
-.message {
+.message-background {
+  background: url('../../../assets/icon/vinotinto_venezuela.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  height: 100%;
+  position: relative;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+ion-list.message-list {
+  padding: 0;
+  background-color: transparent;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+ion-item.message {
+  --background: transparent;
+  margin-bottom: 10px;
+}
+
+.question-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  background-color: transparent;
+  // padding: 10px;
+  // margin: 10px;
+}
+
+.question {
+  margin: 5px;
+  color: white;
+  background: #5e2129;
+  width: 100%;
+  height: 75px;
+  // font-size: 20px;
 }
 
 .message-sender {
   margin-left: auto;
   background-color: #dcf8c6;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   max-width: 70%;
 }
 
 .message-receiver {
   background-color: #dcf8c6;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   max-width: 70%;
 }
 
@@ -33,4 +77,15 @@
 
 ion-button {
   border-radius: 50%;
+}
+
+div {
+  font-size: 20px;
+}
+
+.chat {
+  background: #5e2129;
+  border-radius: 20px;
+  height: 15%;
+  margin: 0px 5px;
 }
