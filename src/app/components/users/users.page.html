@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="warning">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,32 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-  <!-- <ion-card *ngFor="let user of users">
-    <ion-card-content>
-      <ion-icon name="person-circle-outline"></ion-icon>
-      <div>Nombre: {{ user.firstname }} </div>
-      <div>Apellido: {{ user.lastname }} </div>
-      <div>Correo: {{ user.email }} </div>
-    </ion-card-content> -->
-  <!-- <ion-button fill="clear" (click)="updateUser(user.id)">
-      Editar <ion-icon name="pencil-outline" style="margin-left: 10px;"></ion-icon>
-    </ion-button> -->
-  <!-- <ion-button expand="block" (click)="openModal(user.id)">Editar</ion-button>
-    <ion-button fill="clear" (click)="deleteUser(user.id)">
-      Eliminar <ion-icon name="trash-outline" style="margin-left: 10px;"></ion-icon>
-    </ion-button>
-  </ion-card> -->
-
-  <ion-card class="user-card" *ngFor="let user of users" color="warning">
-    <ion-card-content>
-      <ion-row class="user-row">
-        <ion-col size="12">
-          <ion-row class="user-info-row">
-            <ion-col size="10">
+<ion-content>
+  <div class="wallpaper">
+    <ion-card class="user-card" *ngFor="let user of users">
+      <ion-card-content>
+        <ion-row class="user-row">
+          <ion-col size="12">
+            <ion-row class="user-info-row">
               <ion-label class="user-fullname">{{ user.firstname }} {{ user.lastname }}</ion-label>
-            </ion-col>
-            <ion-col size="1" class="user-buttons-col">
               <ion-buttons class="user-buttons">
                 <ion-button (click)="openModal(user.id)">
                   <ion-icon name="create-outline"></ion-icon>
@@ -41,20 +23,37 @@
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
               </ion-buttons>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="3">
-          <ion-icon name="person" class="user-icon"></ion-icon>
-        </ion-col>
-        <ion-col size="9">
-          <ion-label class="user-info">
-            <ion-label class="user-email">Usuario: {{ user.email }}</ion-label>
-            <ion-label class="user-email">Perfil: {{ user.profile.description }}</ion-label>
-          </ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
+              <!-- <ion-col size="10">
+                <ion-label class="user-fullname">{{ user.firstname }} {{ user.lastname }}</ion-label>
+              </ion-col> -->
+              <!-- <ion-col size="1" class="user-buttons-col">
+                <ion-buttons class="user-buttons">
+                  <ion-button (click)="openModal(user.id)">
+                    <ion-icon name="create-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="deleteUser(user.id)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-col> -->
+            </ion-row>
+          </ion-col>
+          <ion-col size="3">
+            <ion-icon name="person" class="user-icon"></ion-icon>
+          </ion-col>
+          <ion-col size="9">
+            <ion-row>
+              <ion-label class="user-label"> {{ label.username }}: </ion-label>
+              <ion-label class="user-email"> {{ user.email }}</ion-label>
+            </ion-row>
 
+            <ion-row>
+              <ion-label class="user-label"> {{ label.profile }}: </ion-label>
+              <ion-label class="user-email"> {{ user.profile.description }}</ion-label>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

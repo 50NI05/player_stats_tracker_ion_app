@@ -1,79 +1,74 @@
-<!-- <ion-header class="ion-no-border">
-  <ion-toolbar color="dark">
-    <ion-title>
-      <div class="contenedor">
-        <p style="color: white;">Player Stats Tracker</p>
-        <ul>
-          <li>es sistema</li>
-          <li>es información</li>
-          <li>es tecnología</li>
-        </ul>
-      </div>
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<ion-content>
+  <div class="wallpaper">
+    <ion-card>
+      <ion-card-content>
+        <ion-img src="assets/icon/login.jpg"></ion-img>
+        <div class="data-container">
+          Bienvenido
+        </div>
+        <div style="color: white; text-align: center; font-size: 15px; padding: 5px;">
+          Inicia Sesión para continuar
+        </div>
+        <form [formGroup]="formularioLogin">
+          <ion-list style="background-color: transparent;">
+            <ion-item class="loginForm">
+              <ion-label position="floating">Usuario</ion-label>
+              <div style="display: flex; flex-direction: row;">
+                <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+                  maxlength="15"></ion-input>
+                <ion-icon name="person-outline" fill="clear"></ion-icon>
+              </div>
+              <ion-note *ngIf="formularioLogin.controls['email'].hasError('pattern')" slot="error">
+                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+              </ion-note>
+              <ion-note
+                *ngIf="formularioLogin.controls['email'].hasError('required') && formularioLogin.get('email')?.touched"
+                slot="error">
+                {{ 'REQUIRED' | translate }}
+              </ion-note>
+            </ion-item>
 
-<ion-content color="dark">
-  <ion-card>
-    <ion-card-content>
-      <ion-img src="assets/icon/login.jpg"></ion-img>
-      <div class="data-container">
-        Bienvenido
-      </div>
-      <div style="color: black; text-align: center; font-size: 15px;">
-        Inicia Sesión para continuar
-      </div>
-      <form [formGroup]="formularioLogin">
-        <ion-list style="background-color: transparent;">
-          <ion-item fill="outline" class="loginForm">
-            <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
-            <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
-              maxlength="50"></ion-input>
-            <ion-icon name="mail-outline" slot="end" fill="clear" color="dark"></ion-icon>
-            <ion-note *ngIf="formularioLogin.controls['email'].hasError('pattern')" slot="error">
-              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-            </ion-note>
-            <ion-note
-              *ngIf="formularioLogin.controls['email'].hasError('required') && formularioLogin.get('email')?.touched"
-              slot="error">
-              {{ 'REQUIRED' | translate }}
-            </ion-note>
-          </ion-item>
+            <ion-item class="loginForm">
+              <ion-label position="floating">Contraseña</ion-label>
 
-          <ion-item fill="outline" class="loginForm">
-            <ion-label position="floating">Contraseña</ion-label>
-            <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
-              [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
-            </ion-input>
-            <ion-button slot="end" fill="clear" (click)="showPassword()">
-              <ion-icon *ngIf="passwordVisibility === false" name="eye-outline" class="iconEye" color="dark"></ion-icon>
-              <ion-icon *ngIf="passwordVisibility === true" name="eye-off-outline" class="iconEye"
-                color="dark"></ion-icon>
-            </ion-button>
-            <ion-note *ngIf="formularioLogin.controls['password'].hasError('pattern')" slot="error">
-              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-            </ion-note>
-            <ion-note
-              *ngIf="formularioLogin.controls['password'].hasError('required') && formularioLogin.get('password')?.touched"
-              slot="error">
-              {{ 'REQUIRED' | translate }}
-            </ion-note>
-          </ion-item>
-        </ion-list>
-      </form>
+              <div style="display: flex; flex-direction: row;">
+                <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
+                  [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
+                </ion-input>
+                <div (click)="showPassword()">
+                  <ion-icon fill="clear" *ngIf="passwordVisibility === false" name="eye-outline"></ion-icon>
+                  <ion-icon fill="clear" *ngIf="passwordVisibility === true" name="eye-off-outline"></ion-icon>
+                </div>
+              </div>
 
-      <div class="forgot-password" [routerLink]="'/forgot-password'">
-        ¿Olvidaste la contraseña?
-      </div>
+              <ion-note *ngIf="formularioLogin.controls['password'].hasError('pattern')" slot="error">
+                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+              </ion-note>
+              <ion-note
+                *ngIf="formularioLogin.controls['password'].hasError('required') && formularioLogin.get('password')?.touched"
+                slot="error">
+                {{ 'REQUIRED' | translate }}
+              </ion-note>
+            </ion-item>
+          </ion-list>
+        </form>
 
-      <ion-button [disabled]="formularioLogin.invalid" (click)="login(formularioLogin.value)" class="loginButton"
-        color="primary">Iniciar Sesión
-      </ion-button>
+        <div class="forgot-password" [routerLink]="'/forgot-password'">
+          <div style="background: rgb(198, 147, 16); border-radius: 20px; padding: 0 10px;">
+            ¿Olvidaste la contraseña?
+          </div>
+        </div>
 
-      <div class="register">
-        ¿No tienes una cuenta? <div class="register-text" [routerLink]="'/register'">Regístrate</div>
-      </div>
+        <ion-button shape="round" expand="full" [disabled]="formularioLogin.invalid"
+          (keyup.enter)="login(formularioLogin.value)" (click)="login(formularioLogin.value)" class="loginButton"
+          color="primary">Iniciar Sesión
+        </ion-button>
 
-    </ion-card-content>
-  </ion-card>
+        <div class="register">
+          ¿No tienes una cuenta? <div class="register-text" [routerLink]="'/register'">Regístrate</div>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
