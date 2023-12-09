@@ -60,7 +60,8 @@
         </div>
 
         <ion-button shape="round" expand="full" [disabled]="formularioLogin.invalid"
-          (click)="login(formularioLogin.value)" class="loginButton" color="primary">Iniciar Sesión
+          (keyup.enter)="login(formularioLogin.value)" (click)="login(formularioLogin.value)" class="loginButton"
+          color="primary">Iniciar Sesión
         </ion-button>
 
         <div class="register">

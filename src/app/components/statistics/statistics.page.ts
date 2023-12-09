@@ -351,7 +351,8 @@ export class StatisticsPage implements OnInit {
             labels: {
               color: "white",
               font: {
-                size: 18
+                size: 15,
+                family: 'Poppins',
               }
             }
           }
@@ -361,20 +362,22 @@ export class StatisticsPage implements OnInit {
             ticks: {
               color: "white",
               font: {
-                size: 18,
+                size: 15,
+                family: 'Poppins',
               },
               stepSize: 1,
-              beginAtZero: false
+              // beginAtZero: false
             }
           },
           x: {
             ticks: {
               color: "white",
               font: {
-                size: 18
+                size: 15,
+                family: 'Poppins',
               },
               stepSize: 1,
-              beginAtZero: true
+              // beginAtZero: true
             }
           }
         }
@@ -402,7 +405,7 @@ export class StatisticsPage implements OnInit {
           data: dataChart2,
           ...type !== 'pie' && { borderColor: '#C69310' },
           ...type !== 'pie' && { backgroundColor: '#C69310' },
-          borderWidth: 1
+          // borderWidth: 1
         },
         ]
       },
@@ -412,7 +415,8 @@ export class StatisticsPage implements OnInit {
             labels: {
               color: "white",
               font: {
-                size: 18
+                size: 15,
+                family: 'Poppins',
               }
             }
           }
@@ -422,20 +426,22 @@ export class StatisticsPage implements OnInit {
             ticks: {
               color: "white",
               font: {
-                size: 18,
+                size: 15,
+                family: 'Poppins',
               },
               stepSize: 1,
-              beginAtZero: false
+              // beginAtZero: false
             }
           },
           x: {
             ticks: {
               color: "white",
               font: {
-                size: 18
+                size: 15,
+                family: 'Poppins',
               },
               stepSize: 1,
-              beginAtZero: true
+              // beginAtZero: true
             }
           }
         }

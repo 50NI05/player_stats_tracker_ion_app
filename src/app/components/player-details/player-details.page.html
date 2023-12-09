@@ -13,10 +13,10 @@
   <div class="wallpaper">
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Jugador</h3>
+      <h4 class="player-title">Datos Jugador</h4>
       <form [formGroup]="form">
         <div formGroupName="player">
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Nombre</ion-label>
             <ion-input placeholder="Ej: Alan Walker" (keypress)="validateText($event)" formControlName="name"
               maxlength="50"></ion-input>
@@ -32,7 +32,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Nombres</ion-label>
             <ion-input placeholder="Ej: Alan Olav" (keypress)="validateText($event)" formControlName="firstname"
               maxlength="50"></ion-input>
@@ -48,7 +48,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Apellidos</ion-label>
             <ion-input placeholder="Ej: Walker" (keypress)="validateText($event)" formControlName="lastname"
               maxlength="50"></ion-input>
@@ -67,7 +67,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Edad</ion-label>
                 <ion-input placeholder="Ej: 20" type="number" formControlName="age" maxlength="2">
                 </ion-input>
@@ -85,7 +85,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Fecha de Nacimiento</ion-label>
                 <ion-input [maskito]="maskitoOptions" [maskitoElement]="maskPredicate" fill="outline"
                   placeholder="Ej: 12/02/2022" type="text" formControlName="birth" maxlength="10">
@@ -106,7 +106,7 @@
           </ion-row>
 
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Nacionalidad</ion-label>
             <ion-input placeholder="Ej: Veneco" (keypress)="validateText($event)" formControlName="nationality"
               maxlength="20">
@@ -125,7 +125,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Altura (cm)</ion-label>
                 <ion-input placeholder="Ej: 1.20" type="number" formControlName="height" maxlength="4">
                 </ion-input>
@@ -143,7 +143,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Peso</ion-label>
                 <ion-input placeholder="Ej: 82" type="number" formControlName="weight" maxlength="4">
                 </ion-input>
@@ -162,13 +162,13 @@
             </ion-col>
           </ion-row>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">URL imagen</ion-label>
             <ion-input placeholder="Ej: https://google.com" formControlName="photo" maxlength="50">
             </ion-input>
           </ion-item>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-select interface="popover" label="Equipos" placeholder="Selecciona un equipo"
               formControlName="id_team">
               <ion-select-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</ion-select-option>
@@ -184,12 +184,12 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos del Partido</h3>
+      <h4 class="player-title">Datos del Partido</h4>
       <form [formGroup]="form">
         <div formGroupName="game">
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Partidos jugados</ion-label>
                 <ion-input placeholder="Ej: 12" type="number" formControlName="appearences" maxlength="3"></ion-input>
                 <ion-note slot="error" style="color: white;"
@@ -206,7 +206,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Minutos jugados</ion-label>
                 <ion-input placeholder="Ej: 521" type="number" formControlName="minutes" maxlength="5"></ion-input>
                 <ion-note slot="error" style="color: white;"
@@ -226,7 +226,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Titularidades</ion-label>
                 <ion-input placeholder="Ej: 20" type="number" formControlName="lineups" maxlength="3"></ion-input>
                 <ion-note slot="error" style="color: white;"
@@ -243,7 +243,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">¿Es capitán?</ion-label>
                 <ion-select interface="popover" label="Equipos" formControlName="captain">
                   <ion-select-option *ngFor="let captain of captainList"
@@ -259,7 +259,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Dorsal</ion-label>
                 <ion-input placeholder="Ej: 20" type="number" formControlName="number" maxlength="2">
                 </ion-input>
@@ -277,7 +277,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Posición</ion-label>
                 <ion-input placeholder="Ej: Attacker" (keypress)="validateText($event)" formControlName="position"
                   maxlength="20">
@@ -296,7 +296,7 @@
             </ion-col>
           </ion-row>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Valoración por partidos</ion-label>
             <ion-input placeholder="Ej: 2" type="number" formControlName="rating" maxlength="2">
             </ion-input>
@@ -317,10 +317,10 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Sustitutos</h3>
+      <h4 class="player-title">Datos Sustitutos</h4>
       <form [formGroup]="form">
         <div formGroupName="substitute">
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Ingresos</ion-label>
             <ion-input placeholder="Ej: 1" type="number" formControlName="in" maxlength="2">
             </ion-input>
@@ -337,7 +337,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Sustituidos</ion-label>
             <ion-input placeholder="Ej: 3" type="number" formControlName="out" maxlength="2">
             </ion-input>
@@ -354,7 +354,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Banqueados</ion-label>
             <ion-input placeholder="Ej: 5" type="number" formControlName="bench" maxlength="2">
             </ion-input>
@@ -376,12 +376,12 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Disparos</h3>
+      <h4 class="player-title">Datos Disparos</h4>
       <form [formGroup]="form">
         <div formGroupName="shot">
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Total disparos</ion-label>
                 <ion-input placeholder="Ej: 12" type="number" formControlName="total" maxlength="3">
                 </ion-input>
@@ -399,7 +399,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Al arco</ion-label>
                 <ion-input placeholder="Ej: 3" type="number" formControlName="on" maxlength="3">
                 </ion-input>
@@ -422,12 +422,12 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Goles</h3>
+      <h4 class="player-title">Datos Goles</h4>
       <form [formGroup]="form">
         <div formGroupName="goal">
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Total goles</ion-label>
                 <ion-input placeholder="Ej: 4" type="number" formControlName="total" maxlength="3">
                 </ion-input>
@@ -445,7 +445,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Asistencias</ion-label>
                 <ion-input placeholder="Ej: 1" type="number" formControlName="assists" maxlength="3">
                 </ion-input>
@@ -466,7 +466,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Goles recibidos</ion-label>
                 <ion-input placeholder="Ej: 2" type="number" formControlName="conceded" maxlength="3">
                 </ion-input>
@@ -484,7 +484,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Goles salvados</ion-label>
                 <ion-input placeholder="Ej: 0" type="number" formControlName="saves" maxlength="3">
                 </ion-input>
@@ -508,10 +508,10 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Passes</h3>
+      <h4 class="player-title">Datos Passes</h4>
       <form [formGroup]="form">
         <div formGroupName="passe">
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Total pases</ion-label>
             <ion-input placeholder="Ej: 50" type="number" formControlName="total" maxlength="3">
             </ion-input>
@@ -529,7 +529,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Pases claves</ion-label>
                 <ion-input placeholder="Ej: 5" type="number" formControlName="key" maxlength="3">
                 </ion-input>
@@ -547,7 +547,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Precisión del pase</ion-label>
                 <ion-input placeholder="Ej: 7" type="number" formControlName="accuracy" maxlength="3">
                 </ion-input>
@@ -570,10 +570,10 @@
     </ion-card>
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Entradas</h3>
+      <h4 class="player-title">Datos Entradas</h4>
       <form [formGroup]="form">
         <div formGroupName="tackle">
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Total entradas</ion-label>
             <ion-input placeholder="Ej: 6" type="number" formControlName="total" maxlength="3">
             </ion-input>
@@ -592,7 +592,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Entrada bloqueadas</ion-label>
                 <ion-input placeholder="Ej: 4" type="number" formControlName="blocks" maxlength="3">
                 </ion-input>
@@ -610,7 +610,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Intercepción del pase</ion-label>
                 <ion-input placeholder="Ej: 3" type="number" formControlName="interceptions" maxlength="3">
                 </ion-input>
@@ -635,12 +635,12 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Duelos</h3>
+      <h4 class="player-title">Datos Duelos</h4>
       <form [formGroup]="form">
         <div formGroupName="duel">
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Total duelos</ion-label>
                 <ion-input placeholder="Ej: 2" type="number" formControlName="total" maxlength="3">
                 </ion-input>
@@ -658,7 +658,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Duelos ganados</ion-label>
                 <ion-input placeholder="Ej: 1" type="number" formControlName="won" maxlength="3">
                 </ion-input>
@@ -682,10 +682,10 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Regates</h3>
+      <h4 class="player-title">Datos Regates</h4>
       <form [formGroup]="form">
         <div formGroupName="dribble">
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Total regates</ion-label>
             <ion-input placeholder="Ej: 8" type="number" formControlName="attempts" maxlength="3">
             </ion-input>
@@ -704,7 +704,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Regate exitosos</ion-label>
                 <ion-input placeholder="Ej: 7" type="number" formControlName="success" maxlength="3">
                 </ion-input>
@@ -722,7 +722,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Regate pasados</ion-label>
                 <ion-input placeholder="Ej: 4" type="number" formControlName="past" maxlength="3">
                 </ion-input>
@@ -746,12 +746,12 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Faltas</h3>
+      <h4 class="player-title">Datos Faltas</h4>
       <form [formGroup]="form">
         <div formGroupName="foul">
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Faltas fuertes</ion-label>
                 <ion-input placeholder="Ej: 7" type="number" formControlName="drawn" maxlength="3">
                 </ion-input>
@@ -769,7 +769,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Faltas cometidas</ion-label>
                 <ion-input placeholder="Ej: 0" type="number" formControlName="committed" maxlength="3">
                 </ion-input>
@@ -792,12 +792,12 @@
     </ion-card>
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Cartas</h3>
+      <h4 class="player-title">Datos Cartas</h4>
       <form [formGroup]="form">
         <div formGroupName="card">
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Tarjetas amarilla</ion-label>
                 <ion-input placeholder="Ej: 5" type="number" formControlName="yellow" maxlength="2">
                 </ion-input>
@@ -815,7 +815,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Doble amarillas</ion-label>
                 <ion-input placeholder="Ej: 1" type="number" formControlName="yellowred" maxlength="2">
                 </ion-input>
@@ -834,7 +834,7 @@
             </ion-col>
           </ion-row>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Tarjetas rojas</ion-label>
             <ion-input placeholder="Ej: 2" type="number" formControlName="red" maxlength="2">
             </ion-input>
@@ -855,12 +855,12 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Datos Penaltis</h3>
+      <h4 class="player-title">Datos Penaltis</h4>
       <form [formGroup]="form">
         <div formGroupName="penalty">
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Penalti ganados</ion-label>
                 <ion-input placeholder="Ej: 3" type="number" formControlName="won" maxlength="2">
                 </ion-input>
@@ -878,7 +878,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Penalti fallados</ion-label>
                 <ion-input placeholder="Ej: 9" type="number" formControlName="missed" maxlength="2">
                 </ion-input>
@@ -899,7 +899,7 @@
 
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Penalti cometidos</ion-label>
                 <ion-input placeholder="Ej: 6" type="number" formControlName="committed" maxlength="2">
                 </ion-input>
@@ -917,7 +917,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Penalti salvados</ion-label>
                 <ion-input placeholder="Ej: 7" type="number" formControlName="saved" maxlength="2">
                 </ion-input>
@@ -936,7 +936,7 @@
             </ion-col>
           </ion-row>
 
-          <ion-item counter="true" class="full-width">
+          <ion-item counter="true">
             <ion-label position="floating">Penalti anotados</ion-label>
             <ion-input placeholder="Ej: 2" type="number" formControlName="scored" maxlength="2">
             </ion-input>
@@ -958,12 +958,12 @@
 
     <ion-card class="jugador-card">
       <!-- <ion-icon name="person-add" class="jugador-icon"></ion-icon> -->
-      <h3>Valor de mercado</h3>
+      <h4 class="player-title">Valor de mercado</h4>
       <form [formGroup]="form">
         <div formGroupName="market">
           <ion-row class="margin-input">
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Fecha</ion-label>
                 <ion-input [maskito]="maskitoOptions" [maskitoElement]="maskPredicate" placeholder="Ej: 19/07/2023"
                   type="text" formControlName="date">
@@ -978,7 +978,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item counter="true" class="full-width">
+              <ion-item counter="true">
                 <ion-label position="floating">Valor del mercado</ion-label>
                 <ion-input placeholder="Ej: 350" type="number" formControlName="marketValue">
                 </ion-input>

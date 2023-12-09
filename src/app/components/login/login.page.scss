@@ -51,7 +51,7 @@ ion-card {
   height: 100%;
   background: rgb(94, 33, 41, 0.6);
   margin: 0;
-  border-radius: 20px;
+  // border-radius: 20px;
   // margin-top: auto;
 }
 
@@ -65,13 +65,12 @@ ion-card {
 }
 
 .wallpaper {
-  padding: 10px;
+  // padding: 10px;
   height: 100%;
   background: url('../../../assets/icon/seleccion-futbol.jpeg') no-repeat fixed;
   background-position: 35% 50%;
   background-size: cover;
-  color: #fff;
-  position: relative;
+  overflow-y: scroll;
 }
 
 ion-item::part(native) {

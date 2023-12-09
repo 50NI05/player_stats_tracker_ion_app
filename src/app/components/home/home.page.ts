@@ -149,19 +149,45 @@ export class HomePage implements OnInit {
           {
             label: data[0].player.firstname + ' ' + data[0].player.lastname,
             data: dataChart,
-            // borderWidth: 1
+            borderColor: '#C69310',
+            backgroundColor: '#C69310',
           },
-          // {
-          //   label: 'leyenda',
-          //   data: dataChart,
-          //   // borderWidth: 1
-          // },
         ]
       },
       options: {
         plugins: {
           legend: {
-            display: false
+            labels: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: false
+            }
+          },
+          x: {
+            ticks: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: true
+            }
           }
         }
       }

@@ -25,8 +25,7 @@
       </ion-list>
     </div>
     <ion-row [formGroup]="form" class="chat">
-      <ion-input placeholder="Escribe un mensaje..." class="message-input" (keyup.enter)="assistant()"
-        formControlName="prompt">
+      <ion-input placeholder="Escribe un mensaje..." (keyup.enter)="assistant()" formControlName="prompt">
       </ion-input>
       <ion-buttons>
         <ion-button color="primary" (click)="assistant()">
@@ -36,16 +35,3 @@
     </ion-row>
   </div>
 </ion-content>
-<!-- 
-<ion-footer>
-  <ion-toolbar [formGroup]="form">
-    <ion-input placeholder="Escribe un mensaje..." class="message-input"
-      (keyup.enter)="assistant()" formControlName="prompt">
-    </ion-input>
-    <ion-buttons slot="end">
-      <ion-button color="primary" (click)="assistant()">
-        <ion-icon slot="icon-only" name="send"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer> -->
