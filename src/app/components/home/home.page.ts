@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   chart!: any;
   datas: any[] = [];
 
-  routes = [
+  routesAdmin = [
     {
       title: 'Estadísticas',
       route: '/statistics',
@@ -38,7 +38,24 @@ export class HomePage implements OnInit {
       title: 'Ver Jugadores',
       route: '/table-players',
     },
+    {
+      title: 'Asistente Virtual',
+      route: '/chat-bot',
+    },
   ]
+
+  routesUser = [
+    {
+      title: 'Estadísticas',
+      route: '/statistics',
+    },
+    {
+      title: 'Asistente Virtual',
+      route: '/chat-bot',
+    },
+  ]
+
+  profile: any;
 
   constructor(
     private authService: AuthService,
@@ -47,7 +64,9 @@ export class HomePage implements OnInit {
     public form: FormBuilder,
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
-  ) { }
+  ) {
+    this.profile = authService.getProfile()
+  }
 
   ngOnInit() {
     this.player()
@@ -65,7 +84,7 @@ export class HomePage implements OnInit {
 
     const random = Math.floor(Math.random() * 10) + 1;
 
-    this.authService.call(null, `getPlayer/${random}`, 'GET', true).subscribe({
+    this.authService.call(null, `getPlayer/${12}`, 'GET', true).subscribe({
       next: (response) => {
         this.datas = []
         if (response.status === Constant.SUCCESS) {
@@ -130,19 +149,45 @@ export class HomePage implements OnInit {
           {
             label: data[0].player.firstname + ' ' + data[0].player.lastname,
             data: dataChart,
-            // borderWidth: 1
+            borderColor: '#C69310',
+            backgroundColor: '#C69310',
           },
-          // {
-          //   label: 'leyenda',
-          //   data: dataChart,
-          //   // borderWidth: 1
-          // },
         ]
       },
       options: {
         plugins: {
           legend: {
-            display: false
+            labels: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: false
+            }
+          },
+          x: {
+            ticks: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: true
+            }
           }
         }
       }
