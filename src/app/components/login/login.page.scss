@@ -15,7 +15,7 @@
   margin-bottom: 20px;
   text-align: end;
   color: white;
-  font-weight: bold;
+  // font-weight: bold;
   font-size: 15px;
   display: flex;
   flex-direction: row;
@@ -33,23 +33,27 @@
 }
 
 .register-text {
-  font-weight: bold;
+  // font-weight: bold;
   color: white;
   margin-left: 5px;
   background: rgb(198, 147, 16);
   border-radius: 20px;
   font-size: 15px;
-  padding: 0 10px;
+  padding: 5px 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 ion-card {
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow-y: scroll;
   height: 100%;
-  background: rgb(94, 33, 41, 0.6);
+  background: rgb(94, 33, 41, 0.9);
   margin: 0;
   // border-radius: 20px;
   // margin-top: auto;
@@ -61,7 +65,7 @@ ion-card {
   text-align: center;
   font-weight: bold;
   color: white;
-  padding: 10px 0;
+  padding: 10px 0 0 0;
 }
 
 .wallpaper {

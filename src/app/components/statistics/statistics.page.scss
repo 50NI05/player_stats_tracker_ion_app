@@ -53,6 +53,7 @@ ion-button {
 .title {
   background: rgb(198, 147, 16);
   border-radius: 20px;
+  padding: 5px 0;
 }
 
 .text-middle-20 {
@@ -101,4 +102,5 @@ ion-item::part(native) {
   border-radius: 20px;
   background: rgb(198, 147, 16);
   color: white;
+  padding: 5px 0;
 }

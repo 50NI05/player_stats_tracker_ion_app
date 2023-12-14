@@ -2,7 +2,7 @@
   <div class="wallpaper">
     <ion-card>
       <ion-card-content>
-        <ion-img src="assets/icon/login.jpg"></ion-img>
+        <ion-img src="assets/icon/Mobile login.png"></ion-img>
         <div class="data-container">
           Bienvenido
         </div>
@@ -14,15 +14,15 @@
             <ion-item class="loginForm">
               <ion-label position="floating">Usuario</ion-label>
               <div style="display: flex; flex-direction: row;">
-                <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+                <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="username"
                   maxlength="15"></ion-input>
                 <ion-icon name="person-outline" fill="clear"></ion-icon>
               </div>
-              <ion-note *ngIf="formularioLogin.controls['email'].hasError('pattern')" slot="error">
+              <ion-note *ngIf="formularioLogin.controls['username'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
               <ion-note
-                *ngIf="formularioLogin.controls['email'].hasError('required') && formularioLogin.get('email')?.touched"
+                *ngIf="formularioLogin.controls['username'].hasError('required') && formularioLogin.get('username')?.touched"
                 slot="error">
                 {{ 'REQUIRED' | translate }}
               </ion-note>
@@ -54,7 +54,7 @@
         </form>
 
         <div class="forgot-password" [routerLink]="'/forgot-password'">
-          <div style="background: rgb(198, 147, 16); border-radius: 20px; padding: 0 10px;">
+          <div style="background: rgb(198, 147, 16); border-radius: 20px; padding: 5px 15px;">
             ¿Olvidaste la contraseña?
           </div>
         </div>
@@ -65,7 +65,9 @@
         </ion-button>
 
         <div class="register">
-          ¿No tienes una cuenta? <div class="register-text" [routerLink]="'/register'">Regístrate</div>
+          <div style="text-align: center; display: flex; flex-direction: column; justify-content: center;">¿No tienes
+            una cuenta?</div>
+          <div class="register-text" [routerLink]="'/register'">Regístrate</div>
         </div>
 
       </ion-card-content>

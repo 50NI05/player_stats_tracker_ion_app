@@ -15,49 +15,65 @@
   <div class="wallpaper">
     <div class="wallpaper-opacity ion-padding">
       <form [formGroup]="updateUserForm">
-        <ion-icon name="person-circle-outline" style="display: block; margin: 0 auto; font-size: 15rem; color: #3880ff;"></ion-icon>
-          <ion-item counter="true" class="form">
-            <ion-label position="floating">Nombre</ion-label>
-            <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
-              maxlength="30"></ion-input>
-            <ion-note *ngIf="updateUserForm.controls['firstname'].hasError('pattern')" slot="error">
-              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-            </ion-note>
-            <ion-note
-              *ngIf="updateUserForm.controls['firstname'].hasError('required') && updateUserForm.get('firstname')?.touched"
-              slot="error">
-              {{ 'REQUIRED' | translate }}
-            </ion-note>
-          </ion-item>
-      
-          <ion-item counter="true" class="form">
-            <ion-label position="floating">Apellido</ion-label>
-            <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastname"
-              maxlength="30"></ion-input>
-            <ion-note *ngIf="updateUserForm.controls['lastname'].hasError('pattern')" slot="error">
-              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-            </ion-note>
-            <ion-note
-              *ngIf="updateUserForm.controls['lastname'].hasError('required') && updateUserForm.get('lastname')?.touched"
-              slot="error">
-              {{ 'REQUIRED' | translate }}
-            </ion-note>
-          </ion-item>
-      
-          <ion-item counter="true" class="form">
-            <ion-label position="floating">Usuario</ion-label>
-            <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
-              maxlength="50"></ion-input>
-            <ion-note *ngIf="updateUserForm.controls['email'].hasError('pattern')" slot="error">
-              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-            </ion-note>
-            <ion-note *ngIf="updateUserForm.controls['email'].hasError('required') && updateUserForm.get('email')?.touched"
-              slot="error">
-              {{ 'REQUIRED' | translate }}
-            </ion-note>
-          </ion-item>
-      
-          <!-- <ion-item counter="true" class="form">
+        <ion-icon name="person-circle-outline"
+          style="display: block; margin: 0 auto; font-size: 15rem; color: #3880ff;"></ion-icon>
+        <ion-item counter="true" class="form">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
+            maxlength="30"></ion-input>
+          <ion-note *ngIf="updateUserForm.controls['firstname'].hasError('pattern')" slot="error">
+            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+          </ion-note>
+          <ion-note
+            *ngIf="updateUserForm.controls['firstname'].hasError('required') && updateUserForm.get('firstname')?.touched"
+            slot="error">
+            {{ 'REQUIRED' | translate }}
+          </ion-note>
+        </ion-item>
+
+        <ion-item counter="true" class="form">
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastname"
+            maxlength="30"></ion-input>
+          <ion-note *ngIf="updateUserForm.controls['lastname'].hasError('pattern')" slot="error">
+            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+          </ion-note>
+          <ion-note
+            *ngIf="updateUserForm.controls['lastname'].hasError('required') && updateUserForm.get('lastname')?.touched"
+            slot="error">
+            {{ 'REQUIRED' | translate }}
+          </ion-note>
+        </ion-item>
+
+        <ion-item counter="true" class="form">
+          <ion-label position="floating">Usuario</ion-label>
+          <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="username"
+            maxlength="50"></ion-input>
+          <ion-note *ngIf="updateUserForm.controls['username'].hasError('pattern')" slot="error">
+            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+          </ion-note>
+          <ion-note
+            *ngIf="updateUserForm.controls['username'].hasError('required') && updateUserForm.get('username')?.touched"
+            slot="error">
+            {{ 'REQUIRED' | translate }}
+          </ion-note>
+        </ion-item>
+
+        <ion-item counter="true" class="form">
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+            maxlength="50"></ion-input>
+          <ion-note *ngIf="updateUserForm.controls['email'].hasError('pattern')" slot="error">
+            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+          </ion-note>
+          <ion-note
+            *ngIf="updateUserForm.controls['email'].hasError('required') && updateUserForm.get('email')?.touched"
+            slot="error">
+            {{ 'REQUIRED' | translate }}
+          </ion-note>
+        </ion-item>
+
+        <!-- <ion-item counter="true" class="form">
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
                 maxlength="20">
@@ -66,16 +82,17 @@
                 Contraseña inválido
               </ion-note>
             </ion-item> -->
-      
-          <ion-item counter="true" class="form">
-            <ion-select interface="popover" label="Perfiles" placeholder="Selecciona una opción" formControlName="idProfile">
-              <ion-select-option *ngFor="let profile of profiles"
-                [value]="profile.id">{{profile.description}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-      
-        <ion-button expand="full" shape="round"  [disabled]="updateUserForm.invalid" (click)="updateUser(updateUserForm.value)"
-          class="save-information">Guardar
+
+        <ion-item counter="true" class="form">
+          <ion-select interface="popover" label="Perfiles" placeholder="Selecciona una opción"
+            formControlName="idProfile">
+            <ion-select-option *ngFor="let profile of profiles"
+              [value]="profile.id">{{profile.description}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button expand="full" shape="round" [disabled]="updateUserForm.invalid"
+          (click)="updateUser(updateUserForm.value)" class="save-information">Guardar
         </ion-button>
       </form>
     </div>

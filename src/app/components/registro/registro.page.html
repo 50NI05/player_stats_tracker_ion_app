@@ -17,7 +17,7 @@
         </ion-card-header>
 
         <ion-card-content>
-          <ion-img src="assets/icon/registro.jpg"></ion-img>
+          <ion-img style="margin-bottom: 20px;" src="assets/icon/privacy policy.png"></ion-img>
           <form [formGroup]="formularioRegistro">
 
             <ion-item counter="true" class="registerForm">
@@ -50,8 +50,22 @@
 
             <ion-item counter="true" class="registerForm">
               <ion-label position="floating">Usuario</ion-label>
-              <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+              <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="username"
                 maxlength="15"></ion-input>
+              <ion-note *ngIf="formularioRegistro.controls['username'].hasError('pattern')" slot="error">
+                {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+              </ion-note>
+              <ion-note
+                *ngIf="formularioRegistro.controls['username'].hasError('required') && formularioRegistro.get('username')?.touched"
+                slot="error">
+                {{ 'REQUIRED' | translate }}
+              </ion-note>
+            </ion-item>
+
+            <ion-item counter="true" class="registerForm">
+              <ion-label position="floating">Correo Electrónico</ion-label>
+              <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+                maxlength="50"></ion-input>
               <ion-note *ngIf="formularioRegistro.controls['email'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
@@ -91,7 +105,7 @@
             </ion-item>
 
             <div class="register-text" [routerLink]="'/login'">
-              <div style="background: rgb(198, 147, 16); border-radius: 20px; padding: 0 10px;">¿Ya tienes una cuenta?
+              <div style="background: rgb(198, 147, 16); border-radius: 20px; padding: 5px 15px;">¿Ya tienes una cuenta?
               </div>
             </div>
 

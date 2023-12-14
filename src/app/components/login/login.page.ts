@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
   ) {
 
     this.formularioLogin = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      username: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       password: new FormControl('', [Validators.required, Validators.pattern(this.passwordPattern)])
     })
 
@@ -80,7 +80,7 @@ export class LoginPage implements OnInit {
     await loadingSpinner(this.loadingCtrl)
 
     let data = {
-      email: loginForm.email,
+      username: loginForm.username,
       password: loginForm.password
     }
 
