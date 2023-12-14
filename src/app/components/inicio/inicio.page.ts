@@ -15,38 +15,59 @@ register();
 })
 export class InicioPage implements OnInit {
 
-  sliders = [
+  slidersAdmin = [
     {
-      img: 'assets/icon/welcome.jpg',
+      img: 'assets/icon/welcome.png',
       title: '¡Bienvenido!',
       description: 'Aprende a aprovechar al máximo nuestra aplicación en este tutorial de introducción. Te guiaremos por las funciones clave para que te familiarices con la experiencia.',
     },
     {
-      img: 'assets/icon/team.jpg',
+      img: 'assets/icon/group.png',
       title: 'Equipos y Visualización',
       description: 'Aprende a agregar y ver equipos en esta diapositiva. Gestionar tus equipos es clave para aprovechar nuestra aplicación.',
     },
     {
-      img: 'assets/icon/add.jpg',
+      img: 'assets/icon/add user.png',
       title: 'Agregar Jugadores',
       description: 'Descubre cómo añadir jugadores a tus equipos. Obtén un análisis completo de las estadísticas.',
     },
     {
-      img: 'assets/icon/statistics.jpg',
+      img: 'assets/icon/information tab.png',
       title: 'Comparación de Estadísticas',
       description: 'Aprende a comparar estadísticas entre jugadores y jugadores. Obtén poderosos análisis en nuestra aplicación.',
     },
     {
-      img: 'assets/icon/user.jpg',
+      img: 'assets/icon/hiring.png',
       title: 'Gestión de Usuarios',
       description: 'Explora cómo gestionar usuarios en esta diapositiva. Aprende a configurar cuentas y administrar permisos para una experiencia personalizada.',
     },
     {
-      img: 'assets/icon/ia.jpg',
+      img: 'assets/icon/robotics.png',
       title: 'Inteligencia Artificial',
       description: 'Utiliza la potencia de la inteligencia artificial para obtener información relacionada con el fútbol. ¡Habla con nuestro asistente virtual y obtén datos precisos y relevantes sobre tu deporte favorito!',
     },
   ]
+
+
+  slidersUser = [
+    {
+      img: 'assets/icon/welcome.png',
+      title: '¡Bienvenido!',
+      description: 'Aprende a aprovechar al máximo nuestra aplicación en este tutorial de introducción. Te guiaremos por las funciones clave para que te familiarices con la experiencia.',
+    },
+    {
+      img: 'assets/icon/information tab.png',
+      title: 'Comparación de Estadísticas',
+      description: 'Aprende a comparar estadísticas entre jugadores y jugadores. Obtén poderosos análisis en nuestra aplicación.',
+    },
+    {
+      img: 'assets/icon/robotics.png',
+      title: 'Inteligencia Artificial',
+      description: 'Utiliza la potencia de la inteligencia artificial para obtener información relacionada con el fútbol. ¡Habla con nuestro asistente virtual y obtén datos precisos y relevantes sobre tu deporte favorito!',
+    },
+  ]
+
+  profile: any;
 
   constructor(
     private authService: AuthService,
@@ -56,6 +77,7 @@ export class InicioPage implements OnInit {
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
   ) {
+    this.profile = authService.getProfile()
   }
 
   ngOnInit() {

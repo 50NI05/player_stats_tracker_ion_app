@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
+import { DatePipe } from '@angular/common';
 
 interface selectTeam1 {
   id: number;
@@ -114,7 +115,12 @@ interface Players1 {
     scored: any,
     missed: any,
     saved: any
-  }
+  },
+  market_value: {
+    market_value: any,
+    date: any,
+    market_value_currency: any
+  },
 }
 
 interface Players2 {
@@ -193,6 +199,11 @@ interface Players2 {
     missed: any,
     saved: any
   }
+  market_value: {
+    market_value: any,
+    date: any,
+    market_value_currency: any
+  },
 }
 
 @Component({
@@ -222,6 +233,7 @@ export class StatisticsPage implements OnInit {
     public form: FormBuilder,
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
+    private datePipe: DatePipe,
   ) {
     this.formTeams = this.form.group({
       idTeams1: new FormControl('', [Validators.required, e => this.loadSquads1(e)]),
@@ -323,13 +335,55 @@ export class StatisticsPage implements OnInit {
       type: type,
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
-        datasets: [{
-          label: this.players1.map(e => e.name)[0],
-          data: dataChart,
-          // borderWidth: 1
-        }]
+        datasets: [
+          {
+            label: this.players1.map(e => e.name)[0],
+            data: dataChart,
+            ...type !== 'pie' && { borderColor: '#C69310' },
+            ...type !== 'pie' && { backgroundColor: '#C69310' },
+            borderWidth: 1
+          },
+        ]
       },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: "white",
+              font: {
+                size: 15,
+                family: 'Poppins',
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              color: "white",
+              font: {
+                size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: false
+            }
+          },
+          x: {
+            ticks: {
+              color: "white",
+              font: {
+                size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: true
+            }
+          }
+        }
+      }
     });
+
   }
 
   generateChartPlayer2(type: any) {
@@ -342,7 +396,6 @@ export class StatisticsPage implements OnInit {
       this.players2.map(e => e.tackle.total === null ? 5 : e.tackle.total)[0],
       this.players2.map(e => e.dribble.success === null ? 3 : e.dribble.success)[0]
     ]
-
     this.chart2 = new Chart(ctx, {
       type: type,
       data: {
@@ -350,9 +403,49 @@ export class StatisticsPage implements OnInit {
         datasets: [{
           label: this.players2.map(e => e.name)[0],
           data: dataChart2,
+          ...type !== 'pie' && { borderColor: '#C69310' },
+          ...type !== 'pie' && { backgroundColor: '#C69310' },
           // borderWidth: 1
-        }]
+        },
+        ]
       },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: "white",
+              font: {
+                size: 15,
+                family: 'Poppins',
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              color: "white",
+              font: {
+                size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: false
+            }
+          },
+          x: {
+            ticks: {
+              color: "white",
+              font: {
+                size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: true
+            }
+          }
+        }
+      }
     });
   }
 
@@ -671,7 +764,8 @@ export class StatisticsPage implements OnInit {
               dribble: { attempts: any; success: any; past: any };
               foul: { drawn: any; committed: any; };
               card: { yellow: any, yellowred: any; red: any; };
-              penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
+              penalty: { won: any, committed: any, scored: any, missed: any, saved: any };
+              market_value: { market_value: any, date: any, market_value_currency: any }
             }) => {
             this.players1.push({
               id: response.data.player.id,
@@ -748,7 +842,12 @@ export class StatisticsPage implements OnInit {
                 scored: e.penalty.scored,
                 missed: e.penalty.missed,
                 saved: e.penalty.saved
-              }
+              },
+              market_value: {
+                market_value: response.data.market_value === undefined ? 0 : response.data.market_value.market_value,
+                date: response.data.market_value === undefined ? 0 : this.datePipe.transform(response.data.market_value.date, 'dd/MM/yyyy', '+0000', 'en-US'),
+                market_value_currency: response.data.market_value === undefined ? '€' : response.data.market_value.market_value_currency
+              },
             })
           },
           )
@@ -811,7 +910,8 @@ export class StatisticsPage implements OnInit {
               dribble: { attempts: any; success: any; past: any };
               foul: { drawn: any; committed: any; };
               card: { yellow: any, yellowred: any; red: any; };
-              penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
+              penalty: { won: any, committed: any, scored: any, missed: any, saved: any };
+              market_value: { market_value: any, date: any, market_value_currency: any }
             }) => {
             this.players2.push({
               id: response.data.player.id,
@@ -888,7 +988,12 @@ export class StatisticsPage implements OnInit {
                 scored: e.penalty.scored,
                 missed: e.penalty.missed,
                 saved: e.penalty.saved
-              }
+              },
+              market_value: {
+                market_value: response.data.market_value === undefined ? 0 : response.data.market_value.market_value,
+                date: response.data.market_value === undefined ? 0 : this.datePipe.transform(response.data.market_value.date, 'dd/MM/yyyy', '+0000', 'en-US'),
+                market_value_currency: response.data.market_value === undefined ? '€' : response.data.market_value.market_value_currency
+              },
             })
           })
           this.loadingCtrl.dismiss()

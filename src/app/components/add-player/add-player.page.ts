@@ -44,12 +44,12 @@ export class AddPlayerPage implements OnInit {
   ) {
     this.addPlayerForm = this.fb.group({
       player: new FormGroup({
-        name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
-        firstname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
-        lastname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
+        name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(Constant.Pattern.Form.Name)]),
+        firstname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(Constant.Pattern.Form.Name)]),
+        lastname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(Constant.Pattern.Form.Name)]),
         age: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         birth: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(this.birthPattern)]),
-        nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.textPattern)]),
+        nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(Constant.Pattern.Form.Name)]),
         height: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
         weight: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
         photo: new FormControl(''),
@@ -60,7 +60,7 @@ export class AddPlayerPage implements OnInit {
         lineups: new FormControl('', [Validators.required, this.validateMaxDigits(3)]),
         minutes: new FormControl('', [Validators.required, this.validateMaxDigits(5)]),
         number: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
-        position: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.textPattern)]),
+        position: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(Constant.Pattern.Form.Name)]),
         rating: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         captain: new FormControl('', [Validators.required])
       }),
@@ -114,6 +114,10 @@ export class AddPlayerPage implements OnInit {
         missed: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         saved: new FormControl('', [Validators.required, this.validateMaxDigits(2)])
       }),
+      market: new FormGroup({
+        date: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(this.birthPattern)]),
+        marketValue: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
+      }),
     })
   }
 
@@ -124,6 +128,12 @@ export class AddPlayerPage implements OnInit {
   validateText(event: KeyboardEvent) {
     let regex = RegExp(this.textPattern);
     return regex.test(event.key);
+  }
+
+  checkText(control: any) {
+    if (this.addPlayerForm.get(control)?.value[0] === ' ') {
+      this.addPlayerForm.get(control)?.reset();
+    }
   }
 
   validateMaxDigits(maxDigits: number) {
@@ -229,6 +239,8 @@ export class AddPlayerPage implements OnInit {
       scored: parseInt(this.addPlayerForm.controls['penalty'].value.scored),
       missed: parseInt(this.addPlayerForm.controls['penalty'].value.missed),
       saved: parseInt(this.addPlayerForm.controls['penalty'].value.saved),
+      date: new Date(this.addPlayerForm.controls['market'].value.date),
+      market_value: this.addPlayerForm.controls['market'].value.marketValue,
       name: this.addPlayerForm.controls['player'].value.name,
       firstname: this.addPlayerForm.controls['player'].value.firstname,
       lastname: this.addPlayerForm.controls['player'].value.lastname,
@@ -258,6 +270,8 @@ export class AddPlayerPage implements OnInit {
             ],
             alertController: this.alertController
           })
+
+          this.addPlayerForm.reset()
 
           this.loadingCtrl.dismiss();
 

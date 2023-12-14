@@ -1,20 +1,39 @@
-<ion-content color="dark">
-
-  <ion-card style="height: 96%; border-radius: 20px; margin-top: 4%;">
-    <swiper-container [loop]="true" [pagination]="true">
-      <swiper-slide *ngFor="let slide of sliders">
+<ion-content>
+  <ion-card style="height: 98.5%; border-radius: 20px;">
+    <swiper-container *ngIf="profile === 1" [loop]="true" [pagination]="true">
+      <swiper-slide *ngFor="let slide of slidersAdmin">
         <img [src]="slide.img" />
         <h2 style="color: black;">{{ slide.title }}</h2>
         <p class="justify-text">{{ slide.description }}</p>
       </swiper-slide>
       <swiper-slide>
-        <img [src]="'assets/icon/finish.jpg'" />
+        <img [src]="'assets/icon/finish line.png'" />
         <h2 style="color: black;">¡Listo para Explorar!</h2>
-        <p class="justify-text">¡Felicidades por completar la introducción! Explora todas las funciones y disfruta del análisis completo de
+        <p class="justify-text">¡Felicidades por completar la introducción! Explora todas las funciones y disfruta del
+          análisis completo de
           estadísticas de jugadores.
         </p>
-        <ion-button fill="clear" (click)="goHome()">Continuar<ion-icon slot="end"
-            name="arrow-forward"></ion-icon></ion-button>
+        <ion-button fill="clear" (click)="goHome()">
+          Continuar<ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button>
+      </swiper-slide>
+    </swiper-container>
+    <swiper-container *ngIf="profile === 2" [loop]="true" [pagination]="true">
+      <swiper-slide *ngFor="let slide of slidersUser">
+        <img [src]="slide.img" />
+        <h2 style="color: black;">{{ slide.title }}</h2>
+        <p class="justify-text">{{ slide.description }}</p>
+      </swiper-slide>
+      <swiper-slide>
+        <img [src]="'assets/icon/finish line.png'" />
+        <h2 style="color: black;">¡Listo para Explorar!</h2>
+        <p class="justify-text">¡Felicidades por completar la introducción! Explora todas las funciones y disfruta del
+          análisis completo de
+          estadísticas de jugadores.
+        </p>
+        <ion-button fill="clear" (click)="goHome()">
+          Continuar<ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button>
       </swiper-slide>
     </swiper-container>
   </ion-card>
