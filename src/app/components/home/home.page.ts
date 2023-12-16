@@ -69,6 +69,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.validateSession()
     this.player()
   }
 
@@ -77,6 +78,38 @@ export class HomePage implements OnInit {
       this.chart.destroy();
       this.player()
     }
+  }
+
+  validateSession() {
+    let data = {
+      session: this.authService.getToken()
+    }
+
+    this.authService.call(data, `validateSession`, 'POST', true).subscribe({
+      next: (response) => {
+        if (response.status === Constant.SUCCESS) {
+          console.log(response);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+
+        alertModal({
+          title: 'Error',
+          text: 'Sesión Expirado',
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+              handler: () => {
+                this.navCtrl.navigateRoot('login');
+              }
+            }
+          ],
+          alertController: this.alertController
+        })
+      }
+    })
   }
 
   async player() {
@@ -206,9 +239,9 @@ export class HomePage implements OnInit {
         console.log(response)
         if (response.status === Constant.SUCCESS) {
           this.authService.setToken(null);
-          this.authService.setLogged(false)
+          // this.authService.setLogged(false)
           this.authService.setModelSesionInSession(this.authService.modelSession);
-          this.authService.setModelLog(this.authService.modelLog);
+          // this.authService.setModelLog(this.authService.modelLog);
           this.navCtrl.navigateRoot('login');
           console.log(this.authService.getLogged());
           this.loadingCtrl.dismiss()

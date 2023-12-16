@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
   formularioLogin: FormGroup;
   passwordVisibility: boolean = true;
-  logged: boolean = false;
+  logged: any;
 
   constructor(
     public fb: FormBuilder,
@@ -37,15 +37,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.authService.getLogged() === false) {
-      this.authService.setLogged(false)
-      this.authService.setModelLog(this.authService.modelLog);
-    } else if (this.authService.getLogged() === true || this.authService.getLogged() === null) {
-      this.authService.setLogged(true)
-      this.authService.setModelLog(this.authService.modelLog);
-    }
-
-    console.log(this.authService.getLogged());
   }
 
   validateEmail(event: KeyboardEvent) {
@@ -53,8 +44,8 @@ export class LoginPage implements OnInit {
   }
 
   checkEmail() {
-    if (this.formularioLogin.controls['email'].value[0] === ' ') {
-      this.formularioLogin.controls['email'].reset();
+    if (this.formularioLogin.controls['username'].value[0] === ' ') {
+      this.formularioLogin.controls['username'].reset();
     }
   }
 
@@ -84,6 +75,8 @@ export class LoginPage implements OnInit {
       password: loginForm.password
     }
 
+    this.logged = this.authService.getLogged()
+
     this.authService.call(data, 'login', 'POST', false).subscribe({
       next: async (response) => {
         if (response.status === Constant.SUCCESS) {
@@ -91,15 +84,14 @@ export class LoginPage implements OnInit {
           this.authService.setToken(response.data.token);
           this.authService.setIdUser(response.data.id);
           this.authService.setProfile(response.data.profile.id);
-          // this.authService.setEmail(response.email);
           this.authService.setModelSesionInSession(this.authService.modelSession);
-          console.log(this.authService.getLogged());
+          console.log('logged: ', this.logged);
 
 
-          if (this.authService.getLogged() === true) {
-            this.navCtrl.navigateRoot('onboarding');
-          } else {
+          if (this.logged) {
             this.navCtrl.navigateRoot('home');
+          } else {
+            this.navCtrl.navigateRoot('onboarding');
           }
 
           this.loadingCtrl.dismiss();

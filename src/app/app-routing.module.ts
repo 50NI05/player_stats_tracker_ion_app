@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'onboarding',
     loadChildren: () => import('./components/inicio/inicio.module').then(m => m.InicioPageModule),
-    canActivate: [IngresadoGuard]
+    canActivate: [RoutesGuard]
   },
   {
     path: 'logout',
@@ -63,21 +63,25 @@ const routes: Routes = [
     path: 'chat-bot',
     loadChildren: () => import('./components/chat-bot/chat-bot.module').then(m => m.ChatBotPageModule),
     canActivate: [IngresadoGuard, RoutesGuard]
-  },  {
+  },
+  {
     path: 'forgot-password',
-    loadChildren: () => import('./components/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    loadChildren: () => import('./components/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule),
   },
   {
     path: 'table-players',
-    loadChildren: () => import('./components/table-players/table-players.module').then( m => m.TablePlayersPageModule)
+    loadChildren: () => import('./components/table-players/table-players.module').then(m => m.TablePlayersPageModule),
+    canActivate: [IngresadoGuard, RoutesGuard]
   },
   {
     path: 'player-details',
-    loadChildren: () => import('./components/player-details/player-details.module').then( m => m.PlayerDetailsPageModule)
+    loadChildren: () => import('./components/player-details/player-details.module').then(m => m.PlayerDetailsPageModule),
+    canActivate: [IngresadoGuard, RoutesGuard]
   },
   {
     path: 'team-details',
-    loadChildren: () => import('./components/team-details/team-details.module').then( m => m.TeamDetailsPageModule)
+    loadChildren: () => import('./components/team-details/team-details.module').then(m => m.TeamDetailsPageModule),
+    canActivate: [IngresadoGuard, RoutesGuard]
   }
 
 ];

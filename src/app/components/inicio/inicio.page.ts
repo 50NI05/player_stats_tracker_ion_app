@@ -81,6 +81,9 @@ export class InicioPage implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authService.getLogged()) {
+      this.navCtrl.navigateRoot('home');
+    }
   }
 
   goHome() {
