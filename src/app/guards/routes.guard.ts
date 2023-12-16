@@ -16,17 +16,16 @@ export class RoutesGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    
+
     let profile = this.authService.getProfile()
     console.log(profile);
-    
-    if ([1,2].includes(profile)) {
+
+    if ([1, 2].includes(profile)) {
       // this.navCtrl.navigateRoot('home');
-      return true; // Permite el acceso a la ruta
+      return true;
     } else {
-      // Redirige a otra ruta si no se cumple la condición
-      return false; // No permite el acceso a la ruta
+      return false;
     }
   }
-  
+
 }
