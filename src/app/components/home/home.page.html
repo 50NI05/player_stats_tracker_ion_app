@@ -1,11 +1,20 @@
 <ion-menu [type]="'reveal'" contentId="main-content">
   <ion-header>
-    <ion-toolbar color="dark">
+    <ion-toolbar>
       <ion-title>Menú</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">
-    <div *ngFor="let route of routes">
+  <ion-content *ngIf="profile === 1" class="ion-padding">
+    <div *ngFor="let route of routesAdmin">
+      <ion-item [routerLink]="route.route">
+        <ion-label>
+          {{ route.title }}
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-content>
+  <ion-content *ngIf="profile === 2" class="ion-padding">
+    <div *ngFor="let route of routesUser">
       <ion-item [routerLink]="route.route">
         <ion-label>
           {{ route.title }}
@@ -17,95 +26,108 @@
 
 <div class="ion-page" id="main-content">
   <ion-header class="ion-no-border">
-    <ion-toolbar color="dark">
+    <ion-toolbar>
       <ion-buttons slot="start">
         <ion-button><ion-menu-button></ion-menu-button></ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button [routerLink]="'/chat-bot'">
+        <ion-button *ngIf="profile === 1" [routerLink]="'/chat-bot'">
           <ion-icon name="chatbox-ellipses-outline"></ion-icon>
         </ion-button>
         <ion-button (click)="logout()">
-          <ion-icon name="log-out-outline" class="icon"></ion-icon>
+          <ion-icon name="log-out-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>Player Stats Tracker</ion-title>
+      <ion-title style="font-size: 18px;">Player Stats Tracker</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-grid class="grid-container">
-      <ion-row class="row-container">
-        <ion-col class="empty-half">
-          <ion-card color="warning" style="border-radius: 5px; height: 96%;">
-            <ion-buttons color="light">
-              <ion-button (click)="playerChart('bar')">
-                <ion-icon name="refresh-outline"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-            <ion-card-content>
-              <div *ngFor="let data of datas" style="text-align: center; font-size: 17px;">
-                {{ data.player.firstname }} {{ data.player.lastname }}
-              </div>
-              <div style="position: relative; margin: auto; height: 300;">
-                <canvas id="chart" #chart></canvas>
-              </div>
-              <div *ngFor="let data of datas">
-                <div style="display: flex; justify-content: space-between; flex-direction: row;">
-                  <h2> Disparos: {{ data.statistics[0].shot.total === null ? 0 : data.statistics[0].shot.total }}
-                  </h2>
-                  <h2> Goles: {{ data.statistics[0].goal.total === null ? 0 : data.statistics[0].goal.total }} </h2>
+    <div class="wallpaper">
+      <ion-grid class="grid-container">
+        <ion-row class="row-container">
+          <ion-col class="empty-half">
+            <ion-card color="a" style="border-radius: 20px; height: 96%; background: rgb(198, 147, 16);">
+              <ion-buttons color="light">
+                <ion-button (click)="playerChart('bar')">
+                  <ion-icon name="refresh-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <ion-card-content>
+                <div *ngFor="let data of datas" style="text-align: center;">
+                  <div style="font-size: 15px;"><strong>Nombre:</strong> {{ data.player.firstname }} {{
+                    data.player.lastname }}</div>
+                  <div style="font-size: 15px;"><strong>Equipo:</strong> {{ data.statistics[0].team.name }}</div>
+                  <div style="font-size: 15px;"><strong>Posición:</strong> {{ data.statistics[0].game.position }}</div>
+                  <div style="font-size: 15px;"><strong>Liga:</strong> {{ data.statistics[0].league.name }}</div>
+                  <div style="font-size: 15px;"><strong>Nacionalidad:</strong> {{ data.player.nationality }}</div>
+                  <div style="font-size: 15px;"><strong>Valor de Mercado:</strong> {{ data.market_value.market_value ===
+                    null ? 0 :
+                    data.market_value.market_value }} mil {{ data.market_value.market_value_currency }}</div>
                 </div>
-              </div>
-              <div *ngFor="let data of datas">
-                <div style="display: flex; justify-content: space-between; flex-direction: row;">
-                  <h2> Pases: {{ data.statistics[0].passe.total === null ? 0 : data.statistics[0].passe.total }} </h2>
-                  <h2> Entradas: {{ data.statistics[0].tackle.total === null ? 0 : data.statistics[0].tackle.total }}
-                  </h2>
+                <div style="position: relative; margin: auto">
+                  <canvas id="chart" #chart></canvas>
                 </div>
-              </div>
-              <div *ngFor="let data of datas">
-                <div style="display: flex; justify-content: space-between; flex-direction: row;">
-                  <h2> Pases: {{ data.statistics[0].dribble.success === null ? 0 : data.statistics[0].dribble.success
-                    }}
-                  </h2>
-                </div>
-              </div>
-            </ion-card-content>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
 
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row class="row-container">
-        <ion-col class="buttons-half">
-          <ion-button [routerLink]="'/statistics'" expand="block" color="danger" class="custom-button">
-            <div class="content-button">
-              <ion-icon name="stats-chart-outline"></ion-icon>
-              <span>Estadistícas</span>
-            </div>
-          </ion-button>
-          <ion-button [routerLink]="'/add-team'" expand="block" color="success" class="custom-button">
-            <div class="content-button">
-              <ion-icon name="people-outline"></ion-icon>
-              <span>Equipos</span>
-            </div>
-          </ion-button>
-        </ion-col>
-        <ion-col class="buttons-half">
-          <ion-button [routerLink]="'/add-player'" expand="block" color="primary" class="custom-button">
-            <div class="content-button">
-              <ion-icon name="person-add-outline"></ion-icon>
-              <span>Jugador</span>
-            </div>
-          </ion-button>
-          <ion-button [routerLink]="'/users'" expand="block" color="warning" class="custom-button">
-            <div class="content-button">
-              <ion-icon name="person-outline"></ion-icon>
-              <span>Usuarios</span>
-            </div>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+
+        <!-- ADMINISTRATOR -->
+        <ion-row *ngIf="profile === 1" class="row-container">
+          <ion-col class="buttons-half">
+            <ion-button [routerLink]="'/statistics'" expand="block" color="danger" class="custom-button">
+              <div class="content-button">
+                <ion-icon name="stats-chart-outline"></ion-icon>
+                <span>Estadistícas</span>
+              </div>
+            </ion-button>
+            <ion-button [routerLink]="'/add-team'" expand="block" color="primary" class="custom-button">
+              <div class="content-button">
+                <ion-icon name="people-outline"></ion-icon>
+                <span>Equipos</span>
+              </div>
+            </ion-button>
+          </ion-col>
+          <ion-col class="buttons-half">
+            <ion-button [routerLink]="'/add-player'" expand="block" color="success" class="custom-button">
+              <div class="content-button">
+                <ion-icon name="person-add-outline"></ion-icon>
+                <span>Jugador</span>
+              </div>
+            </ion-button>
+            <ion-button [routerLink]="'/users'" expand="block" color="a"
+              style="width: 145px; height: 145px; border-radius: 20px; background: rgb(198, 147, 16);">
+              <div class="content-button">
+                <ion-icon name="person-outline"></ion-icon>
+                <span color="white">Usuarios</span>
+              </div>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- USER -->
+        <ion-row *ngIf="profile === 2" class="row-container">
+          <ion-col class="buttons-half">
+            <ion-button [routerLink]="'/statistics'" expand="block" color="danger" class="custom-button">
+              <div class="content-button">
+                <ion-icon name="stats-chart-outline"></ion-icon>
+                <span>Estadistícas</span>
+              </div>
+            </ion-button>
+          </ion-col>
+          <ion-col class="buttons-half">
+            <ion-button [routerLink]="'/chat-bot'" expand="block" color="success" class="custom-button">
+              <div class="content-button" style="overflow: hidden; text-overflow: ellipsis; white-space: break-spaces;">
+                <ion-icon name="chatbubbles-outline"></ion-icon>
+                <span>Asistente Virtual</span>
+              </div>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
   </ion-content>
 </div>

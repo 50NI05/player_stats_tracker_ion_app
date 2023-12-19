@@ -1,5 +1,8 @@
 .user-card {
-  margin: 20px;
+  // margin: 20px;
+  background: rgb(198, 147, 16, 0.2);
+  color: white;
+  border-radius: 20px;
 
   ion-card-content {
     .user-row {
@@ -9,41 +12,74 @@
         justify-content: space-between;
 
         .user-fullname {
-          font-size: 1.5rem;
+          font-size: 16px;
           font-weight: bold;
-          color: black;
+          color: white;
+          background: rgb(198, 147, 16);
+          border-radius: 20px;
+          padding: 0 10px;
         }
 
         .user-buttons-col {
           display: flex;
           justify-content: flex-end;
           align-items: center;
-          color: black;
+          color: white;
         }
 
         .user-buttons {
           display: flex;
           gap: 10px;
-          /* Espacio entre los botones */
+        }
+
+        ion-button {
+          font-size: 16px;
+          color: white;
         }
       }
 
       .user-email {
-        font-size: 1rem;
-        color: black;
+        font-size: 15px;
+        color: rgb(255, 255, 255, 0.8);
+        display: flex;
+        flex-direction: row;
+      }
+
+      .user-label {
+        font-size: 15px;
+        background: #3880ff;
+        border-radius: 20px;
+        margin: 0 10px 5px 0;
+        padding: 0 10px;
       }
 
       .user-icon {
-        font-size: 4rem;
-        color: black;
+        font-size: 3.2rem;
+        color: rgb(255, 255, 255, 0.8);
       }
 
       .user-info {
         display: flex;
         flex-direction: column;
         font-size: 1rem;
-        color: black;
+        color: white;
       }
     }
   }
+}
+
+.wallpaper {
+  height: 100%;
+  background: url('../../../assets/icon/BG.jpg') no-repeat fixed;
+  background-position: 100%;
+  background-size: cover;
+  color: #fff;
+  position: relative;
+  margin-top: 0;
+}
+
+.wallpaper-opacity {
+  background: rgb(94, 33, 41, 0.8);
+  height: 100%;
+  overflow-y: scroll;
 }
