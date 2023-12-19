@@ -55,17 +55,19 @@ ion-item.message {
 
 .message-sender {
   margin-left: auto;
-  background-color: #dcf8c6;
+  background-color: rgb(198, 147, 16);
   padding: 10px;
   border-radius: 20px;
   max-width: 70%;
+  color: white;
 }
 
 .message-receiver {
-  background-color: #dcf8c6;
+  background-color: rgb(198, 147, 16);
   padding: 10px;
   border-radius: 20px;
   max-width: 70%;
+  color: white;
 }
 
 ion-button {

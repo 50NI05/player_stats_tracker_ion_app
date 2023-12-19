@@ -141,6 +141,31 @@ export class UserInformationPage implements OnInit {
     })
   }
 
+  alert(form: any) {
+    alertModal({
+      title: 'Actualización de Información',
+      text: '¿Deseas actualizar la información del usuario seleccionado?',
+      button: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.updateUser(form)
+          }
+        }
+      ],
+      alertController: this.alertController
+    })
+  }
+
   async updateUser(updateInformation: any) {
     await loadingSpinner(this.loadingCtrl)
 
@@ -165,6 +190,9 @@ export class UserInformationPage implements OnInit {
               {
                 cssClass: 'alert-button-confirm',
                 text: 'Aceptar',
+                handler: () => {
+                  this.confirm()
+                }
               }
             ],
             alertController: this.alertController

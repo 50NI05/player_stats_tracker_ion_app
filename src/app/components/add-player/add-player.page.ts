@@ -33,6 +33,10 @@ export class AddPlayerPage implements OnInit {
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
   };
 
+  readonly maskitoOptionsDecimal: MaskitoOptions = {
+    mask: [/\d/, '.', /\d/, /\d/],
+  };
+
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 
   constructor(
@@ -51,7 +55,7 @@ export class AddPlayerPage implements OnInit {
         birth: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(this.birthPattern)]),
         nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(Constant.Pattern.Form.Name)]),
         height: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
-        weight: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
+        weight: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         photo: new FormControl(''),
         id_team: new FormControl('', [Validators.required]),
       }),
@@ -198,6 +202,31 @@ export class AddPlayerPage implements OnInit {
     })
   }
 
+  alert() {
+    alertModal({
+      title: 'Confirmar Agregación de Nuevo Jugador',
+      text: '¿Estás seguro de que deseas agregar a este nuevo jugador al equipo? Una vez confirmado, la información será actualizada y el jugador formará parte oficialmente del equipo.',
+      button: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.addPlayer()
+          }
+        }
+      ],
+      alertController: this.alertController
+    })
+  }
+
   async addPlayer() {
     await loadingSpinner(this.loadingCtrl)
 
@@ -260,7 +289,7 @@ export class AddPlayerPage implements OnInit {
       next: async (response) => {
         if (response.status === Constant.SUCCESS) {
           alertModal({
-            title: response.status,
+            title: 'Nuevo Jugador Agregado',
             text: response.data,
             button: [
               {

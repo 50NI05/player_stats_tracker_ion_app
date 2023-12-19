@@ -182,8 +182,8 @@ export class HomePage implements OnInit {
           {
             label: data[0].player.firstname + ' ' + data[0].player.lastname,
             data: dataChart,
-            borderColor: '#C69310',
-            backgroundColor: '#C69310',
+            borderColor: 'rgb(94, 33, 41)',
+            backgroundColor: 'rgb(94, 33, 41)',
           },
         ]
       },

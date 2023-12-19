@@ -16,7 +16,7 @@
     <div class="wallpaper-opacity ion-padding">
       <form [formGroup]="updateUserForm">
         <ion-icon name="person-circle-outline"
-          style="display: block; margin: 0 auto; font-size: 15rem; color: #3880ff;"></ion-icon>
+          style="display: block; margin: 0 auto; font-size: 15rem; color: rgb(198, 147, 16, 0.7);"></ion-icon>
         <ion-item counter="true" class="form">
           <ion-label position="floating">Nombre</ion-label>
           <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
@@ -48,7 +48,7 @@
         <ion-item counter="true" class="form">
           <ion-label position="floating">Usuario</ion-label>
           <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="username"
-            maxlength="50"></ion-input>
+            maxlength="15"></ion-input>
           <ion-note *ngIf="updateUserForm.controls['username'].hasError('pattern')" slot="error">
             {{ 'CHARACTER_NOT_ALLOWED' | translate }}
           </ion-note>
@@ -92,7 +92,7 @@
         </ion-item>
 
         <ion-button expand="full" shape="round" [disabled]="updateUserForm.invalid"
-          (click)="updateUser(updateUserForm.value)" class="save-information">Guardar
+          (click)="alert(updateUserForm.value)" class="save-information">Guardar
         </ion-button>
       </form>
     </div>

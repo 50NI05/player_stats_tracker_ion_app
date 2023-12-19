@@ -1,6 +1,6 @@
 .user-card {
-  margin: 20px;
-  background: rgb(94, 33, 41, 0.5);
+  // margin: 20px;
+  background: rgb(198, 147, 16, 0.2);
   color: white;
   border-radius: 20px;
 
@@ -76,5 +76,10 @@
   color: #fff;
   position: relative;
   margin-top: 0;
+}
+
+.wallpaper-opacity {
+  background: rgb(94, 33, 41, 0.8);
+  height: 100%;
   overflow-y: scroll;
 }

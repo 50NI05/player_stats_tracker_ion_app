@@ -18,18 +18,20 @@
 
         <ion-card-content>
           <ion-img style="margin-bottom: 20px;" src="assets/icon/privacy policy.png"></ion-img>
-          <form [formGroup]="formularioRegistro">
+          <form [formGroup]="form">
 
             <ion-item counter="true" class="registerForm">
               <ion-label position="floating">Nombre</ion-label>
               <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
                 maxlength="30"></ion-input>
-              <ion-note
-                *ngIf="formularioRegistro.controls['firstname'].hasError('required') && formularioRegistro.get('firstname')?.touched"
+              <ion-note *ngIf="form.controls['firstname'].hasError('required') && form.get('firstname')?.touched"
                 slot="error">
                 {{ 'REQUIRED' | translate }}
               </ion-note>
-              <ion-note *ngIf="formularioRegistro.controls['firstname'].hasError('pattern')" slot="error">
+              <ion-note slot="error" style="color: white;" *ngIf="form.get('firstname')?.hasError('maxlength')">
+                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+              </ion-note>
+              <ion-note *ngIf="form.controls['firstname'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
             </ion-item>
@@ -38,12 +40,14 @@
               <ion-label position="floating">Apellido</ion-label>
               <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastname"
                 maxlength="30"></ion-input>
-              <ion-note
-                *ngIf="formularioRegistro.controls['lastname'].hasError('required') && formularioRegistro.get('lastname')?.touched"
+              <ion-note *ngIf="form.controls['lastname'].hasError('required') && form.get('lastname')?.touched"
                 slot="error">
                 {{ 'REQUIRED' | translate }}
               </ion-note>
-              <ion-note *ngIf="formularioRegistro.controls['lastname'].hasError('pattern')" slot="error">
+              <ion-note slot="error" style="color: white;" *ngIf="form.get('lastname')?.hasError('maxlength')">
+                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+              </ion-note>
+              <ion-note *ngIf="form.controls['lastname'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
             </ion-item>
@@ -52,11 +56,13 @@
               <ion-label position="floating">Usuario</ion-label>
               <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="username"
                 maxlength="15"></ion-input>
-              <ion-note *ngIf="formularioRegistro.controls['username'].hasError('pattern')" slot="error">
+              <ion-note *ngIf="form.controls['username'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
-              <ion-note
-                *ngIf="formularioRegistro.controls['username'].hasError('required') && formularioRegistro.get('username')?.touched"
+              <ion-note slot="error" style="color: white;" *ngIf="form.get('username')?.hasError('maxlength')">
+                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+              </ion-note>
+              <ion-note *ngIf="form.controls['username'].hasError('required') && form.get('username')?.touched"
                 slot="error">
                 {{ 'REQUIRED' | translate }}
               </ion-note>
@@ -66,12 +72,13 @@
               <ion-label position="floating">Correo Electrónico</ion-label>
               <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
                 maxlength="50"></ion-input>
-              <ion-note *ngIf="formularioRegistro.controls['email'].hasError('pattern')" slot="error">
+              <ion-note *ngIf="form.controls['email'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
-              <ion-note
-                *ngIf="formularioRegistro.controls['email'].hasError('required') && formularioRegistro.get('email')?.touched"
-                slot="error">
+              <ion-note slot="error" style="color: white;" *ngIf="form.get('email')?.hasError('maxlength')">
+                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+              </ion-note>
+              <ion-note *ngIf="form.controls['email'].hasError('required') && form.get('email')?.touched" slot="error">
                 {{ 'REQUIRED' | translate }}
               </ion-note>
             </ion-item>
@@ -88,7 +95,7 @@
                 </div>
               </div>
               <ion-note style="display: flex; flex-direction: column; "
-                *ngIf="formularioRegistro.controls['password'].hasError('pattern')" slot="error">
+                *ngIf="form.controls['password'].hasError('pattern')" slot="error">
                 <p>El campo Contraseña debe cumplir con las siguientes especificaciones:</p>
                 <p>- Al menos una letra en mayúscula.</p>
                 <p>- Al menos una letra en minúscula.</p>
@@ -97,8 +104,10 @@
                 <p>- Mínimo: 6 caracteres."</p>
                 <p>- Máximo: 20 caracteres.</p>
               </ion-note>
-              <ion-note
-                *ngIf="formularioRegistro.controls['password'].hasError('required') && formularioRegistro.get('password')?.touched"
+              <ion-note slot="error" style="color: white;" *ngIf="form.get('password')?.hasError('maxlength')">
+                {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+              </ion-note>
+              <ion-note *ngIf="form.controls['password'].hasError('required') && form.get('password')?.touched"
                 slot="error">
                 {{ 'REQUIRED' | translate }}
               </ion-note>
@@ -109,8 +118,8 @@
               </div>
             </div>
 
-            <ion-button expand="block" shape="round" style="font-size: 15px;" [disabled]="formularioRegistro.invalid"
-              (click)="register(formularioRegistro.value)">Registrarte
+            <ion-button expand="block" shape="round" style="font-size: 15px;" [disabled]="form.invalid"
+              (click)="register(form.value)">Registrarte
             </ion-button>
 
           </form>
