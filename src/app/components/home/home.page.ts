@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   chart!: any;
   datas: any[] = [];
 
-  routes = [
+  routesAdmin = [
     {
       title: 'Estadísticas',
       route: '/statistics',
@@ -38,7 +38,24 @@ export class HomePage implements OnInit {
       title: 'Ver Jugadores',
       route: '/table-players',
     },
+    {
+      title: 'Asistente Virtual',
+      route: '/chat-bot',
+    },
   ]
+
+  routesUser = [
+    {
+      title: 'Estadísticas',
+      route: '/statistics',
+    },
+    {
+      title: 'Asistente Virtual',
+      route: '/chat-bot',
+    },
+  ]
+
+  profile: any;
 
   constructor(
     private authService: AuthService,
@@ -47,9 +64,12 @@ export class HomePage implements OnInit {
     public form: FormBuilder,
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
-  ) { }
+  ) {
+    this.profile = authService.getProfile()
+  }
 
   ngOnInit() {
+    this.validateSession()
     this.player()
   }
 
@@ -60,12 +80,46 @@ export class HomePage implements OnInit {
     }
   }
 
+  validateSession() {
+    let data = {
+      session: this.authService.getToken()
+    }
+
+    this.authService.call(data, `validateSession`, 'POST', true).subscribe({
+      next: (response) => {
+        if (response.status === Constant.SUCCESS) {
+          console.log(response);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+
+        alertModal({
+          title: 'Error',
+          text: 'Sesión Expirado',
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+              handler: () => {
+                this.authService.setToken(null);
+                this.authService.setModelSesionInSession(this.authService.modelSession);
+                this.navCtrl.navigateRoot('login');
+              }
+            }
+          ],
+          alertController: this.alertController
+        })
+      }
+    })
+  }
+
   async player() {
     await loadingSpinner(this.loadingCtrl);
 
     const random = Math.floor(Math.random() * 10) + 1;
 
-    this.authService.call(null, `getPlayer/${random}`, 'GET', true).subscribe({
+    this.authService.call(null, `getPlayer/${12}`, 'GET', true).subscribe({
       next: (response) => {
         this.datas = []
         if (response.status === Constant.SUCCESS) {
@@ -130,19 +184,45 @@ export class HomePage implements OnInit {
           {
             label: data[0].player.firstname + ' ' + data[0].player.lastname,
             data: dataChart,
-            // borderWidth: 1
+            borderColor: 'rgb(94, 33, 41)',
+            backgroundColor: 'rgb(94, 33, 41)',
           },
-          // {
-          //   label: 'leyenda',
-          //   data: dataChart,
-          //   // borderWidth: 1
-          // },
         ]
       },
       options: {
         plugins: {
           legend: {
-            display: false
+            labels: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: false
+            }
+          },
+          x: {
+            ticks: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: true
+            }
           }
         }
       }
@@ -161,9 +241,9 @@ export class HomePage implements OnInit {
         console.log(response)
         if (response.status === Constant.SUCCESS) {
           this.authService.setToken(null);
-          this.authService.setLogged(false)
+          // this.authService.setLogged(false)
           this.authService.setModelSesionInSession(this.authService.modelSession);
-          this.authService.setModelLog(this.authService.modelLog);
+          // this.authService.setModelLog(this.authService.modelLog);
           this.navCtrl.navigateRoot('login');
           console.log(this.authService.getLogged());
           this.loadingCtrl.dismiss()
