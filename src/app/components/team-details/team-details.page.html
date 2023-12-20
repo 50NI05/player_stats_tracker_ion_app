@@ -14,18 +14,19 @@
 
 <ion-content>
   <div class="wallpaper">
-    <div class="wallpaper-opacity ion-padding">
-      <form [formGroup]="form">
-        <div *ngIf="logo === null || logo === ''">
-          <ion-icon name="football-outline" style="display: block; margin: 0 auto; font-size: 15rem;"></ion-icon>
-        </div>
-        <div *ngIf="logo !== null && logo !== ''"
-          style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-          <ion-avatar style="width: 15rem; height: 15rem; margin-bottom: 15px;">
-            <img [src]="logo">
-          </ion-avatar>
-        </div>
-      
+    <div class="wallpaper-opacity">
+
+      <div *ngIf="logo === null || logo === ''">
+        <ion-icon name="football-outline" style="display: block; margin: 0 auto; font-size: 15rem;"></ion-icon>
+      </div>
+      <div *ngIf="logo !== null && logo !== ''"
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <ion-avatar style="width: 15rem; height: 15rem; margin: 45px 0;">
+          <img [src]="logo">
+        </ion-avatar>
+      </div>
+
+      <form [formGroup]="form" class="ion-padding">
         <ion-item counter="true" class="form">
           <ion-label position="floating">Nombre del Equipo</ion-label>
           <ion-input formControlName="name" maxlength="50"></ion-input>
@@ -36,7 +37,7 @@
             {{ 'REQUIRED' | translate }}
           </ion-note>
         </ion-item>
-      
+
         <ion-item counter="true" class="form">
           <ion-label position="floating">País</ion-label>
           <ion-input formControlName="country" maxlength="30"></ion-input>
@@ -47,7 +48,7 @@
             {{ 'REQUIRED' | translate }}
           </ion-note>
         </ion-item>
-      
+
         <ion-item counter="true" class="form">
           <ion-label position="floating">Año de Fundación</ion-label>
           <ion-input formControlName="founded" maxlength="4"></ion-input>
@@ -58,7 +59,7 @@
             {{ 'REQUIRED' | translate }}
           </ion-note>
         </ion-item>
-      
+
         <ion-item counter="true" class="form">
           <ion-label position="floating">Logo </ion-label>
           <ion-input formControlName="logo">
@@ -67,7 +68,7 @@
             {{ 'CHARACTER_NOT_ALLOWED' | translate }}
           </ion-note>
         </ion-item>
-      
+
         <ion-button expand="full" shape="round" (click)="updateTeam(form.value)" [disabled]="form.invalid"
           class="save-information">
           Guardar

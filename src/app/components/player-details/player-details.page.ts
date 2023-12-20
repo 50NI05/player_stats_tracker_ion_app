@@ -43,8 +43,12 @@ export class PlayerDetailsPage implements OnInit {
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
   };
 
-  readonly maskitoOptionsDecimal: MaskitoOptions = {
+  readonly maskitoOptionsHeight: MaskitoOptions = {
     mask: [/\d/, '.', /\d/, /\d/],
+  };
+
+  readonly maskitoOptionsWeight: MaskitoOptions = {
+    mask: [/\d/, /\d/, '.', /\d/],
   };
 
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
@@ -60,7 +64,7 @@ export class PlayerDetailsPage implements OnInit {
         birth: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(Constant.Pattern.Form.Birthday)]),
         nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(Constant.Pattern.Form.Name)]),
         height: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
-        weight: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
+        weight: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
         photo: new FormControl(''),
         id_team: new FormControl('', [Validators.required]),
       }),

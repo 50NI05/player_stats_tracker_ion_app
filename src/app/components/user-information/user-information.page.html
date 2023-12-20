@@ -13,10 +13,11 @@
 </ion-header>
 <ion-content>
   <div class="wallpaper">
-    <div class="wallpaper-opacity ion-padding">
-      <form [formGroup]="updateUserForm">
-        <ion-icon name="person-circle-outline"
-          style="display: block; margin: 0 auto; font-size: 15rem; color: rgb(198, 147, 16, 0.7);"></ion-icon>
+    <div class="wallpaper-opacity ">
+      <ion-icon name="person-circle-outline"
+        style="display: block; margin: 30px auto; font-size: 15rem; color: rgb(198, 147, 16, 0.7);"></ion-icon>
+
+      <form [formGroup]="updateUserForm" class="ion-padding">
         <ion-item counter="true" class="form">
           <ion-label position="floating">Nombre</ion-label>
           <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"

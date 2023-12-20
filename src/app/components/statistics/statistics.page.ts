@@ -1,12 +1,13 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { Chart, ChartItem } from 'chart.js/auto';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
 import { DatePipe } from '@angular/common';
+import { ChatBotPage } from '../chat-bot/chat-bot.page';
 
 interface selectTeam1 {
   id: number;
@@ -215,16 +216,18 @@ export class StatisticsPage implements OnInit {
   @ViewChild('chart1') chartCanvas1!: ElementRef;
   @ViewChild('chart2') chartCanvas2!: ElementRef;
 
-  teams1: selectTeam1[] = []
-  teams2: selectTeam2[] = []
-  squads1: selectSquad1[] = []
-  squads2: selectSquad2[] = []
-  players1: Players1[] = []
-  players2: Players2[] = []
+  teams1: selectTeam1[] = [];
+  teams2: selectTeam2[] = [];
+  squads1: selectSquad1[] = [];
+  squads2: selectSquad2[] = [];
+  players1: Players1[] = [];
+  players2: Players2[] = [];
   formTeams: FormGroup;
-  chart1!: any
-  chart2!: any
-  profile = this.authService.getProfile()
+  chart1!: any;
+  chart2!: any;
+  dataChart: any;
+  dataChart2: any;
+  profile = this.authService.getProfile();
 
   constructor(
     private authService: AuthService,
@@ -234,6 +237,7 @@ export class StatisticsPage implements OnInit {
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
     private datePipe: DatePipe,
+    private modalCtrl: ModalController,
   ) {
     this.formTeams = this.form.group({
       idTeams1: new FormControl('', [Validators.required, e => this.loadSquads1(e)]),
@@ -318,10 +322,31 @@ export class StatisticsPage implements OnInit {
     return null;
   }
 
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: ChatBotPage,
+      componentProps: {
+        statistic: this.player1
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role) {
+    }
+  }
+
   generateChartPlayer1(type: any) {
+    if (this.chart1) {
+      this.chart1.destroy();
+    }
+
     const ctx = this.chartCanvas1.nativeElement.getContext('2d')
 
-    let dataChart = [
+    this.dataChart = []
+
+    this.dataChart = [
       this.players1.map(e => e.shot.total === null ? 3 : e.shot.total)[0],
       this.players1.map(e => e.goal.total === null ? 1 : e.goal.total)[0],
       this.players1.map(e => e.passe.total === null ? 5 : e.passe.total)[0],
@@ -329,7 +354,7 @@ export class StatisticsPage implements OnInit {
       this.players1.map(e => e.dribble.success === null ? 2 : e.dribble.success)[0]
     ]
 
-    console.log(dataChart)
+    console.log(this.dataChart)
 
     this.chart1 = new Chart(ctx, {
       type: type,
@@ -338,7 +363,7 @@ export class StatisticsPage implements OnInit {
         datasets: [
           {
             label: this.players1.map(e => e.name)[0],
-            data: dataChart,
+            data: this.dataChart,
             ...type !== 'pie' && { borderColor: '#C69310' },
             ...type !== 'pie' && { backgroundColor: '#C69310' },
             borderWidth: 1
@@ -346,6 +371,8 @@ export class StatisticsPage implements OnInit {
         ]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             labels: {
@@ -383,33 +410,49 @@ export class StatisticsPage implements OnInit {
         }
       }
     });
-
   }
 
   generateChartPlayer2(type: any) {
+    if (this.chart2) {
+      this.chart2.destroy();
+    }
+
     const ctx = this.chartCanvas2.nativeElement.getContext('2d')
 
-    let dataChart2 = [
+    this.dataChart2 = []
+
+    this.dataChart2 = [
       this.players2.map(e => e.shot.total === null ? 6 : e.shot.total)[0],
       this.players2.map(e => e.goal.total === null ? 2 : e.goal.total)[0],
       this.players2.map(e => e.passe.total === null ? 4 : e.passe.total)[0],
       this.players2.map(e => e.tackle.total === null ? 5 : e.tackle.total)[0],
       this.players2.map(e => e.dribble.success === null ? 3 : e.dribble.success)[0]
     ]
+
     this.chart2 = new Chart(ctx, {
       type: type,
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
-        datasets: [{
-          label: this.players2.map(e => e.name)[0],
-          data: dataChart2,
-          ...type !== 'pie' && { borderColor: '#C69310' },
-          ...type !== 'pie' && { backgroundColor: '#C69310' },
-          // borderWidth: 1
-        },
+        datasets: [
+          {
+            label: this.players2.map(e => e.name)[0],
+            data: this.dataChart2,
+            ...type !== 'pie' && { borderColor: '#C69310' },
+            ...type !== 'pie' && { backgroundColor: '#C69310' },
+            // borderWidth: 1
+          },
+          {
+            label: this.players1.map(e => e.name)[0],
+            data: this.dataChart,
+            ...type !== 'pie' && { borderColor: '#5e2129' },
+            ...type !== 'pie' && { backgroundColor: '#5e2129' },
+            // borderWidth: 1
+          },
         ]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             labels: {
@@ -459,10 +502,6 @@ export class StatisticsPage implements OnInit {
       this.formTeams.get('idSquad1')?.enable()
       this.formTeams.get('idSquad2')?.enable()
     }
-  }
-
-  test() {
-    this.navCtrl.navigateRoot('statistics');
   }
 
   async logout() {
@@ -853,7 +892,11 @@ export class StatisticsPage implements OnInit {
           )
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
-          this.generateChartPlayer1('bar')
+          if (this.players2.length === 0) {
+            this.generateChartPlayer1('bar')
+          } else {
+            this.generateChartPlayer2('bar')
+          }
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()

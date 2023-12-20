@@ -3,6 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="openModal()">
+        <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Estadisticas</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -22,7 +27,7 @@
               </ion-item>
             </ion-col>
 
-            <ion-col col-6>
+            <ion-col col-6 *ngIf="formTeams.get('idTeams1')?.value !== ''">
               <ion-item fill="outline">
                 <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams2">
                   <ion-select-option *ngFor="let team of teams2" [value]="team.id">{{team.name}}</ion-select-option>
@@ -62,26 +67,46 @@
               <div *ngFor="let player of players1">{{ player.name }}</div>
               <div *ngFor="let player of players2">{{ player.name }}</div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-20">Edad</div>
+              <div *ngFor="let player of players1">{{ player.age }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.age }}</div>
               <div class="text-middle-20">Edad</div>
               <div *ngFor="let player of players2">{{ player.age }}</div>
             </ion-row>
-            <ion-row class="text-justify">
-              <div *ngFor="let player of players1">{{ player.height }} cm</div>
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
               <div class="text-middle-20">Altura</div>
-              <div *ngFor="let player of players2">{{ player.height }} cm</div>
+              <div *ngFor="let player of players1">{{ player.height }} m</div>
             </ion-row>
-            <ion-row class="text-justify">
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
+              <div *ngFor="let player of players1">{{ player.height }} m</div>
+              <div class="text-middle-20">Altura</div>
+              <div *ngFor="let player of players2">{{ player.height }} m</div>
+            </ion-row>
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-20">Peso</div>
+              <div *ngFor="let player of players1">{{ player.weight }} kg</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.weight }} kg</div>
               <div class="text-middle-20">Peso</div>
               <div *ngFor="let player of players2">{{ player.weight }} kg</div>
             </ion-row>
-            <div class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-20">Liga</div>
+              <div *ngFor="let player of players1">{{ player.league.name }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.league.name }}</div>
               <div class="text-middle-20">Liga</div>
               <div *ngFor="let player of players2">{{ player.league.name }}</div>
-            </div>
+            </ion-row>
           </ion-card-content>
         </ion-card>
 
@@ -89,37 +114,71 @@
           <ion-card-content>
             <!-- Posición -->
             <div class="title">Top estadísticas</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Partidos jugados</div>
+              <div *ngFor="let player of players1">{{ player.game.appearences }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.game.appearences }}</div>
               <div class="text-middle-55">Partidos jugados</div>
               <div *ngFor="let player of players2">{{ player.game.appearences }}</div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Titularidades</div>
+              <div *ngFor="let player of players1">{{ player.game.lineups }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.game.lineups }}</div>
               <div class="text-middle-40">Titularidades</div>
               <div *ngFor="let player of players2">{{ player.game.lineups }}</div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Minutos jugados</div>
+              <div *ngFor="let player of players1">{{ player.game.minutes }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.game.minutes }}</div>
               <div class="text-middle-55">Minutos jugados</div>
               <div *ngFor="let player of players2">{{ player.game.minutes }}</div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-30">Dorsal</div>
+              <div *ngFor="let player of players1">{{ player.game.number }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.game.number }}</div>
               <div class="text-middle-30">Dorsal</div>
               <div *ngFor="let player of players2">{{ player.game.number }}</div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-30">Posición</div>
+              <div *ngFor="let player of players1">{{ player.game.position }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.game.position }}</div>
               <div class="text-middle-30">Posición</div>
               <div *ngFor="let player of players2">{{ player.game.position }}</div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Valoración</div>
+              <div *ngFor="let player of players1">{{ player.game.rating }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.game.rating }}</div>
               <div class="text-middle-40">Valoración</div>
               <div *ngFor="let player of players2">{{ player.game.rating }}</div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-30">Capitán</div>
+              <div *ngFor="let player of players1">{{ player.game.captain === false ? 'No' : 'Si' }}</div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.game.captain === false ? 'No' : 'Si' }}</div>
               <div class="text-middle-30">Capitán</div>
               <div *ngFor="let player of players2">{{ player.game.captain === false ? 'No' : 'Si' }}</div>
@@ -131,7 +190,14 @@
           <ion-card-content>
             <!-- VALOR DEL MERCADO -->
             <div class="title">Valor de Mercado</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Valor actual</div>
+              <div *ngFor="let player of players1">{{ player.market_value.market_value === null ? 0 :
+                player.market_value.market_value
+                }} mil {{ player.market_value.market_value_currency }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.market_value.market_value === null ? 0 :
                 player.market_value.market_value
                 }} mil {{ player.market_value.market_value_currency }}
@@ -142,7 +208,14 @@
                 }} mil {{ player.market_value.market_value_currency }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Última revisión</div>
+              <div *ngFor="let player of players1">{{ player.market_value.date === null ? 0 :
+                player.market_value.date }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.market_value.date === null ? 0 :
                 player.market_value.date }}
               </div>
@@ -158,7 +231,13 @@
           <ion-card-content>
             <!-- Disparos -->
             <div class="title">Disparos</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Disparos totales</div>
+              <div *ngFor="let player of players1">
+                {{ player.shot.total === null ? 0 : player.shot.total }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.shot.total === null ? 0 : player.shot.total }}
               </div>
@@ -167,7 +246,14 @@
                 {{ player.shot.total === null ? 0 : player.shot.total }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Disparos al arcos</div>
+              <div *ngFor="let player of players1">
+                {{ player.shot.on === null ? 0 : player.shot.on }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.shot.on === null ? 0 : player.shot.on }}
               </div>
@@ -183,7 +269,13 @@
           <ion-card-content>
             <!-- Goles -->
             <div class="title">Goles</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Goles totales</div>
+              <div *ngFor="let player of players1">
+                {{ player.goal.total === null ? 0 : player.goal.total }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.goal.total === null ? 0 : player.goal.total }}
               </div>
@@ -192,7 +284,14 @@
                 {{ player.goal.total === null ? 0 : player.goal.total }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Asistencias</div>
+              <div *ngFor="let player of players1">
+                {{ player.goal.assists === null ? 0 : player.goal.assists }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.goal.assists === null ? 0 : player.goal.assists }}
               </div>
@@ -201,7 +300,14 @@
                 {{ player.goal.assists === null ? 0 : player.goal.assists }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Recibidos</div>
+              <div *ngFor="let player of players1">
+                {{ player.goal.conceded === null ? 0 : player.goal.conceded }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.goal.conceded === null ? 0 : player.goal.conceded }}
               </div>
@@ -210,7 +316,14 @@
                 {{ player.goal.conceded === null ? 0 : player.goal.conceded }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Salvados</div>
+              <div *ngFor="let player of players1">
+                {{ player.goal.saves === null ? 0 : player.goal.saves }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.goal.saves === null ? 0 : player.goal.saves }}
               </div>
@@ -226,7 +339,13 @@
           <ion-card-content>
             <!-- Sustitutos -->
             <div class="title">Sustitutos</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Ingresos</div>
+              <div *ngFor="let player of players1">
+                {{ player.substitute.in === null ? 0 : player.substitute.in }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.substitute.in === null ? 0 : player.substitute.in }}
               </div>
@@ -235,7 +354,14 @@
                 {{ player.substitute.in === null ? 0 : player.substitute.in }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Sustituidos</div>
+              <div *ngFor="let player of players1">
+                {{ player.substitute.out === null ? 0 : player.substitute.out }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.substitute.out === null ? 0 : player.substitute.out }}
               </div>
@@ -244,7 +370,14 @@
                 {{ player.substitute.out === null ? 0 : player.substitute.out }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Banqueados</div>
+              <div *ngFor="let player of players1">
+                {{ player.substitute.bench === null ? 0 : player.substitute.bench }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.substitute.bench === null ? 0 : player.substitute.bench }}
               </div>
@@ -260,7 +393,13 @@
           <ion-card-content>
             <!-- Pases -->
             <div class="title">Pases</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Pases totales</div>
+              <div *ngFor="let player of players1">
+                {{ player.passe.total === null ? 0 : player.passe.total }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.passe.total === null ? 0 : player.passe.total }}
               </div>
@@ -269,14 +408,27 @@
                 {{ player.passe.total === null ? 0 : player.passe.total }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Pases claves</div>
+              <div *ngFor="let player of players1">{{ player.passe.key === null ? 0 : player.passe.key }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">{{ player.passe.key === null ? 0 : player.passe.key }}
               </div>
               <div class="text-middle-55">Pases claves</div>
               <div *ngFor="let player of players2">{{ player.passe.key === null ? 0 : player.passe.key }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Pases precisos</div>
+              <div *ngFor="let player of players1">
+                {{ player.passe.accuracy === null ? 0 : player.passe.accuracy }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.passe.accuracy === null ? 0 : player.passe.accuracy }}
               </div>
@@ -292,7 +444,13 @@
           <ion-card-content>
             <!-- Entradas -->
             <div class="title">Entradas</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Entradas totales</div>
+              <div *ngFor="let player of players1">
+                {{ player.tackle.total === null ? 0 : player.tackle.total }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.tackle.total === null ? 0 : player.tackle.total }}
               </div>
@@ -301,7 +459,14 @@
                 {{ player.tackle.total === null ? 0 : player.tackle.total }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Bloqueadas</div>
+              <div *ngFor="let player of players1">
+                {{ player.tackle.blocks === null ? 0 : player.tackle.blocks }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.tackle.blocks === null ? 0 : player.tackle.blocks }}
               </div>
@@ -310,7 +475,14 @@
                 {{ player.tackle.blocks === null ? 0 : player.tackle.blocks }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Intercepción</div>
+              <div *ngFor="let player of players1">
+                {{ player.tackle.interceptions === null ? 0 : player.tackle.interceptions }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.tackle.interceptions === null ? 0 : player.tackle.interceptions }}
               </div>
@@ -326,7 +498,13 @@
           <ion-card-content>
             <!-- Regates -->
             <div class="title">Regates</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Intentos de regate</div>
+              <div *ngFor="let player of players1">
+                {{ player.dribble.attempts === null ? 0 : player.dribble.attempts }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.dribble.attempts === null ? 0 : player.dribble.attempts }}
               </div>
@@ -335,7 +513,14 @@
                 {{ player.dribble.attempts === null ? 0 : player.dribble.attempts }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Regates exitosos</div>
+              <div *ngFor="let player of players1">
+                {{ player.dribble.success === null ? 0 : player.dribble.success }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.dribble.success === null ? 0 : player.dribble.success }}
               </div>
@@ -344,7 +529,14 @@
                 {{ player.dribble.success === null ? 0 : player.dribble.success }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Regates pasados</div>
+              <div *ngFor="let player of players1">
+                {{ player.dribble.past === null ? 0 : player.dribble.past }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.dribble.past === null ? 0 : player.dribble.past }}
               </div>
@@ -360,7 +552,13 @@
           <ion-card-content>
             <!-- Duelos -->
             <div class="title">Duelos</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Duelos totales</div>
+              <div *ngFor="let player of players1">
+                {{ player.duel.total === null ? 0 : player.duel.total}}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.duel.total === null ? 0 : player.duel.total}}
               </div>
@@ -369,7 +567,14 @@
                 {{ player.duel.total === null ? 0 : player.duel.total}}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Duelos ganados</div>
+              <div *ngFor="let player of players1">
+                {{ player.duel.won === null ? 0 : player.duel.won }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.duel.won === null ? 0 : player.duel.won }}
               </div>
@@ -385,7 +590,13 @@
           <ion-card-content>
             <!-- Faltas -->
             <div class="title">Faltas</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Faltas duras</div>
+              <div *ngFor="let player of players1">
+                {{ player.foul.drawn === null ? 0 : player.foul.drawn }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.foul.drawn === null ? 0 : player.foul.drawn }}
               </div>
@@ -394,7 +605,14 @@
                 {{ player.foul.drawn === null ? 0 : player.foul.drawn }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Faltas cometidas</div>
+              <div *ngFor="let player of players1">
+                {{ player.foul.committed === null ? 0 : player.foul.committed }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.foul.committed === null ? 0 : player.foul.committed }}
               </div>
@@ -410,7 +628,13 @@
           <ion-card-content>
             <!-- Tarjetas -->
             <div class="title">Tarjetas</div>
-            <ion-row class="text-justify">
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Tarjetas amarillas</div>
+              <div *ngFor="let player of players1">
+                {{ player.card.yellow === null ? 0 : player.card.yellow }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.card.yellow === null ? 0 : player.card.yellow }}
               </div>
@@ -419,7 +643,14 @@
                 {{ player.card.yellow === null ? 0 : player.card.yellow }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Doble amarillas</div>
+              <div *ngFor="let player of players1">
+                {{ player.card.yellowred === null ? 0 : player.card.yellowred }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.card.yellowred === null ? 0 : player.card.yellowred }}
               </div>
@@ -428,7 +659,14 @@
                 {{ player.card.yellowred === null ? 0 : player.card.yellowred }}
               </div>
             </ion-row>
-            <ion-row class="text-justify">
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-55">Tarjetas rojas</div>
+              <div *ngFor="let player of players1">
+                {{ player.card.red === null ? 0 : player.card.red }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.card.red === null ? 0 : player.card.red }}
               </div>
@@ -444,7 +682,13 @@
           <ion-card-content>
             <!-- Penaltis -->
             <div class="title">Penaltis</div>
-            <ion-row>
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Ganados</div>
+              <div *ngFor="let player of players1">
+                {{ player.penalty.won === null ? 0 : player.penalty.won }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.penalty.won === null ? 0 : player.penalty.won }}
               </div>
@@ -453,7 +697,14 @@
                 {{ player.penalty.won === null ? 0 : player.penalty.won }}
               </div>
             </ion-row>
-            <ion-row>
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Cometidos</div>
+              <div *ngFor="let player of players1">
+                {{ player.penalty.committed === null ? 0 : player.penalty.committed }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.penalty.committed === null ? 0 : player.penalty.committed }}
               </div>
@@ -462,7 +713,14 @@
                 {{ player.penalty.committed === null ? 0 : player.penalty.committed }}
               </div>
             </ion-row>
-            <ion-row>
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Marcados</div>
+              <div *ngFor="let player of players1">
+                {{ player.penalty.scored === null ? 0 : player.penalty.scored }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.penalty.scored === null ? 0 : player.penalty.scored }}
               </div>
@@ -471,7 +729,14 @@
                 {{ player.penalty.scored === null ? 0 : player.penalty.scored }}
               </div>
             </ion-row>
-            <ion-row>
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Fallados</div>
+              <div *ngFor="let player of players1">
+                {{ player.penalty.missed === null ? 0 : player.penalty.missed }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.penalty.missed === null ? 0 : player.penalty.missed }}
               </div>
@@ -480,7 +745,14 @@
                 {{ player.penalty.missed === null ? 0 : player.penalty.missed }}
               </div>
             </ion-row>
-            <ion-row>
+
+            <ion-row class="text-justify" *ngIf="players2.length === 0">
+              <div class="text-middle-40">Parados</div>
+              <div *ngFor="let player of players1">
+                {{ player.penalty.saved === null ? 0 : player.penalty.saved }}
+              </div>
+            </ion-row>
+            <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
               <div *ngFor="let player of players1">
                 {{ player.penalty.saved === null ? 0 : player.penalty.saved }}
               </div>
@@ -494,20 +766,20 @@
 
 
         <ion-card class="statistics" *ngIf="players1.length !== 0 || players2.length !== 0">
-          <ion-buttons color="light">
+          <!-- <ion-buttons color="light">
             <ion-button (click)="chart('bar')">
               <ion-icon name="stats-chart-outline"></ion-icon>
             </ion-button>
             <ion-button (click)="chart('pie')">
               <ion-icon name="pie-chart-outline"></ion-icon>
             </ion-button>
-          </ion-buttons>
+          </ion-buttons> -->
           <ion-card-content>
-            <div *ngIf="players1.length !== 0" style="position: relative; margin: auto; height: 300;">
+            <div *ngIf="players2.length === 0">
               <canvas id="chart1" #chart1></canvas>
             </div>
 
-            <div *ngIf="players2.length !== 0" style="position: relative; margin: auto; height: 300;">
+            <div *ngIf="players2.length !== 0 && players1.length !== 0">
               <canvas id="chart2" #chart2></canvas>
             </div>
           </ion-card-content>

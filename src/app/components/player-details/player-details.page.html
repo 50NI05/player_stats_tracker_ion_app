@@ -128,8 +128,8 @@
             <ion-row class="margin-input">
               <ion-col>
                 <ion-item counter="true">
-                  <ion-label position="floating">Altura (cm)</ion-label>
-                  <ion-input [maskito]="maskitoOptionsDecimal" [maskitoElement]="maskPredicate" placeholder="Ej: 1.20"
+                  <ion-label position="floating">Altura (m)</ion-label>
+                  <ion-input [maskito]="maskitoOptionsHeight" [maskitoElement]="maskPredicate" placeholder="Ej: 1.20"
                     type="text" formControlName="height" maxlength="4">
                   </ion-input>
                   <ion-note slot="error" style="color: white;"
@@ -148,7 +148,8 @@
               <ion-col>
                 <ion-item counter="true">
                   <ion-label position="floating">Peso (Kg)</ion-label>
-                  <ion-input placeholder="Ej: 82" type="number" formControlName="weight" maxlength="2">
+                  <ion-input [maskito]="maskitoOptionsWeight" [maskitoElement]="maskPredicate" placeholder="Ej: 82"
+                    type="text" formControlName="weight" maxlength="4">
                   </ion-input>
                   <ion-note slot="error" style="color: white;"
                     *ngIf="form.get('player.weight')?.hasError('required') && form.get('player.weight')?.touched">

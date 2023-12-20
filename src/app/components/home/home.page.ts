@@ -102,6 +102,8 @@ export class HomePage implements OnInit {
               cssClass: 'alert-button-cancel',
               text: 'Cerrar',
               handler: () => {
+                this.authService.setToken(null);
+                this.authService.setModelSesionInSession(this.authService.modelSession);
                 this.navCtrl.navigateRoot('login');
               }
             }
