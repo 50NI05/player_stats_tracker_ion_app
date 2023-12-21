@@ -16,8 +16,11 @@
   <div class="wallpaper">
     <div class="wallpaper-opacity">
 
-      <div *ngIf="logo === null || logo === ''">
-        <ion-icon name="football-outline" style="display: block; margin: 0 auto; font-size: 15rem;"></ion-icon>
+      <div *ngIf="logo === null || logo === ''"
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <ion-avatar style="width: 15rem; height: 15rem; margin: 45px 0;">
+          <ion-icon name="football-outline" style="display: block; margin: 0 auto; font-size: 15rem;"></ion-icon>
+        </ion-avatar>
       </div>
       <div *ngIf="logo !== null && logo !== ''"
         style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -26,54 +29,58 @@
         </ion-avatar>
       </div>
 
-      <form [formGroup]="form" class="ion-padding">
-        <ion-item counter="true" class="form">
-          <ion-label position="floating">Nombre del Equipo</ion-label>
-          <ion-input formControlName="name" maxlength="50"></ion-input>
-          <ion-note *ngIf="form.controls['name'].hasError('pattern')" slot="error">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-          <ion-note *ngIf="form.controls['name'].hasError('required') && form.get('name')?.touched" slot="error">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-        </ion-item>
+      <div class="background-form">
+        <form [formGroup]="form" style="margin: 0 25px;">
+          <ion-item counter="true" class="form">
+            <ion-label position="floating">Nombre del Equipo</ion-label>
+            <ion-input formControlName="name" maxlength="50"></ion-input>
+            <ion-note *ngIf="form.controls['name'].hasError('pattern')" slot="error">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+            <ion-note *ngIf="form.controls['name'].hasError('required') && form.get('name')?.touched" slot="error">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+          </ion-item>
 
-        <ion-item counter="true" class="form">
-          <ion-label position="floating">País</ion-label>
-          <ion-input formControlName="country" maxlength="30"></ion-input>
-          <ion-note *ngIf="form.controls['country'].hasError('pattern')" slot="error">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-          <ion-note *ngIf="form.controls['country'].hasError('required') && form.get('country')?.touched" slot="error">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-item counter="true" class="form">
+            <ion-label position="floating">País</ion-label>
+            <ion-input formControlName="country" maxlength="30"></ion-input>
+            <ion-note *ngIf="form.controls['country'].hasError('pattern')" slot="error">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+            <ion-note *ngIf="form.controls['country'].hasError('required') && form.get('country')?.touched"
+              slot="error">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+          </ion-item>
 
-        <ion-item counter="true" class="form">
-          <ion-label position="floating">Año de Fundación</ion-label>
-          <ion-input formControlName="founded" maxlength="4"></ion-input>
-          <ion-note *ngIf="form.controls['founded'].hasError('pattern')" slot="error">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-          <ion-note *ngIf="form.controls['founded'].hasError('required') && form.get('founded')?.touched" slot="error">
-            {{ 'REQUIRED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-item counter="true" class="form">
+            <ion-label position="floating">Año de Fundación</ion-label>
+            <ion-input formControlName="founded" maxlength="4"></ion-input>
+            <ion-note *ngIf="form.controls['founded'].hasError('pattern')" slot="error">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+            <ion-note *ngIf="form.controls['founded'].hasError('required') && form.get('founded')?.touched"
+              slot="error">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+          </ion-item>
 
-        <ion-item counter="true" class="form">
-          <ion-label position="floating">Logo </ion-label>
-          <ion-input formControlName="logo">
-          </ion-input>
-          <ion-note *ngIf="form.controls['logo'].hasError('pattern')" slot="error">
-            {{ 'CHARACTER_NOT_ALLOWED' | translate }}
-          </ion-note>
-        </ion-item>
+          <ion-item counter="true" class="form">
+            <ion-label position="floating">Logo </ion-label>
+            <ion-input formControlName="logo">
+            </ion-input>
+            <ion-note *ngIf="form.controls['logo'].hasError('pattern')" slot="error">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
+          </ion-item>
 
-        <ion-button expand="full" shape="round" (click)="updateTeam(form.value)" [disabled]="form.invalid"
-          class="save-information">
-          Guardar
-        </ion-button>
-      </form>
+          <ion-button expand="full" shape="round" (click)="alert(form.value)" [disabled]="form.invalid"
+            class="save-information">
+            Guardar
+          </ion-button>
+        </form>
+      </div>
     </div>
   </div>
 </ion-content>

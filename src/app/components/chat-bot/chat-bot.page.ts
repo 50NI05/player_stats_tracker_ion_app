@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, NavController, NavParams } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
@@ -14,6 +14,8 @@ import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 export class ChatBotPage implements OnInit {
   form: FormGroup;
   questions = []
+  dataStatistic1: any;
+  dataStatistic2: any;
 
   constructor(
     private authService: AuthService,
@@ -22,6 +24,8 @@ export class ChatBotPage implements OnInit {
     public fb: FormBuilder,
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
+    private modalCtrl: ModalController,
+    private navParams: NavParams,
   ) {
     this.form = this.fb.group({
       prompt: new FormControl('')
@@ -29,11 +33,25 @@ export class ChatBotPage implements OnInit {
   }
 
   ngOnInit() {
+    if (this.navParams.get('statistic1') || this.navParams.get('statistic2')) {
+      this.dataStatistic1 = this.navParams.get('statistic1')
+      this.dataStatistic2 = this.navParams.get('statistic2')
+      console.log(this.navParams.get('statistic1'));
+      console.log(this.navParams.get('statistic2'));
+    }
     this.listQuestions()
   }
 
   messages: { text: string; isSender: boolean }[] = [];
   newMessage: string = '';
+
+  cancel() {
+    return this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    return this.modalCtrl.dismiss(null, 'confirm');
+  }
 
   async assistant() {
     // if (this.newMessage.trim() !== '') {
@@ -49,7 +67,6 @@ export class ChatBotPage implements OnInit {
     console.log(this.form.controls['prompt'].value);
     if (this.form.controls['prompt'].value.trim() !== '') {
       this.messages.push({ text: this.form.controls['prompt'].value, isSender: true });
-      // this.form.controls['prompt'].setValue('');
 
       await loadingSpinner(this.loadingCtrl)
 
@@ -105,7 +122,7 @@ export class ChatBotPage implements OnInit {
           })
         }
       })
-      
+
       this.listQuestions()
     }
   }

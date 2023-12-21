@@ -1,7 +1,12 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="background: #5e2129;">
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Asistente Virtual</ion-title>
   </ion-toolbar>

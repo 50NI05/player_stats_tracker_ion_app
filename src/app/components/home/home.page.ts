@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { Chart, Colors } from 'chart.js';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
+import { ChatBotPage } from '../chat-bot/chat-bot.page';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,10 @@ export class HomePage implements OnInit {
       route: '/statistics',
     },
     {
+      title: 'Asistente Virtual',
+      route: '/chat-bot',
+    },
+    {
       title: 'Agregar Equipo',
       route: '/add-team',
     },
@@ -31,16 +36,12 @@ export class HomePage implements OnInit {
       route: '/add-player',
     },
     {
-      title: 'Ver Usuarios',
-      route: '/users',
-    },
-    {
       title: 'Ver Jugadores',
       route: '/table-players',
     },
     {
-      title: 'Asistente Virtual',
-      route: '/chat-bot',
+      title: 'Ver Usuarios',
+      route: '/users',
     },
   ]
 
@@ -64,6 +65,7 @@ export class HomePage implements OnInit {
     public form: FormBuilder,
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
+    private modalCtrl: ModalController,
   ) {
     this.profile = authService.getProfile()
   }
@@ -71,6 +73,20 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.validateSession()
     this.player()
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: ChatBotPage,
+      componentProps: {
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role) {
+    }
   }
 
   playerChart(type: any) {

@@ -1,5 +1,5 @@
 .save-information {
-  margin-top: 30px;
+  margin-top: 35px;
   // background: rgb(198, 147, 16);
   // border-radius: 20px;
   font-size: 15px;
@@ -33,4 +33,12 @@ ion-item::part(native) {
 ion-note {
   font-size: 15px;
   color: white;
+}
+
+.background-form {
+  background-color: rgb(198, 147, 16, 0.2);
+  padding: 155px 0 15px 0;
+  margin: -155px 15px;
+  border-radius: 20px;
+  height: 75%;
 }

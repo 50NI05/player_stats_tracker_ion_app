@@ -31,7 +31,7 @@
         <ion-button><ion-menu-button></ion-menu-button></ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button *ngIf="profile === 1" [routerLink]="'/chat-bot'">
+        <ion-button *ngIf="profile === 1" (click)="openModal()">
           <ion-icon name="chatbox-ellipses-outline"></ion-icon>
         </ion-button>
         <ion-button (click)="logout()">
@@ -97,11 +97,11 @@
                 <span>Jugador</span>
               </div>
             </ion-button>
-            <ion-button [routerLink]="'/users'" expand="block" color="a"
+            <ion-button (click)="openModal()" expand="block" color="a"
               style="width: 145px; height: 145px; border-radius: 20px; background: rgb(198, 147, 16);">
               <div class="content-button">
-                <ion-icon name="person-outline"></ion-icon>
-                <span color="white">Usuarios</span>
+                <ion-icon name="chatbubbles-outline"></ion-icon>
+                <span color="white">Asistente Virtual</span>
               </div>
             </ion-button>
           </ion-col>
@@ -118,7 +118,7 @@
             </ion-button>
           </ion-col>
           <ion-col class="buttons-half">
-            <ion-button [routerLink]="'/chat-bot'" expand="block" color="success" class="custom-button">
+            <ion-button (click)="openModal()" expand="block" color="success" class="custom-button">
               <div class="content-button" style="overflow: hidden; text-overflow: ellipsis; white-space: break-spaces;">
                 <ion-icon name="chatbubbles-outline"></ion-icon>
                 <span>Asistente Virtual</span>

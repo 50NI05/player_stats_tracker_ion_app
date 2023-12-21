@@ -76,6 +76,31 @@ export class TeamDetailsPage implements OnInit {
     };
   }
 
+  alert(form: any) {
+    alertModal({
+      title: 'Actualización de Información',
+      text: '¿Deseas actualizar la información del equipo seleccionado?',
+      button: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.updateTeam(form)
+          }
+        }
+      ],
+      alertController: this.alertController
+    })
+  }
+
   async updateTeam(form: any) {
     await loadingSpinner(this.loadingCtrl)
 
@@ -92,8 +117,8 @@ export class TeamDetailsPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Succes',
-            text: 'Usuario actualizado exitosamente',
+            title: response.status,
+            text: 'Equipo actualizado exitosamente',
             button: [
               {
                 cssClass: 'alert-button-confirm',

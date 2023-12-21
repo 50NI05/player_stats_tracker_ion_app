@@ -326,7 +326,8 @@ export class StatisticsPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ChatBotPage,
       componentProps: {
-        statistic: this.player1
+        statistic1: this.players1,
+        statistic2: this.players2,
       }
     });
     modal.present();
@@ -435,15 +436,15 @@ export class StatisticsPage implements OnInit {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [
           {
-            label: this.players2.map(e => e.name)[0],
-            data: this.dataChart2,
+            label: this.players1.map(e => e.name)[0],
+            data: this.dataChart,
             ...type !== 'pie' && { borderColor: '#C69310' },
             ...type !== 'pie' && { backgroundColor: '#C69310' },
             // borderWidth: 1
           },
           {
-            label: this.players1.map(e => e.name)[0],
-            data: this.dataChart,
+            label: this.players2.map(e => e.name)[0],
+            data: this.dataChart2,
             ...type !== 'pie' && { borderColor: '#5e2129' },
             ...type !== 'pie' && { backgroundColor: '#5e2129' },
             // borderWidth: 1
