@@ -16,6 +16,7 @@ export class ChatBotPage implements OnInit {
   questions = []
   dataStatistic1: any;
   dataStatistic2: any;
+  data: any
 
   constructor(
     private authService: AuthService,
@@ -34,10 +35,12 @@ export class ChatBotPage implements OnInit {
 
   ngOnInit() {
     if (this.navParams.get('statistic1') || this.navParams.get('statistic2')) {
-      this.dataStatistic1 = this.navParams.get('statistic1')
-      this.dataStatistic2 = this.navParams.get('statistic2')
+      this.dataStatistic1 = this.navParams.get('statistic1')[0]
+      this.dataStatistic2 = this.navParams.get('statistic2')[0]
       console.log(this.navParams.get('statistic1'));
       console.log(this.navParams.get('statistic2'));
+
+      this.assistant(JSON.stringify(this.dataStatistic1) + '\n\n\n' + JSON.stringify(this.dataStatistic2) + '\n\n\n' + 'en forma de tabla')
     }
     this.listQuestions()
   }
@@ -53,7 +56,7 @@ export class ChatBotPage implements OnInit {
     return this.modalCtrl.dismiss(null, 'confirm');
   }
 
-  async assistant() {
+  async assistant(form: any) {
     // if (this.newMessage.trim() !== '') {
     //   this.messages.push({ text: this.newMessage, isSender: true });
     //   this.newMessage = '';
@@ -65,18 +68,24 @@ export class ChatBotPage implements OnInit {
     //   }, 1000);
     // }
     console.log(this.form.controls['prompt'].value);
-    if (this.form.controls['prompt'].value.trim() !== '') {
+    if (form.prompt !== '' || form !== '') {
       this.messages.push({ text: this.form.controls['prompt'].value, isSender: true });
 
       await loadingSpinner(this.loadingCtrl)
 
-      let data = {
-        prompt: this.form.controls['prompt'].value.trim()
+      if (form.prompt !== '' && form.prompt !== undefined) {
+        this.data = {
+          prompt: form.prompt
+        }
+      } else {
+        this.data = {
+          prompt: form
+        }
       }
 
       this.form.reset()
 
-      this.authService.call(data, 'assistant', 'POST', true).subscribe({
+      this.authService.call(this.data, 'assistant', 'POST', true).subscribe({
         next: (response) => {
           console.log(response)
           if (response.status === Constant.SUCCESS) {

@@ -30,10 +30,10 @@
       </ion-list>
     </div>
     <ion-row [formGroup]="form" class="chat">
-      <ion-input placeholder="Escribe un mensaje..." (keyup.enter)="assistant()" formControlName="prompt">
+      <ion-input placeholder="Escribe un mensaje..." (keyup.enter)="assistant(form.value)" formControlName="prompt">
       </ion-input>
       <ion-buttons>
-        <ion-button color="primary" (click)="assistant()">
+        <ion-button color="primary" (click)="assistant(form.value)">
           <ion-icon slot="icon-only" name="send"></ion-icon>
         </ion-button>
       </ion-buttons>

@@ -78,3 +78,23 @@ ion-menu {
 ion-button {
   --border-radius: 20px
 }
+
+p {
+  // padding: 0 40px;
+  // font-size: 15px;
+  line-height: 1.5;
+  color: white;
+  // color: #60646b;
+}
+
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

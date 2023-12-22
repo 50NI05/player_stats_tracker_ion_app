@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   @ViewChild('chart') chartCanvas!: ElementRef;
   chart!: any;
   datas: any[] = [];
+  news: any;
 
   routesAdmin = [
     {
@@ -72,7 +73,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.validateSession()
-    this.player()
+    // this.player()
+    this.newsFootball()
   }
 
   async openModal() {
@@ -122,6 +124,36 @@ export class HomePage implements OnInit {
                 this.authService.setModelSesionInSession(this.authService.modelSession);
                 this.navCtrl.navigateRoot('login');
               }
+            }
+          ],
+          alertController: this.alertController
+        })
+      }
+    })
+  }
+
+  async newsFootball() {
+    await loadingSpinner(this.loadingCtrl);
+
+    this.authService.call(null, `newsFootball`, 'GET', false).subscribe({
+      next: (response) => {
+        if (response.status === Constant.SUCCESS) {
+          this.news = response.data
+
+          this.loadingCtrl.dismiss()
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss()
+
+        alertModal({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
             }
           ],
           alertController: this.alertController
