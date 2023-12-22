@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, "i18n/", ".json");
@@ -34,7 +35,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
-    }
+    },
+    DatePipe
   ],
   bootstrap: [
     AppComponent
