@@ -53,8 +53,7 @@
                   <ion-icon name="refresh-outline"></ion-icon>
                 </ion-button>
               </ion-buttons> -->
-              <ion-card-content>
-                <!-- <div *ngFor="let data of datas" style="text-align: center;">
+              <!-- <div *ngFor="let data of datas" style="text-align: center;">
                   <div style="font-size: 15px;"><strong>Nombre:</strong> {{ data.player.firstname }} {{
                     data.player.lastname }}</div>
                   <div style="font-size: 15px;"><strong>Equipo:</strong> {{ data.statistics[0].team.name }}</div>
@@ -69,19 +68,18 @@
                   <canvas id="chart" #chart></canvas>
                 </div> -->
 
-                <swiper-container [loop]="true" [pagination]="true">
-                  <swiper-slide *ngFor="let new of news">
-                    <img *ngIf="new.urlToImage !== null" [src]="new.urlToImage" />
-                    <img style="width: 80%; margin: 15px 0 20px 0;" *ngIf="new.urlToImage === null"
-                      [src]="'assets/icon/default_news.png'" />
-                    <h6 style="color: white; margin: 0 15px;">{{ new.title }}</h6>
-                    <p class="justify-text">{{ new.description }}</p>
-                    <a href={{new.url}} style="color: #5e2129; text-decoration: none;">¿Deseas obtener más
-                      información?</a>
-                    <p style="margin-bottom: 20px;">Autor: {{new.author}}</p>
-                  </swiper-slide>
-                </swiper-container>
-              </ion-card-content>
+              <swiper-container [loop]="true" [pagination]="true">
+                <swiper-slide *ngFor="let new of news">
+                  <img *ngIf="new.urlToImage !== null" [src]="new.urlToImage" />
+                  <img style="width: 80%; margin: 15px 0 20px 0;" *ngIf="new.urlToImage === null"
+                    [src]="'assets/icon/default_news.png'" />
+                  <h6 style="color: white; margin: 0 15px;">{{ new.title }}</h6>
+                  <p class="justify-text">{{ new.description }}</p>
+                  <a href={{new.url}} style="color: #5e2129; text-decoration: none;">¿Deseas obtener más
+                    información?</a>
+                  <p style="margin-bottom: 20px;">Autor: {{new.author}}</p>
+                </swiper-slide>
+              </swiper-container>
             </ion-card>
           </ion-col>
         </ion-row>

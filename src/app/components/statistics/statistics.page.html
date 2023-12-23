@@ -3,11 +3,6 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="openModal()">
-        <ion-icon name="chatbox-ellipses-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
     <ion-title>Estadisticas</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,6 +11,15 @@
   <div class="wallpaper">
     <div class="wallpaper-opacity">
       <form [formGroup]="formTeams">
+        <ion-card class="statistics" *ngIf="players1.length !== 0 && players2.length !== 0">
+          <div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
+            <div> ¿Deseas un análisis estadísticos? </div>
+            <ion-button fill="clear" (click)="openModal()" style="color: rgb(198, 147, 16);">
+              <ion-icon name="arrow-forward"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card>
+
         <ion-card class="statistics">
           <div class="title-card-input">Equipo</div>
           <ion-row>
