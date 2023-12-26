@@ -5,6 +5,7 @@ ion-card {
 }
 
 div {
+  font-size: 15px;
   text-align: center;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -20,6 +21,105 @@ ion-row {
   justify-content: end;
 }
 
-// * {
-//     font-family: 'segoeui';
-//   }
+.wallpaper {
+  height: 100%;
+  background: url('../../../assets/icon/BG.jpg') no-repeat fixed;
+  background-position: 15% 50%;
+  background-size: cover;
+  color: #fff;
+  position: relative;
+  margin-top: 0;
+}
+
+.wallpaper-opacity {
+  background: rgb(94, 33, 41, 0.8);
+  height: 100%;
+  overflow-y: scroll;
+  margin: 0;
+}
+
+.statistics {
+  border-radius: 20px;
+  background: rgb(198, 147, 16, 0.2);
+  font-size: 15px;
+}
+
+.noWithPlayer2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+form {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+ion-card-title {
+  color: white;
+}
+
+ion-button {
+  font-size: 20px;
+}
+
+.title {
+  background: rgb(198, 147, 16);
+  border-radius: 20px;
+  padding: 5px 0;
+}
+
+.text-middle-20 {
+  background: rgb(255, 255, 255, 0.8);
+  color: black;
+  border-radius: 20px;
+  width: 20%;
+}
+
+.text-middle-30 {
+  background: rgb(255, 255, 255, 0.8);
+  color: black;
+  border-radius: 20px;
+  width: 30%;
+}
+
+.text-middle-40 {
+  background: rgb(255, 255, 255, 0.8);
+  color: black;
+  border-radius: 20px;
+  width: 40%;
+}
+
+.text-middle-55 {
+  background: rgb(255, 255, 255, 0.8);
+  color: black;
+  border-radius: 20px;
+  width: 55%;
+}
+
+.text-justify {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+ion-item::part(native) {
+  background-color: rgb(255, 255, 255, 0.8);
+  border-radius: 20px;
+}
+
+.title-card-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 20px;
+  background: rgb(198, 147, 16);
+  color: white;
+  padding: 5px 0;
+}
+
+canvas {
+  width: 100% !important;
+  height: 250px !important;
+}

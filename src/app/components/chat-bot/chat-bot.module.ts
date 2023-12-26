@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ChatBotPageRoutingModule } from './chat-bot-routing.module';
 
 import { ChatBotPage } from './chat-bot.page';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ChatBotPage } from './chat-bot.page';
     IonicModule,
     ChatBotPageRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   declarations: [ChatBotPage]
 })
-export class ChatBotPageModule {}
+export class ChatBotPageModule { }

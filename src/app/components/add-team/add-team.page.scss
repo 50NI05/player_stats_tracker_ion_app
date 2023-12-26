@@ -1,43 +1,7 @@
-// ion-card {
-//   padding: 10px;
-//   background-repeat: no-repeat;
-//   color: white;
-// }
-
-// div {
-//   text-align: center;
-//   margin-top: 5px;
-//   margin-bottom: 5px;
-// }
-
-// ion-grid {
-//   --ion-grid-column-padding: 10px;
-//   border-collapse: collapse;
-//   border-style: hidden;
-
-//   ion-row:first-child {
-//     background-color: #2dd36f;
-//     font-weight: bold;
-//   }
-
-//   ion-col {
-//     border: 1px solid black;
-//     border-bottom: 0;
-//     border-right: 0;
-//   }
-
-//   ion-col:last-child {
-//     border-right: 1px solid black;
-//   }
-
-//   ion-row:last-child {
-//     border-bottom: 1px solid black;
-//   }
-// }
-
 .equipo-card {
+  background: rgb(198, 147, 16, 0.2);
   color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 20px;
   margin: 20px;
 
@@ -64,36 +28,79 @@
 
 .equipos-list-card {
   color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 20px;
   margin: 20px;
+  background: rgb(198, 147, 16, 0.2);
+  height: 51%;
+  overflow-y: scroll;
 
   h2 {
     margin-bottom: 10px;
     font-size: 1.5rem;
   }
 
-  ion-list {
-    ion-item {
-      ion-avatar {
-        img {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-        }
+  // ion-list {
+
+  ion-item {
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: transparent;
+
+    ion-avatar {
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    }
+
+    ion-label {
+      h3 {
+        margin-top: 5px;
+        font-size: 1.2rem;
       }
 
-      ion-label {
-        h3 {
-          margin-top: 5px;
-          font-size: 1.2rem;
-        }
-
-        p {
-          font-size: 14px;
-          color: #999;
-        }
+      p {
+        font-size: 14px;
+        color: #999;
       }
     }
   }
+
+  // }
+}
+
+.wallpaper {
+  height: 100%;
+  background: url('../../../assets/icon/BG.jpg') no-repeat fixed;
+  background-position: 0%;
+  background-size: cover;
+  color: #fff;
+  position: relative;
+  margin-top: 0;
+  overflow-y: scroll;
+}
+
+.wallpaper-opacity {
+  background: rgb(94, 33, 41, 0.8);
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.title {
+  text-align: center;
+  border-radius: 20px;
+  background: rgb(198, 147, 16);
+  margin-bottom: 25px;
+  padding: 5px 0;
+}
+
+ion-item::part(native) {
+  background-color: rgb(255, 255, 255, 0.8);
+  border-radius: 20px;
+}
+
+ion-note {
+  font-size: 15px;
 }

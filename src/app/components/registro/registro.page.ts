@@ -16,9 +16,9 @@ export class RegistroPage implements OnInit {
   namePattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
   passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{6,20}$/;
   // emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
-  emailPattern = /^(?=.*[a-zA-Z0-9@.])[a-zA-Z0-9@.]{6,15}$/
+  emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{2,3})$/
 
-  formularioRegistro: FormGroup;
+  form: FormGroup;
   passwordVisibility: boolean = true;
 
   constructor(
@@ -28,11 +28,12 @@ export class RegistroPage implements OnInit {
     public loadingCtrl: LoadingController,
     public navCtrl: NavController
   ) {
-    this.formularioRegistro = this.fb.group({
-      firstname: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
-      lastname: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
-      email: new FormControl("", [Validators.required, Validators.pattern(this.emailPattern)]),
-      password: new FormControl("", [Validators.required, Validators.pattern(this.passwordPattern)]),
+    this.form = this.fb.group({
+      firstname: new FormControl("", [Validators.required, Validators.pattern(Constant.Pattern.Form.Name), this.validateMaxDigits(30)]),
+      lastname: new FormControl("", [Validators.required, Validators.pattern(Constant.Pattern.Form.Name), this.validateMaxDigits(30)]),
+      username: new FormControl("", [Validators.required, Validators.pattern(Constant.Pattern.Form.Username), this.validateMaxDigits(15)]),
+      email: new FormControl("", [Validators.required, Validators.pattern(this.emailPattern), this.validateMaxDigits(50)]),
+      password: new FormControl("", [Validators.required, Validators.pattern(this.passwordPattern), this.validateMaxDigits(20)]),
       // confirmacionPassword: new FormControl("", Validators.required)
     });
   }
@@ -45,14 +46,14 @@ export class RegistroPage implements OnInit {
   }
 
   checkFirstName() {
-    if (this.formularioRegistro.controls['firstname'].value[0] === ' ') {
-      this.formularioRegistro.controls['firstname'].reset();
+    if (this.form.controls['firstname'].value[0] === ' ') {
+      this.form.controls['firstname'].reset();
     }
   }
 
   checkLastName() {
-    if (this.formularioRegistro.controls['lastname'].value[0] === ' ') {
-      this.formularioRegistro.controls['lastname'].reset();
+    if (this.form.controls['lastname'].value[0] === ' ') {
+      this.form.controls['lastname'].reset();
     }
   }
 
@@ -61,8 +62,8 @@ export class RegistroPage implements OnInit {
   }
 
   checkEmail() {
-    if (this.formularioRegistro.controls['email'].value[0] === ' ') {
-      this.formularioRegistro.controls['email'].reset();
+    if (this.form.controls['email'].value[0] === ' ') {
+      this.form.controls['email'].reset();
     }
   }
 
@@ -71,8 +72,8 @@ export class RegistroPage implements OnInit {
   }
 
   checkPassword() {
-    if (this.formularioRegistro.controls['password'].value[0] === ' ') {
-      this.formularioRegistro.controls['password'].reset();
+    if (this.form.controls['password'].value[0] === ' ') {
+      this.form.controls['password'].reset();
     }
   }
 
@@ -84,11 +85,21 @@ export class RegistroPage implements OnInit {
     }
   }
 
+  validateMaxDigits(maxDigits: number) {
+    return (control: { value: any; }) => {
+      const value = control.value;
+      if (value && value.toString().length > maxDigits) {
+        return { maxDigitsExceeded: true };
+      }
+      return null;
+    };
+  }
+
   // async guardar() {
 
-  //   var f = this.formularioRegistro.value;
+  //   var f = this.form.value;
 
-  //   if (this.formularioRegistro.invalid) {
+  //   if (this.form.invalid) {
   //     const alert = await this.alertController.create({
   //       header: 'Datos incompletos',
   //       message: 'Tienes que llenar todos los datos',
@@ -116,7 +127,8 @@ export class RegistroPage implements OnInit {
     let data = {
       firstname: registerForm.firstname.trim(),
       lastname: registerForm.lastname.trim(),
-      email: registerForm.email,
+      username: registerForm.username.trim(),
+      email: registerForm.email.trim(),
       password: registerForm.password,
       id_profile: 2
     }
@@ -129,7 +141,7 @@ export class RegistroPage implements OnInit {
           console.log(response);
           this.loadingCtrl.dismiss();
           alertModal({
-            title: response.status,
+            title: 'Registro Exitoso',
             text: 'Usuario registrado exitosamente. ¿Deseas iniciar sesión?',
             button: [
               {
@@ -174,7 +186,7 @@ export class RegistroPage implements OnInit {
 
         alertModal({
           title: 'Error',
-          text: 'Falla en el servidor',
+          text: '¡Error en el Registro! Por favor, inténtalo de nuevo.',
           button: [
             {
               cssClass: 'alert-button-cancel',
