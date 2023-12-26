@@ -67,7 +67,7 @@
         <ion-item *ngFor="let team of allTeams">
           <ion-avatar slot="start">
             <img *ngIf="team.logo !== ''" [src]="team.logo">
-            <ion-icon *ngIf="team.logo === ''" style="font-size: 42px;" name="football-outline"></ion-icon>
+            <img *ngIf="team.logo === ''" [src]="'assets/icon/default-team.png'">
           </ion-avatar>
           <ion-label>
             <h4>{{ team.name }}</h4>

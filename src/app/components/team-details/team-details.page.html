@@ -19,7 +19,7 @@
       <div *ngIf="logo === null || logo === ''"
         style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
         <ion-avatar style="width: 15rem; height: 15rem; margin: 45px 0;">
-          <ion-icon name="football-outline" style="display: block; margin: 0 auto; font-size: 15rem;"></ion-icon>
+          <img [src]="'assets/icon/default-team.png'">
         </ion-avatar>
       </div>
       <div *ngIf="logo !== null && logo !== ''"

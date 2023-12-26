@@ -29,7 +29,7 @@ export class PlayerDetailsPage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private navParams: NavParams,
+    public navParams: NavParams,
     public fb: FormBuilder,
     public alertController: AlertController,
     private authService: AuthService,
@@ -63,9 +63,9 @@ export class PlayerDetailsPage implements OnInit {
         age: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         birth: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(Constant.Pattern.Form.Birthday)]),
         nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(Constant.Pattern.Form.Name)]),
-        height: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
-        weight: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
-        photo: new FormControl(''),
+        height: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.OnlyDecimal), this.validateMaxDigits(4)]),
+        weight: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.OnlyDecimal), this.validateMaxDigits(4)]),
+        photo: new FormControl('', [Validators.pattern(Constant.Pattern.Form.HTTP)]),
         id_team: new FormControl('', [Validators.required]),
       }),
       game: new FormGroup({
