@@ -89,12 +89,6 @@ ion-item::part(native) {
   border-radius: 20px;
 }
 
-.item-counter::part(native) {
-  --color: var(--ion-color-step-550, white) !important;
-  white-space: nowrap;
-  padding-inline-start: 16px;
-}
-
 .title {
   text-align: center;
   border-radius: 20px;

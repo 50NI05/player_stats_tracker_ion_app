@@ -39,9 +39,9 @@ interface User {
   styleUrls: ['./users.page.scss'],
 })
 export class UsersPage implements OnInit {
-
   users: Users[] = [];
   user: User[] = [];
+  form: FormGroup;
   label = {
     username: 'Usuario',
     profile: 'Perfil'
@@ -51,10 +51,13 @@ export class UsersPage implements OnInit {
     private authService: AuthService,
     public loadingCtrl: LoadingController,
     public navCtrl: NavController,
-    public form: FormBuilder,
+    public fb: FormBuilder,
     public alertController: AlertController,
     private modalCtrl: ModalController,
   ) {
+    this.form = this.fb.group({
+      filter: new FormControl(''),
+    })
   }
 
   ngOnInit() {
@@ -78,6 +81,23 @@ export class UsersPage implements OnInit {
     if (role) {
       this.getUsers()
     }
+  }
+
+  applyFilter() {
+    const searchTerm = this.form.get('filter')?.value.toLowerCase();
+
+    this.users = this.users.filter((user: Users) => {
+      return (
+        user.username.toLowerCase().includes(searchTerm) ||
+        user.firstname.toLowerCase().includes(searchTerm) ||
+        user.lastname.toLowerCase().includes(searchTerm)
+      );
+    });
+  }
+
+  refreshList() {
+    this.form.get('filter')?.setValue('');
+    this.getUsers()
   }
 
   async getUsers() {

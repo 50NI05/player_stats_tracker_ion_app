@@ -24,10 +24,10 @@ export class HomePage implements OnInit {
       title: 'Estadísticas',
       route: '/statistics',
     },
-    {
-      title: 'Asistente Virtual',
-      route: '/chat-bot',
-    },
+    // {
+    //   title: 'Asistente Virtual',
+    //   route: '/chat-bot',
+    // },
     {
       title: 'Agregar Equipo',
       route: '/add-team',
@@ -51,10 +51,10 @@ export class HomePage implements OnInit {
       title: 'Estadísticas',
       route: '/statistics',
     },
-    {
-      title: 'Asistente Virtual',
-      route: '/chat-bot',
-    },
+    // {
+    //   title: 'Asistente Virtual',
+    //   route: '/chat-bot',
+    // },
   ]
 
   profile: any;

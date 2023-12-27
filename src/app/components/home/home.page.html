@@ -5,6 +5,11 @@
     </ion-toolbar>
   </ion-header>
   <ion-content *ngIf="profile === 1" class="ion-padding">
+    <ion-item (click)="openModal()">
+      <ion-label>
+        Asistente Virtual
+      </ion-label>
+    </ion-item>
     <div *ngFor="let route of routesAdmin">
       <ion-item [routerLink]="route.route">
         <ion-label>
@@ -14,6 +19,11 @@
     </div>
   </ion-content>
   <ion-content *ngIf="profile === 2" class="ion-padding">
+    <ion-item (click)="openModal()">
+      <ion-label>
+        Asistente Virtual
+      </ion-label>
+    </ion-item>
     <div *ngFor="let route of routesUser">
       <ion-item [routerLink]="route.route">
         <ion-label>
@@ -32,7 +42,7 @@
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button *ngIf="profile === 1" (click)="openModal()">
-          <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+          <ion-icon name="chatbubbles-outline"></ion-icon>
         </ion-button>
         <ion-button (click)="logout()">
           <ion-icon name="log-out-outline"></ion-icon>
@@ -78,7 +88,7 @@
                 <p *ngIf="new.description !== null" class="justify-text">{{ new.description }}</p>
                 <a href={{new.url}} style="color: #5e2129; margin-top: 5px;">¿Deseas obtener más
                   información?</a>
-                <p style="margin: 5px 0 20px 0;">Autor: {{new.author}}</p>
+                <p style="margin: 5px 0 40px 0;">Autor: {{new.author}}</p>
               </swiper-slide>
             </swiper-container>
           </ion-card>
@@ -122,7 +132,7 @@
 
           <!-- USER -->
           <ion-row *ngIf="profile === 2" class="row-container">
-            <ion-col class="buttons-half">
+            <ion-col class="buttons-half" style="align-items: start; margin-left: 5px;">
               <ion-button [routerLink]="'/statistics'" expand="block" color="danger" class="custom-button">
                 <div class="content-button">
                   <ion-icon name="stats-chart-outline"></ion-icon>
@@ -130,7 +140,7 @@
                 </div>
               </ion-button>
             </ion-col>
-            <ion-col class="buttons-half">
+            <ion-col class="buttons-half" style="align-items: end; margin-right: 5px;">
               <ion-button (click)="openModal()" expand="block" color="a"
                 style="width: 145px; height: 145px; border-radius: 20px; background: rgb(198, 147, 16);">
                 <div class="content-button"

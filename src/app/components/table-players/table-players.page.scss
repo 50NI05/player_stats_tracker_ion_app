@@ -19,6 +19,17 @@ ion-item::part(native) {
   background-color: rgb(198, 147, 16, 0.2);
   border-radius: 20px;
   margin: 0 0 10px 0;
+  color: #fff;
+}
+
+.filter {
+  width: 100%;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .label-title {
@@ -39,4 +50,12 @@ ion-item::part(native) {
 ion-button {
   color: rgb(198, 147, 16);
   font-size: 15px;
+}
+
+.refresh-button {
+  background: rgb(198, 147, 16);
+  border-radius: 20px;
+  margin-left: 10px;
+  height: 100%;
+  padding: 10px;
 }

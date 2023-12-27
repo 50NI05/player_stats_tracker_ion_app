@@ -10,6 +10,21 @@
 <ion-content>
   <div class="wallpaper">
     <div class="wallpaper-opacity">
+      <form [formGroup]="form">
+        <div class="filter-form">
+          <ion-item counter="true" fill="solid" class="filter">
+            <ion-label position="floating" style="color: white;">Filtro</ion-label>
+            <ion-input (ionChange)="applyFilter()" formControlName="filter"></ion-input>
+          </ion-item>
+
+          <ion-buttons style="margin-bottom: 10px;">
+            <ion-button (click)="refreshList()" class="refresh-button">
+              <ion-icon style="font-size: 1.5em; color: rgb(94, 33, 41);" name="refresh-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </form>
+
       <ion-card class="user-card" *ngFor="let user of users">
         <ion-card-content>
           <ion-row class="user-row">
@@ -41,6 +56,12 @@
               </ion-row>
             </ion-col>
           </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="user-card" *ngIf="users.length === 0">
+        <ion-card-content>
+          <ion-label> {{ 'NO_DATA' | translate }} </ion-label>
         </ion-card-content>
       </ion-card>
     </div>
