@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
   formularioLogin: FormGroup;
   passwordVisibility: boolean = true;
-  logged: boolean = false;
+  logged: any;
 
   constructor(
     public fb: FormBuilder,
@@ -30,22 +30,13 @@ export class LoginPage implements OnInit {
   ) {
 
     this.formularioLogin = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      username: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       password: new FormControl('', [Validators.required, Validators.pattern(this.passwordPattern)])
     })
 
   }
 
   ngOnInit() {
-    if (this.authService.getLogged() === false) {
-      this.authService.setLogged(false)
-      this.authService.setModelLog(this.authService.modelLog);
-    } else if (this.authService.getLogged() === true || this.authService.getLogged() === null) {
-      this.authService.setLogged(true)
-      this.authService.setModelLog(this.authService.modelLog);
-    }
-
-    console.log(this.authService.getLogged());
   }
 
   validateEmail(event: KeyboardEvent) {
@@ -53,8 +44,8 @@ export class LoginPage implements OnInit {
   }
 
   checkEmail() {
-    if (this.formularioLogin.controls['email'].value[0] === ' ') {
-      this.formularioLogin.controls['email'].reset();
+    if (this.formularioLogin.controls['username'].value[0] === ' ') {
+      this.formularioLogin.controls['username'].reset();
     }
   }
 
@@ -80,9 +71,11 @@ export class LoginPage implements OnInit {
     await loadingSpinner(this.loadingCtrl)
 
     let data = {
-      email: loginForm.email,
+      username: loginForm.username,
       password: loginForm.password
     }
+
+    this.logged = this.authService.getLogged()
 
     this.authService.call(data, 'login', 'POST', false).subscribe({
       next: async (response) => {
@@ -91,19 +84,14 @@ export class LoginPage implements OnInit {
           this.authService.setToken(response.data.token);
           this.authService.setIdUser(response.data.id);
           this.authService.setProfile(response.data.profile.id);
-          // this.authService.setEmail(response.email);
           this.authService.setModelSesionInSession(this.authService.modelSession);
-          console.log(this.authService.getLogged());
+          console.log('logged: ', this.logged);
 
 
-          if (this.authService.getLogged() === true) {
-            this.navCtrl.navigateRoot('onboarding');
+          if (this.logged) {
+            this.navCtrl.navigateRoot('home');
           } else {
-            if (response.data.profile.id === 1) {
-              this.navCtrl.navigateRoot('home');
-            } else {
-              this.navCtrl.navigateRoot('statistics');
-            }
+            this.navCtrl.navigateRoot('onboarding');
           }
 
           this.loadingCtrl.dismiss();

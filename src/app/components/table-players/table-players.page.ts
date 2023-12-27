@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AlertController, IonModal, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
@@ -90,7 +90,12 @@ interface Player {
     scored: any,
     missed: any,
     saved: any
-  }
+  },
+  market_value: {
+    market_value: any,
+    date: any,
+    market_value_currency: any
+  },
 }
 
 @Component({
@@ -101,6 +106,7 @@ interface Player {
 export class TablePlayersPage implements OnInit {
   players: any = [];
   detailsPlayer: Player[] = [];
+  form: FormGroup;
 
   constructor(
     public fb: FormBuilder,
@@ -109,7 +115,11 @@ export class TablePlayersPage implements OnInit {
     public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     private modalCtrl: ModalController,
-  ) { }
+  ) {
+    this.form = this.fb.group({
+      filter: new FormControl(''),
+    })
+  }
 
   ngOnInit() {
     this.getAllSquad()
@@ -132,6 +142,24 @@ export class TablePlayersPage implements OnInit {
     if (role) {
       this.getAllSquad()
     }
+  }
+
+  applyFilter() {
+    const searchTerm = this.form.get('filter')?.value.toLowerCase();
+
+    this.players = this.players.filter((player: Player) => {
+      return (
+        player.name.toLowerCase().includes(searchTerm) ||
+        player.firstname.toLowerCase().includes(searchTerm) ||
+        player.lastname.toLowerCase().includes(searchTerm) ||
+        player.nationality.toLowerCase().includes(searchTerm)
+      );
+    });
+  }
+
+  refreshList() {
+    this.form.get('filter')?.setValue('');
+    this.getAllSquad()
   }
 
   async player1(playerId: any) {
@@ -240,7 +268,12 @@ export class TablePlayersPage implements OnInit {
                   scored: e.penalty.scored,
                   missed: e.penalty.missed,
                   saved: e.penalty.saved
-                }
+                },
+                market_value: {
+                  market_value: response.data.market_value === undefined ? 0 : response.data.market_value.market_value,
+                  date: response.data.market_value === undefined ? 0 : response.data.market_value.date,
+                  market_value_currency: response.data.market_value === undefined ? '€' : response.data.market_value.market_value_currency
+                },
               })
             },
             )
