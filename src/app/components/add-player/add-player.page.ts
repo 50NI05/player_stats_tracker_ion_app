@@ -206,7 +206,7 @@ export class AddPlayerPage implements OnInit {
     })
   }
 
-  alert() {
+  alert(form: any) {
     alertModal({
       title: 'Confirmar Agregación de Nuevo Jugador',
       text: '¿Estás seguro de que deseas agregar a este nuevo jugador al equipo? Una vez confirmado, la información será actualizada y el jugador formará parte oficialmente del equipo.',
@@ -223,7 +223,7 @@ export class AddPlayerPage implements OnInit {
           text: 'Aceptar',
           cssClass: 'alert-button-confirm',
           handler: () => {
-            this.addPlayer()
+            this.addPlayer(form)
           }
         }
       ],
@@ -231,59 +231,59 @@ export class AddPlayerPage implements OnInit {
     })
   }
 
-  async addPlayer() {
+  async addPlayer(form: any) {
     await loadingSpinner(this.loadingCtrl)
 
     let data = {
-      appearences: parseInt(this.addPlayerForm.controls['game'].value.appearences),
-      lineups: parseInt(this.addPlayerForm.controls['game'].value.lineups),
-      minutes: parseInt(this.addPlayerForm.controls['game'].value.minutes),
-      number: parseInt(this.addPlayerForm.controls['game'].value.number),
-      position: this.addPlayerForm.controls['game'].value.position,
-      rating: parseInt(this.addPlayerForm.controls['game'].value.rating),
-      captain: parseInt(this.addPlayerForm.controls['game'].value.captain),
-      in: parseInt(this.addPlayerForm.controls['substitute'].value.in),
-      out: parseInt(this.addPlayerForm.controls['substitute'].value.out),
-      bench: parseInt(this.addPlayerForm.controls['substitute'].value.bench),
-      shotTotal: parseInt(this.addPlayerForm.controls['shot'].value.total),
-      shotOn: parseInt(this.addPlayerForm.controls['shot'].value.on),
-      goalTotal: parseInt(this.addPlayerForm.controls['goal'].value.total),
-      conceded: parseInt(this.addPlayerForm.controls['goal'].value.conceded),
-      assists: parseInt(this.addPlayerForm.controls['goal'].value.assists),
-      saves: parseInt(this.addPlayerForm.controls['goal'].value.saves),
-      passeTotal: parseInt(this.addPlayerForm.controls['passe'].value.total),
-      key: parseInt(this.addPlayerForm.controls['passe'].value.key),
-      accuracy: parseInt(this.addPlayerForm.controls['passe'].value.accuracy),
-      tackleTotal: parseInt(this.addPlayerForm.controls['tackle'].value.total),
-      blocks: parseInt(this.addPlayerForm.controls['tackle'].value.blocks),
-      interceptions: parseInt(this.addPlayerForm.controls['tackle'].value.interceptions),
-      duelTotal: parseInt(this.addPlayerForm.controls['duel'].value.total),
-      duelWon: parseInt(this.addPlayerForm.controls['duel'].value.won),
-      attempts: parseInt(this.addPlayerForm.controls['dribble'].value.attempts),
-      success: parseInt(this.addPlayerForm.controls['dribble'].value.success),
-      past: parseInt(this.addPlayerForm.controls['dribble'].value.past),
-      drawn: parseInt(this.addPlayerForm.controls['foul'].value.drawn),
-      foulCommitted: parseInt(this.addPlayerForm.controls['foul'].value.committed),
-      yellow: parseInt(this.addPlayerForm.controls['card'].value.yellow),
-      yellowred: parseInt(this.addPlayerForm.controls['card'].value.yellowred),
-      red: parseInt(this.addPlayerForm.controls['card'].value.red),
-      penaltyWon: parseInt(this.addPlayerForm.controls['penalty'].value.won),
-      penaltyCommitted: parseInt(this.addPlayerForm.controls['penalty'].value.committed),
-      scored: parseInt(this.addPlayerForm.controls['penalty'].value.scored),
-      missed: parseInt(this.addPlayerForm.controls['penalty'].value.missed),
-      saved: parseInt(this.addPlayerForm.controls['penalty'].value.saved),
-      date: new Date(this.addPlayerForm.controls['market'].value.date),
-      market_value: this.addPlayerForm.controls['market'].value.marketValue,
-      name: this.addPlayerForm.controls['player'].value.name,
-      firstname: this.addPlayerForm.controls['player'].value.firstname,
-      lastname: this.addPlayerForm.controls['player'].value.lastname,
-      age: parseInt(this.addPlayerForm.controls['player'].value.age),
-      birth: new Date(this.addPlayerForm.controls['player'].value.birth),
-      nationality: this.addPlayerForm.controls['player'].value.nationality,
-      height: this.addPlayerForm.controls['player'].value.height,
-      weight: this.addPlayerForm.controls['player'].value.weight,
-      photo: this.addPlayerForm.controls['player'].value.photo,
-      id_team: parseInt(this.addPlayerForm.controls['player'].value.id_team)
+      appearences: form.game.appearences,
+      lineups: form.game.lineups,
+      minutes: form.game.minutes,
+      number: form.game.number,
+      position: form.game.position,
+      rating: form.game.rating,
+      captain: form.game.captain,
+      in: form.substitute.in,
+      out: form.substitute.out,
+      bench: form.substitute.bench,
+      shotTotal: form.shot.total,
+      shotOn: form.shot.on,
+      goalTotal: form.goal.total,
+      conceded: form.goal.conceded,
+      assists: form.goal.assists,
+      saves: form.goal.saves,
+      passeTotal: form.passe.total,
+      key: form.passe.key,
+      accuracy: form.passe.accuracy,
+      tackleTotal: form.tackle.total,
+      blocks: form.tackle.blocks,
+      interceptions: form.tackle.interceptions,
+      duelTotal: form.duel.total,
+      duelWon: form.duel.won,
+      attempts: form.dribble.attempts,
+      success: form.dribble.success,
+      past: form.dribble.past,
+      drawn: form.foul.drawn,
+      foulCommitted: form.foul.committed,
+      yellow: form.card.yellow,
+      yellowred: form.card.yellowred,
+      red: form.card.red,
+      penaltyWon: form.penalty.won,
+      penaltyCommitted: form.penalty.committed,
+      scored: form.penalty.scored,
+      missed: form.penalty.missed,
+      saved: form.penalty.saved,
+      date: new Date(form.market.date),
+      market_value: form.market.marketValue,
+      name: form.player.name,
+      firstname: form.player.firstname,
+      lastname: form.player.lastname,
+      age: form.player.age,
+      birth: new Date(form.player.birth),
+      nationality: form.player.nationality,
+      height: form.player.height,
+      weight: form.player.weight,
+      photo: form.player.photo,
+      id_team: form.player.id_team
     }
 
     console.log(data);

@@ -1021,7 +1021,8 @@
               </ion-item>
             </div>
 
-            <ion-button expand="full" shape="round" [disabled]="addPlayerForm.invalid" (click)="alert()">Guardar
+            <ion-button expand="full" shape="round" [disabled]="addPlayerForm.invalid"
+              (click)="alert(addPlayerForm.value)">Guardar
             </ion-button>
           </form>
         </ion-card>
