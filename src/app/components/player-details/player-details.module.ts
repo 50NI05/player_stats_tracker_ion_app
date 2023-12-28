@@ -1,5 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -20,9 +20,12 @@ import { MaskitoModule } from '@maskito/angular';
     ReactiveFormsModule,
     TranslateModule,
     HttpClientModule,
-    MaskitoModule
+    MaskitoModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
+    DatePipe,
+  ],
   declarations: [PlayerDetailsPage]
 })
 export class PlayerDetailsPageModule { }

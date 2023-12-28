@@ -1,24 +1,61 @@
-/* player-list.component.scss */
+.wallpaper {
+  height: 100%;
+  background: url('../../../assets/icon/Escudo.jpg') no-repeat fixed;
+  background-position: 50% 50%;
+  background-size: cover;
+  color: #fff;
+  position: relative;
+  margin-top: 0;
+  overflow-y: scroll;
+}
 
-.player-list {
-  .header {
-    font-weight: bold;
-    background-color: #f2f2f2;
+.wallpaper-opacity {
+  background: rgb(94, 33, 41, 0.8);
+  height: 100%;
+  overflow-y: scroll;
+}
 
-    ion-label {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
+ion-item::part(native) {
+  background-color: rgb(198, 147, 16, 0.2);
+  border-radius: 20px;
+  margin: 0 0 10px 0;
+  color: #fff;
+}
 
-  .player-item {
-    border-bottom: 1px solid #ccc;
+.filter {
+  width: 100%;
+}
 
-    ion-label {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
+.filter-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.label-title {
+  background: rgb(198, 147, 16);
+  border-radius: 20px;
+  padding: 0 10px;
+  font-size: 16px;
+}
+
+.label-body {
+  // background: rgb(94, 33, 41, 0.5);
+  border-radius: 20px;
+  padding: 0 5px;
+  color: white;
+  font-size: 15px;
+}
+
+ion-button {
+  color: rgb(198, 147, 16);
+  font-size: 15px;
+}
+
+.refresh-button {
+  background: rgb(198, 147, 16);
+  border-radius: 20px;
+  margin-left: 10px;
+  height: 100%;
+  padding: 10px;
 }
