@@ -33,6 +33,7 @@ export class UserInformationPage implements OnInit {
       firstname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
       lastname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      username: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.Username)]),
       // password: new FormControl('', [Validators.pattern(this.passwordPattern)]),
       idProfile: new FormControl(''),
     })
@@ -46,6 +47,7 @@ export class UserInformationPage implements OnInit {
   setUserInformation() {
     this.updateUserForm.controls['firstname'].setValue(this.navParams.get('user')[0].firstname)
     this.updateUserForm.controls['lastname'].setValue(this.navParams.get('user')[0].lastname)
+    this.updateUserForm.controls['username'].setValue(this.navParams.get('user')[0].username)
     this.updateUserForm.controls['email'].setValue(this.navParams.get('user')[0].email)
     this.updateUserForm.controls['idProfile'].setValue(this.navParams.get('user')[0].profile.id)
   }
@@ -107,7 +109,7 @@ export class UserInformationPage implements OnInit {
           console.log(response)
           this.loadingCtrl.dismiss()
 
-          alert({
+          alertModal({
             title: response.status,
             text: response.data,
             button: [
@@ -124,7 +126,7 @@ export class UserInformationPage implements OnInit {
         console.log(error)
         this.loadingCtrl.dismiss()
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: [
@@ -139,13 +141,39 @@ export class UserInformationPage implements OnInit {
     })
   }
 
+  alert(form: any) {
+    alertModal({
+      title: 'Actualización de Información',
+      text: '¿Deseas actualizar la información del usuario seleccionado?',
+      button: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.updateUser(form)
+          }
+        }
+      ],
+      alertController: this.alertController
+    })
+  }
+
   async updateUser(updateInformation: any) {
     await loadingSpinner(this.loadingCtrl)
 
     let data = {
       firstname: updateInformation.firstname.trim(),
       lastname: updateInformation.lastname.trim(),
-      email: updateInformation.email,
+      username: updateInformation.username.trim(),
+      email: updateInformation.email.trim(),
       // password: updateInformation.password != '' ? updateInformation.password : this.navParams.get('user')[0].password,
       id_profile: updateInformation.idProfile
     }
@@ -162,6 +190,9 @@ export class UserInformationPage implements OnInit {
               {
                 cssClass: 'alert-button-confirm',
                 text: 'Aceptar',
+                handler: () => {
+                  this.confirm()
+                }
               }
             ],
             alertController: this.alertController

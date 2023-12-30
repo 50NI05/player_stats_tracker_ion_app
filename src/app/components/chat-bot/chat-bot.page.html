@@ -1,30 +1,42 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="dark">
-    <ion-buttons slot="start">
+  <ion-toolbar style="background: #5e2129;">
+    <!-- <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>Asistentes de Chat</ion-title>
+    <ion-title>Asistente Virtual</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list class="message-list">
-    <ion-item *ngFor="let message of messages" class="message">
-      <div [ngClass]="{'message-sender': message.isSender, 'message-receiver': !message.isSender}">
-        {{ message.text }}
-      </div>
-    </ion-item>
-  </ion-list>
+  <div class="message-background">
+    <div class="overlay"></div>
+    <ion-list class="message-list">
+      <ion-item *ngFor="let message of messages" class="message">
+        <div [ngClass]="{'message-sender': message.isSender, 'message-receiver': !message.isSender}">
+          {{ message.text }}
+        </div>
+      </ion-item>
+    </ion-list>
+    <div>
+      <ion-list class="question-list">
+        <ion-chip *ngFor="let question of questions" class="question" (click)="message(question)">
+          {{ question }}
+        </ion-chip>
+      </ion-list>
+    </div>
+    <ion-row [formGroup]="form" class="chat">
+      <ion-input placeholder="Escribe un mensaje..." (keyup.enter)="assistant(form.value)" formControlName="prompt">
+      </ion-input>
+      <ion-buttons>
+        <ion-button color="primary" (click)="assistant(form.value)" [disabled]="form.invalid">
+          <ion-icon slot="icon-only" name="send"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-row>
+  </div>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar [formGroup]="form">
-    <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje..." class="message-input"
-      (keyup.enter)="assistant()" formControlName="prompt"></ion-input>
-    <ion-buttons slot="end">
-      <ion-button color="primary" (click)="assistant()">
-        <ion-icon slot="icon-only" name="send"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
