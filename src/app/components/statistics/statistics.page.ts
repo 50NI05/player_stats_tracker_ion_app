@@ -505,60 +505,6 @@ export class StatisticsPage implements OnInit {
     }
   }
 
-  async logout() {
-    await loadingSpinner(this.loadingCtrl)
-
-    let data = {
-      idUser: this.authService.getIdUser()
-    }
-
-    this.authService.call(data, 'logout', 'POST', true).subscribe({
-      next: (response) => {
-        console.log(response)
-        if (response.status === Constant.SUCCESS) {
-          this.authService.setToken(null);
-          this.authService.setLogged(false)
-          this.authService.setModelSesionInSession(this.authService.modelSession);
-          this.authService.setModelLog(this.authService.modelLog);
-          this.navCtrl.navigateRoot('login');
-          console.log(this.authService.getLogged());
-          this.loadingCtrl.dismiss()
-        } else {
-          console.log(response)
-          this.loadingCtrl.dismiss()
-
-          alertModal({
-            title: response.status,
-            text: response.data,
-            button: [
-              {
-                cssClass: 'alert-button-cancel',
-                text: 'Cerrar',
-              }
-            ],
-            alertController: this.alertController
-          })
-        }
-      },
-      error: (error) => {
-        console.log(error)
-        this.loadingCtrl.dismiss()
-
-        alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
-          button: [
-            {
-              cssClass: 'alert-button-cancel',
-              text: 'Cerrar',
-            }
-          ],
-          alertController: this.alertController
-        })
-      }
-    })
-  }
-
   footballTeams1() {
     this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
       next: (response) => {

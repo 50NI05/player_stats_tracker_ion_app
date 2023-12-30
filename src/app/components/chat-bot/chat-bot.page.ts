@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavController, NavParams } from '@ionic/angular';
 import { log } from 'console';
 import { AuthService } from 'src/app/services/auth.service';
@@ -30,7 +30,7 @@ export class ChatBotPage implements OnInit {
     private navParams: NavParams,
   ) {
     this.form = this.fb.group({
-      prompt: new FormControl('')
+      prompt: new FormControl('', [Validators.required])
     })
   }
 

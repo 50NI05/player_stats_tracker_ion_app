@@ -33,7 +33,7 @@
       <ion-input placeholder="Escribe un mensaje..." (keyup.enter)="assistant(form.value)" formControlName="prompt">
       </ion-input>
       <ion-buttons>
-        <ion-button color="primary" (click)="assistant(form.value)">
+        <ion-button color="primary" (click)="assistant(form.value)" [disabled]="form.invalid">
           <ion-icon slot="icon-only" name="send"></ion-icon>
         </ion-button>
       </ion-buttons>
