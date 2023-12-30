@@ -8,6 +8,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DatePipe } from '@angular/common';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, "i18n/", ".json");
@@ -32,6 +33,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
   ],
   providers: [
+    ScreenOrientation,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

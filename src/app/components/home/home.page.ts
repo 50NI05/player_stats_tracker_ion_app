@@ -7,6 +7,8 @@ import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { ChatBotPage } from '../chat-bot/chat-bot.page';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { StatisticsPage } from '../statistics/statistics.page';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +22,10 @@ export class HomePage implements OnInit {
   news: any;
 
   routesAdmin = [
-    {
-      title: 'Estadísticas',
-      route: '/statistics',
-    },
+    // {
+    //   title: 'Estadísticas',
+    //   route: '/statistics',
+    // },
     // {
     //   title: 'Asistente Virtual',
     //   route: '/chat-bot',
@@ -67,17 +69,20 @@ export class HomePage implements OnInit {
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
     private modalCtrl: ModalController,
+    private screenOrientation: ScreenOrientation
   ) {
     this.profile = authService.getProfile()
   }
 
   ngOnInit() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
+
     this.validateSession()
     // this.player()
     this.newsFootball()
   }
 
-  async openModal() {
+  async openModalChat() {
     const modal = await this.modalCtrl.create({
       component: ChatBotPage,
       componentProps: {
@@ -88,6 +93,21 @@ export class HomePage implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role) {
+    }
+  }
+
+  async openModalStatistic() {
+    const modal = await this.modalCtrl.create({
+      component: StatisticsPage,
+      componentProps: {
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role) {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
     }
   }
 

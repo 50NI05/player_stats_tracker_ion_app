@@ -1,9 +1,22 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Estadisticas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!band" (click)="setLandscape()">
+        <ion-icon name="phone-landscape-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="band" (click)="setPortrait()">
+        <ion-icon name="phone-portrait-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

@@ -8,6 +8,7 @@ import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
 import { DatePipe } from '@angular/common';
 import { ChatBotPage } from '../chat-bot/chat-bot.page';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 interface selectTeam1 {
   id: number;
@@ -228,6 +229,7 @@ export class StatisticsPage implements OnInit {
   dataChart: any;
   dataChart2: any;
   profile = this.authService.getProfile();
+  band = false;
 
   constructor(
     private authService: AuthService,
@@ -238,6 +240,7 @@ export class StatisticsPage implements OnInit {
     public alertController: AlertController,
     private datePipe: DatePipe,
     private modalCtrl: ModalController,
+    private screenOrientation: ScreenOrientation
   ) {
     this.formTeams = this.form.group({
       idTeams1: new FormControl('', [Validators.required, e => this.loadSquads1(e)]),
@@ -245,6 +248,14 @@ export class StatisticsPage implements OnInit {
       idSquad1: new FormControl('', [Validators.required, e => this.loadPlayers1(e)]),
       idSquad2: new FormControl('', [Validators.required, e => this.loadPlayers2(e)]),
     });
+  }
+
+  cancel() {
+    return this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    return this.modalCtrl.dismiss(null, 'confirm');
   }
 
   ngOnInit() {
@@ -336,6 +347,16 @@ export class StatisticsPage implements OnInit {
 
     if (role) {
     }
+  }
+
+  setLandscape() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE)
+    this.band = true
+  }
+
+  setPortrait() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
+    this.band = false
   }
 
   generateChartPlayer1(type: any) {

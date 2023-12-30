@@ -5,6 +5,7 @@ import { loadingSpinner } from '../../shared/loading/loading.component';
 import { AuthService } from '../../services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +27,10 @@ export class LoginPage implements OnInit {
     public alertController: AlertController,
     private authService: AuthService,
     public loadingCtrl: LoadingController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private screenOrientation: ScreenOrientation
   ) {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
 
     this.formularioLogin = this.fb.group({
       username: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
