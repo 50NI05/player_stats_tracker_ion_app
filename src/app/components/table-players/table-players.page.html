@@ -1,6 +1,5 @@
-<!-- player-list.component.html -->
 <ion-header>
-  <ion-toolbar color="dark">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -9,24 +8,47 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
-      <ion-item color="dark">
-        <ion-label class="ion-text-center">Nombre</ion-label>
-        <ion-label class="ion-text-center">Edad</ion-label>
-        <ion-label class="ion-text-center">Posición</ion-label>
-        <ion-label class="ion-text-center">Acción</ion-label>
+  <div class="wallpaper">
+    <div class=" wallpaper-opacity ion-padding">
+      <form [formGroup]="form">
+        <div class="filter-form">
+          <ion-item counter="true" fill="solid" class="filter">
+            <ion-label position="floating" style="color: white;">Filtro</ion-label>
+            <ion-input (ionChange)="applyFilter()" formControlName="filter"></ion-input>
+          </ion-item>
+
+          <ion-buttons style="margin-bottom: 10px;">
+            <ion-button (click)="refreshList()" class="refresh-button">
+              <ion-icon style="font-size: 1.5em; color: rgb(94, 33, 41);" name="refresh-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </form>
+
+      <ion-item class="label">
+        <ion-label class="ion-text-center label-title">Nombre</ion-label>
+        <!-- <ion-label class="ion-text-center label-title">Edad</ion-label> -->
+        <ion-label class="ion-text-center label-title">País</ion-label>
+        <ion-label class="ion-text-center label-title">Acción</ion-label>
       </ion-item>
-      
-      <ion-item *ngFor="let player of players" color="dark">
-        <ion-label class="ion-text-center">{{ player.name }}</ion-label>
-        <ion-label class="ion-text-center">{{ player.age }}</ion-label>
-        <ion-label class="ion-text-center">{{ player.nationality }}</ion-label>
-        <ion-label>
+
+      <ion-item *ngFor="let player of players" class="players">
+        <ion-label class="ion-text-center label-body">{{ player.name }}</ion-label>
+        <!-- <ion-label class="ion-text-center label-body">{{ player.age }}</ion-label> -->
+        <ion-label class="ion-text-center label-body">{{ player.nationality }}</ion-label>
+        <ion-label class="label-body">
           <ion-buttons style="display: flex; flex-direction: row; justify-content: center;">
-            <ion-button (click)="openModal(player.id)" fill="clear"><ion-icon name="search-outline"></ion-icon></ion-button>
-            <ion-button (click)="deletePlayer(player.id)" fill="clear"><ion-icon name="trash-outline"></ion-icon></ion-button>
+            <ion-button (click)="openModal(player.id)" fill="clear"><ion-icon
+                name="search-outline"></ion-icon></ion-button>
+            <ion-button (click)="deletePlayer(player.id)" fill="clear"><ion-icon
+                name="trash-outline"></ion-icon></ion-button>
           </ion-buttons>
         </ion-label>
       </ion-item>
-    </ion-card>
+
+      <ion-item *ngIf="players.length === 0">
+        <ion-label> {{ 'NO_DATA' | translate }} </ion-label>
+      </ion-item>
+    </div>
+  </div>
 </ion-content>

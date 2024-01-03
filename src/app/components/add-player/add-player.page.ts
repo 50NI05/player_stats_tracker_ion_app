@@ -33,6 +33,14 @@ export class AddPlayerPage implements OnInit {
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
   };
 
+  readonly maskitoOptionsHeight: MaskitoOptions = {
+    mask: [/\d/, '.', /\d/, /\d/],
+  };
+
+  readonly maskitoOptionsWeight: MaskitoOptions = {
+    mask: [/\d/, /\d/, '.', /\d/],
+  };
+
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 
   constructor(
@@ -44,15 +52,15 @@ export class AddPlayerPage implements OnInit {
   ) {
     this.addPlayerForm = this.fb.group({
       player: new FormGroup({
-        name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
-        firstname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
-        lastname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
+        name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(Constant.Pattern.Form.Name)]),
+        firstname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(Constant.Pattern.Form.Name)]),
+        lastname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(Constant.Pattern.Form.Name)]),
         age: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         birth: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(this.birthPattern)]),
-        nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.textPattern)]),
-        height: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
-        weight: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
-        photo: new FormControl(''),
+        nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(Constant.Pattern.Form.Name)]),
+        height: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.OnlyDecimal), this.validateMaxDigits(4)]),
+        weight: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.OnlyDecimal), this.validateMaxDigits(4)]),
+        photo: new FormControl('', [Validators.pattern(Constant.Pattern.Form.HTTP)]),
         id_team: new FormControl('', [Validators.required]),
       }),
       game: new FormGroup({
@@ -60,7 +68,7 @@ export class AddPlayerPage implements OnInit {
         lineups: new FormControl('', [Validators.required, this.validateMaxDigits(3)]),
         minutes: new FormControl('', [Validators.required, this.validateMaxDigits(5)]),
         number: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
-        position: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.textPattern)]),
+        position: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(Constant.Pattern.Form.Name)]),
         rating: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         captain: new FormControl('', [Validators.required])
       }),
@@ -114,6 +122,10 @@ export class AddPlayerPage implements OnInit {
         missed: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
         saved: new FormControl('', [Validators.required, this.validateMaxDigits(2)])
       }),
+      market: new FormGroup({
+        date: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(this.birthPattern)]),
+        marketValue: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
+      }),
     })
   }
 
@@ -124,6 +136,12 @@ export class AddPlayerPage implements OnInit {
   validateText(event: KeyboardEvent) {
     let regex = RegExp(this.textPattern);
     return regex.test(event.key);
+  }
+
+  checkText(control: any) {
+    if (this.addPlayerForm.get(control)?.value[0] === ' ') {
+      this.addPlayerForm.get(control)?.reset();
+    }
   }
 
   validateMaxDigits(maxDigits: number) {
@@ -188,57 +206,84 @@ export class AddPlayerPage implements OnInit {
     })
   }
 
-  async addPlayer() {
+  alert(form: any) {
+    alertModal({
+      title: 'Confirmar Agregación de Nuevo Jugador',
+      text: '¿Estás seguro de que deseas agregar a este nuevo jugador al equipo? Una vez confirmado, la información será actualizada y el jugador formará parte oficialmente del equipo.',
+      button: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.addPlayer(form)
+          }
+        }
+      ],
+      alertController: this.alertController
+    })
+  }
+
+  async addPlayer(form: any) {
     await loadingSpinner(this.loadingCtrl)
 
     let data = {
-      appearences: parseInt(this.addPlayerForm.controls['game'].value.appearences),
-      lineups: parseInt(this.addPlayerForm.controls['game'].value.lineups),
-      minutes: parseInt(this.addPlayerForm.controls['game'].value.minutes),
-      number: parseInt(this.addPlayerForm.controls['game'].value.number),
-      position: this.addPlayerForm.controls['game'].value.position,
-      rating: parseInt(this.addPlayerForm.controls['game'].value.rating),
-      captain: parseInt(this.addPlayerForm.controls['game'].value.captain),
-      in: parseInt(this.addPlayerForm.controls['substitute'].value.in),
-      out: parseInt(this.addPlayerForm.controls['substitute'].value.out),
-      bench: parseInt(this.addPlayerForm.controls['substitute'].value.bench),
-      shotTotal: parseInt(this.addPlayerForm.controls['shot'].value.total),
-      shotOn: parseInt(this.addPlayerForm.controls['shot'].value.on),
-      goalTotal: parseInt(this.addPlayerForm.controls['goal'].value.total),
-      conceded: parseInt(this.addPlayerForm.controls['goal'].value.conceded),
-      assists: parseInt(this.addPlayerForm.controls['goal'].value.assists),
-      saves: parseInt(this.addPlayerForm.controls['goal'].value.saves),
-      passeTotal: parseInt(this.addPlayerForm.controls['passe'].value.total),
-      key: parseInt(this.addPlayerForm.controls['passe'].value.key),
-      accuracy: parseInt(this.addPlayerForm.controls['passe'].value.accuracy),
-      tackleTotal: parseInt(this.addPlayerForm.controls['tackle'].value.total),
-      blocks: parseInt(this.addPlayerForm.controls['tackle'].value.blocks),
-      interceptions: parseInt(this.addPlayerForm.controls['tackle'].value.interceptions),
-      duelTotal: parseInt(this.addPlayerForm.controls['duel'].value.total),
-      duelWon: parseInt(this.addPlayerForm.controls['duel'].value.won),
-      attempts: parseInt(this.addPlayerForm.controls['dribble'].value.attempts),
-      success: parseInt(this.addPlayerForm.controls['dribble'].value.success),
-      past: parseInt(this.addPlayerForm.controls['dribble'].value.past),
-      drawn: parseInt(this.addPlayerForm.controls['foul'].value.drawn),
-      foulCommitted: parseInt(this.addPlayerForm.controls['foul'].value.committed),
-      yellow: parseInt(this.addPlayerForm.controls['card'].value.yellow),
-      yellowred: parseInt(this.addPlayerForm.controls['card'].value.yellowred),
-      red: parseInt(this.addPlayerForm.controls['card'].value.red),
-      penaltyWon: parseInt(this.addPlayerForm.controls['penalty'].value.won),
-      penaltyCommitted: parseInt(this.addPlayerForm.controls['penalty'].value.committed),
-      scored: parseInt(this.addPlayerForm.controls['penalty'].value.scored),
-      missed: parseInt(this.addPlayerForm.controls['penalty'].value.missed),
-      saved: parseInt(this.addPlayerForm.controls['penalty'].value.saved),
-      name: this.addPlayerForm.controls['player'].value.name,
-      firstname: this.addPlayerForm.controls['player'].value.firstname,
-      lastname: this.addPlayerForm.controls['player'].value.lastname,
-      age: parseInt(this.addPlayerForm.controls['player'].value.age),
-      birth: new Date(this.addPlayerForm.controls['player'].value.birth),
-      nationality: this.addPlayerForm.controls['player'].value.nationality,
-      height: this.addPlayerForm.controls['player'].value.height,
-      weight: this.addPlayerForm.controls['player'].value.weight,
-      photo: this.addPlayerForm.controls['player'].value.photo,
-      id_team: parseInt(this.addPlayerForm.controls['player'].value.id_team)
+      appearences: form.game.appearences,
+      lineups: form.game.lineups,
+      minutes: form.game.minutes,
+      number: form.game.number,
+      position: form.game.position,
+      rating: form.game.rating,
+      captain: form.game.captain,
+      in: form.substitute.in,
+      out: form.substitute.out,
+      bench: form.substitute.bench,
+      shotTotal: form.shot.total,
+      shotOn: form.shot.on,
+      goalTotal: form.goal.total,
+      conceded: form.goal.conceded,
+      assists: form.goal.assists,
+      saves: form.goal.saves,
+      passeTotal: form.passe.total,
+      key: form.passe.key,
+      accuracy: form.passe.accuracy,
+      tackleTotal: form.tackle.total,
+      blocks: form.tackle.blocks,
+      interceptions: form.tackle.interceptions,
+      duelTotal: form.duel.total,
+      duelWon: form.duel.won,
+      attempts: form.dribble.attempts,
+      success: form.dribble.success,
+      past: form.dribble.past,
+      drawn: form.foul.drawn,
+      foulCommitted: form.foul.committed,
+      yellow: form.card.yellow,
+      yellowred: form.card.yellowred,
+      red: form.card.red,
+      penaltyWon: form.penalty.won,
+      penaltyCommitted: form.penalty.committed,
+      scored: form.penalty.scored,
+      missed: form.penalty.missed,
+      saved: form.penalty.saved,
+      date: new Date(form.market.date),
+      market_value: form.market.marketValue,
+      name: form.player.name,
+      firstname: form.player.firstname,
+      lastname: form.player.lastname,
+      age: form.player.age,
+      birth: new Date(form.player.birth),
+      nationality: form.player.nationality,
+      height: form.player.height,
+      weight: form.player.weight,
+      photo: form.player.photo,
+      id_team: form.player.id_team
     }
 
     console.log(data);
@@ -248,7 +293,7 @@ export class AddPlayerPage implements OnInit {
       next: async (response) => {
         if (response.status === Constant.SUCCESS) {
           alertModal({
-            title: response.status,
+            title: 'Nuevo Jugador Agregado',
             text: response.data,
             button: [
               {
@@ -258,6 +303,8 @@ export class AddPlayerPage implements OnInit {
             ],
             alertController: this.alertController
           })
+
+          this.addPlayerForm.reset()
 
           this.loadingCtrl.dismiss();
 
