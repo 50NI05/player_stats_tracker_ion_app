@@ -86,18 +86,20 @@
                   <canvas id="chart" #chart></canvas>
                 </div> -->
 
-            <swiper-container [loop]="true" [pagination]="true">
-              <swiper-slide *ngFor="let new of news">
-                <img *ngIf="new.urlToImage !== null" [src]="new.urlToImage" />
-                <img style="width: 80%; margin: 20px 0;" *ngIf="new.urlToImage === null"
-                  [src]="'assets/icon/default_news.png'" />
-                <h6 style="color: white; margin: 0 10px;">{{ new.title }}</h6>
-                <p *ngIf="new.description !== null" class="justify-text">{{ new.description }}</p>
-                <a href={{new.url}} style="color: #5e2129; margin-top: 5px;">¿Deseas obtener más
-                  información?</a>
-                <p style="margin: 5px 0 40px 0;">Autor: {{new.author}}</p>
-              </swiper-slide>
-            </swiper-container>
+            <ion-card-content>
+              <swiper-container [loop]="true" [pagination]="true">
+                <swiper-slide *ngFor="let new of news">
+                  <img *ngIf="new.urlToImage !== null" [src]="new.urlToImage" />
+                  <img style="margin: 10px 0 5px 0;" *ngIf="new.urlToImage === null"
+                    [src]="'assets/icon/default_news.png'" />
+                  <h6 style="color: white; margin: 10px 10px 0 10px; text-align: justify;">{{ new.title }}</h6>
+                  <p *ngIf="new.description !== null" class="justify-text">{{ new.description }}</p>
+                  <a href={{new.url}} style="color: #5e2129; margin-top: 5px;">¿Deseas obtener más
+                    información?</a>
+                  <p style="margin: 5px 0 30px 0;">Autor: {{new.author}}</p>
+                </swiper-slide>
+              </swiper-container>
+            </ion-card-content>
           </ion-card>
           <!-- </ion-col>
         </ion-row> -->
@@ -105,7 +107,7 @@
 
           <!-- ADMINISTRATOR -->
           <ion-row *ngIf="profile === 1" class="row-container">
-            <ion-col class="buttons-half" style="align-items: start; margin-left: 5px;">
+            <ion-col class="buttons-half">
               <ion-button (click)="openModalStatistic()" expand="block" color="danger" class="custom-button">
                 <div class="content-button">
                   <ion-icon name="stats-chart-outline"></ion-icon>
@@ -119,7 +121,7 @@
                 </div>
               </ion-button>
             </ion-col>
-            <ion-col class="buttons-half" style="align-items: end; margin-right: 5px;">
+            <ion-col class="buttons-half">
               <ion-button [routerLink]="'/add-player'" expand="block" color="success" class="custom-button">
                 <div class="content-button">
                   <ion-icon name="person-add-outline"></ion-icon>
@@ -139,7 +141,7 @@
 
           <!-- USER -->
           <ion-row *ngIf="profile === 2" class="row-container">
-            <ion-col class="buttons-half" style="align-items: start; margin-left: 5px;">
+            <ion-col class="buttons-half">
               <ion-button (click)="openModalStatistic()" expand="block" color="danger" class="custom-button">
                 <div class="content-button">
                   <ion-icon name="stats-chart-outline"></ion-icon>
@@ -147,7 +149,7 @@
                 </div>
               </ion-button>
             </ion-col>
-            <ion-col class="buttons-half" style="align-items: end; margin-right: 5px;">
+            <ion-col class="buttons-half">
               <ion-button (click)="openModalChat()" expand="block" color="a"
                 style="width: 145px; height: 145px; border-radius: 20px; background: rgb(198, 147, 16);">
                 <div class="content-button"

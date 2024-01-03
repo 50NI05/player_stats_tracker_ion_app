@@ -80,6 +80,38 @@
         <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
           <ion-card-content>
             <div class="title">Jugador</div>
+
+            <ion-row>
+              <ion-col *ngFor="let player of players1">
+                <div *ngIf="player.photo !== ''" style="position: relative; text-align: center;">
+                  <ion-avatar style="display: block; margin: 20px auto 25px auto; height: max-content; width: 50%;">
+                    <img alt="Silhouette of a person's head" [src]="player.photo" />
+                  </ion-avatar>
+                </div>
+
+                <div *ngIf="player.photo === ''" style="position: relative; text-align: center;">
+                  <ion-avatar style="display: block; margin: 20px auto 25px auto; height: max-content; width: 50%;">
+                    <img alt="Silhouette of a person's head"
+                      src="https://media-3.api-sports.io/football/players/356129.png" />
+                  </ion-avatar>
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let player of players2">
+                <div *ngIf="player.photo !== ''" style="position: relative; text-align: center;">
+                  <ion-avatar style="display: block; margin: 20px auto 25px auto; height: max-content; width: 50%;">
+                    <img alt="Silhouette of a person's head" [src]="player.photo" />
+                  </ion-avatar>
+                </div>
+
+                <div *ngIf="player.photo === ''" style="position: relative; text-align: center;">
+                  <ion-avatar style="display: block; margin: 20px auto 25px auto; height: max-content; width: 50%;">
+                    <img alt="Silhouette of a person's head"
+                      src="https://media-3.api-sports.io/football/players/356129.png" />
+                  </ion-avatar>
+                </div>
+              </ion-col>
+            </ion-row>
+
             <ion-row>
               <div *ngFor="let player of players1">{{ player.name }}</div>
               <div *ngFor="let player of players2">{{ player.name }}</div>
