@@ -1,11 +1,14 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { Chart, Colors } from 'chart.js';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { Constant } from 'src/app/shared/constant/constant.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
+import { ChatBotPage } from '../chat-bot/chat-bot.page';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { StatisticsPage } from '../statistics/statistics.page';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +19,17 @@ export class HomePage implements OnInit {
   @ViewChild('chart') chartCanvas!: ElementRef;
   chart!: any;
   datas: any[] = [];
+  news: any;
 
-  routes = [
-    {
-      title: 'Estadísticas',
-      route: '/statistics',
-    },
+  routesAdmin = [
+    // {
+    //   title: 'Estadísticas',
+    //   route: '/statistics',
+    // },
+    // {
+    //   title: 'Asistente Virtual',
+    //   route: '/chat-bot',
+    // },
     {
       title: 'Agregar Equipo',
       route: '/add-team',
@@ -31,14 +39,27 @@ export class HomePage implements OnInit {
       route: '/add-player',
     },
     {
-      title: 'Ver Usuarios',
-      route: '/users',
-    },
-    {
       title: 'Ver Jugadores',
       route: '/table-players',
     },
+    {
+      title: 'Ver Usuarios',
+      route: '/users',
+    },
   ]
+
+  routesUser = [
+    {
+      title: 'Estadísticas',
+      route: '/statistics',
+    },
+    // {
+    //   title: 'Asistente Virtual',
+    //   route: '/chat-bot',
+    // },
+  ]
+
+  profile: any;
 
   constructor(
     private authService: AuthService,
@@ -47,10 +68,47 @@ export class HomePage implements OnInit {
     public form: FormBuilder,
     private ref: ChangeDetectorRef,
     public alertController: AlertController,
-  ) { }
+    private modalCtrl: ModalController,
+    private screenOrientation: ScreenOrientation
+  ) {
+    this.profile = authService.getProfile()
+  }
 
   ngOnInit() {
-    this.player()
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
+
+    this.validateSession()
+    // this.player()
+    this.newsFootball()
+  }
+
+  async openModalChat() {
+    const modal = await this.modalCtrl.create({
+      component: ChatBotPage,
+      componentProps: {
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role) {
+    }
+  }
+
+  async openModalStatistic() {
+    const modal = await this.modalCtrl.create({
+      component: StatisticsPage,
+      componentProps: {
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role) {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
+    }
   }
 
   playerChart(type: any) {
@@ -60,12 +118,76 @@ export class HomePage implements OnInit {
     }
   }
 
+  validateSession() {
+    let data = {
+      session: this.authService.getToken()
+    }
+
+    this.authService.call(data, `validateSession`, 'POST', true).subscribe({
+      next: (response) => {
+        if (response.status === Constant.SUCCESS) {
+          console.log(response);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+
+        alertModal({
+          title: 'Error',
+          text: 'Sesión Expirado',
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+              handler: () => {
+                this.authService.setToken(null);
+                this.authService.setModelSesionInSession(this.authService.modelSession);
+                this.navCtrl.navigateRoot('login');
+              }
+            }
+          ],
+          alertController: this.alertController
+        })
+      }
+    })
+  }
+
+  async newsFootball() {
+    await loadingSpinner(this.loadingCtrl);
+
+    this.authService.call(null, `newsFootball`, 'GET', false).subscribe({
+      next: (response) => {
+        if (response.status === Constant.SUCCESS) {
+          this.news = response.data
+
+          this.loadingCtrl.dismiss()
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss()
+
+        alertModal({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
+          alertController: this.alertController
+        })
+      }
+    })
+  }
+
   async player() {
     await loadingSpinner(this.loadingCtrl);
 
     const random = Math.floor(Math.random() * 10) + 1;
 
-    this.authService.call(null, `getPlayer/${random}`, 'GET', true).subscribe({
+    this.authService.call(null, `getPlayer/${12}`, 'GET', true).subscribe({
       next: (response) => {
         this.datas = []
         if (response.status === Constant.SUCCESS) {
@@ -130,19 +252,45 @@ export class HomePage implements OnInit {
           {
             label: data[0].player.firstname + ' ' + data[0].player.lastname,
             data: dataChart,
-            // borderWidth: 1
+            borderColor: 'rgb(94, 33, 41)',
+            backgroundColor: 'rgb(94, 33, 41)',
           },
-          // {
-          //   label: 'leyenda',
-          //   data: dataChart,
-          //   // borderWidth: 1
-          // },
         ]
       },
       options: {
         plugins: {
           legend: {
-            display: false
+            labels: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: false
+            }
+          },
+          x: {
+            ticks: {
+              color: "white",
+              font: {
+                // size: 15,
+                family: 'Poppins',
+              },
+              stepSize: 1,
+              // beginAtZero: true
+            }
           }
         }
       }
@@ -161,9 +309,9 @@ export class HomePage implements OnInit {
         console.log(response)
         if (response.status === Constant.SUCCESS) {
           this.authService.setToken(null);
-          this.authService.setLogged(false)
+          // this.authService.setLogged(false)
           this.authService.setModelSesionInSession(this.authService.modelSession);
-          this.authService.setModelLog(this.authService.modelLog);
+          // this.authService.setModelLog(this.authService.modelLog);
           this.navCtrl.navigateRoot('login');
           console.log(this.authService.getLogged());
           this.loadingCtrl.dismiss()

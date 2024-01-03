@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { TablePlayersPageRoutingModule } from './table-players-routing.module';
 
 import { TablePlayersPage } from './table-players.page';
+import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -14,8 +16,10 @@ import { TablePlayersPage } from './table-players.page';
     FormsModule,
     IonicModule,
     TablePlayersPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule,
+    HttpClientModule,
   ],
   declarations: [TablePlayersPage]
 })
-export class TablePlayersPageModule {}
+export class TablePlayersPageModule { }

@@ -11,6 +11,7 @@ interface Users {
   id: number,
   firstname: string,
   lastname: string,
+  username: string,
   email: string,
   password: string,
   profile: {
@@ -23,6 +24,7 @@ interface User {
   id: number,
   firstname: string,
   lastname: string,
+  username: string,
   email: string,
   password: string,
   profile: {
@@ -37,18 +39,25 @@ interface User {
   styleUrls: ['./users.page.scss'],
 })
 export class UsersPage implements OnInit {
-
   users: Users[] = [];
   user: User[] = [];
+  form: FormGroup;
+  label = {
+    username: 'Usuario',
+    profile: 'Perfil'
+  }
 
   constructor(
     private authService: AuthService,
     public loadingCtrl: LoadingController,
     public navCtrl: NavController,
-    public form: FormBuilder,
+    public fb: FormBuilder,
     public alertController: AlertController,
     private modalCtrl: ModalController,
   ) {
+    this.form = this.fb.group({
+      filter: new FormControl(''),
+    })
   }
 
   ngOnInit() {
@@ -74,6 +83,23 @@ export class UsersPage implements OnInit {
     }
   }
 
+  applyFilter() {
+    const searchTerm = this.form.get('filter')?.value.toLowerCase();
+
+    this.users = this.users.filter((user: Users) => {
+      return (
+        user.username.toLowerCase().includes(searchTerm) ||
+        user.firstname.toLowerCase().includes(searchTerm) ||
+        user.lastname.toLowerCase().includes(searchTerm)
+      );
+    });
+  }
+
+  refreshList() {
+    this.form.get('filter')?.setValue('');
+    this.getUsers()
+  }
+
   async getUsers() {
     await loadingSpinner(this.loadingCtrl)
 
@@ -82,12 +108,13 @@ export class UsersPage implements OnInit {
         this.users = []
         if (response.status === Constant.SUCCESS) {
           response.data.map((e: {
-            profile: any; id: any; firstname: any; lastname: any; email: any; password: any
+            profile: any; id: any; firstname: any; lastname: any; username: any, email: any; password: any
           }) => {
             this.users.push({
               id: e.id,
               firstname: e.firstname,
               lastname: e.lastname,
+              username: e.username,
               email: e.email,
               password: e.password,
               profile: {
@@ -145,12 +172,13 @@ export class UsersPage implements OnInit {
             this.user = []
             response.data.map((e: {
               id: number;
-              profile: { id: number; description: string }; firstname: string; lastname: string; email: string; password: string;
+              profile: any; firstname: string; lastname: string; username: string; email: string; password: string;
             }) => {
               this.user.push({
                 id: e.id,
                 firstname: e.firstname,
                 lastname: e.lastname,
+                username: e.username,
                 email: e.email,
                 password: e.password,
                 profile: {

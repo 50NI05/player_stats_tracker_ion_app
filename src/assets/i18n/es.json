@@ -1,5 +1,7 @@
 {
   "REQUIRED": "Campo requerido.",
   "CHARACTER_NOT_ALLOWED": "Dato Inv\u00e1lido.",
-  "MIN_CHARACTER_REQUIRED": "Longitud del dato menor a la mínima requerida."
+  "MIN_CHARACTER_REQUIRED": "Longitud del dato menor a la mínima requerida.",
+  "MAX_CHARACTER_REQUIRED": "Longitud del dato es mayor a la requerida.",
+  "NO_DATA": "No se encontraron datos registrados"
 }

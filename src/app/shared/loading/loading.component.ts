@@ -16,7 +16,7 @@ export class LoadingComponent implements OnInit {
 
 export async function loadingSpinner(loadingCtrl: LoadingController) {
   const loading = await loadingCtrl.create({
-    message: 'Cargando...',
+    // message: 'Cargando...',
     spinner: 'crescent',
   });
 
