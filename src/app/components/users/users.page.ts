@@ -56,7 +56,7 @@ export class UsersPage implements OnInit {
     private modalCtrl: ModalController,
   ) {
     this.form = this.fb.group({
-      filter: new FormControl(''),
+      filter: new FormControl('', [Validators.required]),
     })
   }
 

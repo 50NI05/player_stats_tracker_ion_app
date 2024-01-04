@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonModal, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
@@ -117,7 +117,7 @@ export class TablePlayersPage implements OnInit {
     private modalCtrl: ModalController,
   ) {
     this.form = this.fb.group({
-      filter: new FormControl(''),
+      filter: new FormControl('', [Validators.required]),
     })
   }
 

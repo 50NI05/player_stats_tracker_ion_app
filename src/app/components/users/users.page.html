@@ -18,7 +18,7 @@
           </ion-item>
 
           <ion-buttons style="margin-bottom: 10px;">
-            <ion-button (click)="refreshList()" class="refresh-button">
+            <ion-button (click)="refreshList()" class="refresh-button" [disabled]="form.invalid">
               <ion-icon style="font-size: 1.5em; color: rgb(94, 33, 41);" name="refresh-outline"></ion-icon>
             </ion-button>
           </ion-buttons>
