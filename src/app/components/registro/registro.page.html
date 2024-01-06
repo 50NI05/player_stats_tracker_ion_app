@@ -22,6 +22,7 @@
 
             <ion-item counter="true" class="registerForm">
               <ion-label position="floating">Nombre</ion-label>
+              <ion-icon name="person-outline" fill="clear" slot="start"></ion-icon>
               <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
                 maxlength="30"></ion-input>
               <ion-note *ngIf="form.controls['firstname'].hasError('required') && form.get('firstname')?.touched"
@@ -38,6 +39,7 @@
 
             <ion-item counter="true" class="registerForm">
               <ion-label position="floating">Apellido</ion-label>
+              <ion-icon name="person-outline" fill="clear" slot="start"></ion-icon>
               <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastname"
                 maxlength="30"></ion-input>
               <ion-note *ngIf="form.controls['lastname'].hasError('required') && form.get('lastname')?.touched"
@@ -54,6 +56,7 @@
 
             <ion-item counter="true" class="registerForm">
               <ion-label position="floating">Usuario</ion-label>
+              <ion-icon name="person-outline" fill="clear" slot="start"></ion-icon>
               <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="username"
                 maxlength="15"></ion-input>
               <ion-note *ngIf="form.controls['username'].hasError('pattern')" slot="error">
@@ -70,6 +73,7 @@
 
             <ion-item counter="true" class="registerForm">
               <ion-label position="floating">Correo Electrónico</ion-label>
+              <ion-icon name="mail-outline" slot="start"></ion-icon>
               <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
                 maxlength="50"></ion-input>
               <ion-note *ngIf="form.controls['email'].hasError('pattern')" slot="error">
@@ -85,6 +89,7 @@
 
             <ion-item counter="true" class="registerForm">
               <ion-label position="floating">Contraseña</ion-label>
+              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
               <div style="display: flex; flex-direction: row;">
                 <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
                   [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">

@@ -171,6 +171,7 @@ export class PlayerDetailsPage implements OnInit {
     this.form.get('player.nationality')!.setValue(this.navParams.get('detailsPlayer')[0].nationality)
     this.form.get('player.height')!.setValue(this.navParams.get('detailsPlayer')[0].height)
     this.form.get('player.weight')!.setValue(this.navParams.get('detailsPlayer')[0].weight)
+    this.form.get('player.photo')!.setValue(this.navParams.get('detailsPlayer')[0].photo)
     this.form.get('player.id_team')!.setValue(this.navParams.get('detailsPlayer')[0].team.id)
 
     this.form.get('game.appearences')!.setValue(this.navParams.get('detailsPlayer')[0].game.appearences)
@@ -274,6 +275,31 @@ export class PlayerDetailsPage implements OnInit {
           alertController: this.alertController
         })
       }
+    })
+  }
+
+  alert(form: any) {
+    alertModal({
+      title: 'Confirmar Actualización de Información del Jugador',
+      text: '¿Estás seguro de que deseas actualizar la información de este jugador? Una vez confirmado, los cambios se guardarán y la información del jugador se actualizará oficialmente en el sistema.',
+      button: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.updatePlayer(form)
+          }
+        }
+      ],
+      alertController: this.alertController
     })
   }
 

@@ -96,6 +96,24 @@ export class HomePage implements OnInit {
     }
   }
 
+  isOverThreeLines(text: string): boolean {
+    const lineHeight = 16; // Ajusta esto según tu tamaño de línea
+    const maxHeight = 3 * lineHeight; // Máximo permitido para tres líneas
+    const dummyElement = document.createElement('div');
+    dummyElement.style.visibility = 'hidden';
+    dummyElement.style.position = 'absolute';
+    dummyElement.style.width = '300px'; // Ajusta esto según el ancho del contenedor
+    dummyElement.innerHTML = text;
+    document.body.appendChild(dummyElement);
+
+    const isOverThreeLines = dummyElement.clientHeight > maxHeight;
+
+    document.body.removeChild(dummyElement);
+
+    return isOverThreeLines;
+  }
+
+
   async openModalStatistic() {
     const modal = await this.modalCtrl.create({
       component: StatisticsPage,

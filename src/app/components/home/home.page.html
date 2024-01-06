@@ -93,7 +93,11 @@
                   <img style="margin: 10px 0 5px 0;" *ngIf="new.urlToImage === null"
                     [src]="'assets/icon/default_news.png'" />
                   <h6 style="color: white; margin: 10px 10px 0 10px; text-align: justify;">{{ new.title }}</h6>
-                  <p *ngIf="new.description !== null" class="justify-text">{{ new.description }}</p>
+                  <p [ngClass]="{'truncate-multiline': isOverThreeLines(new.description)}"
+                    *ngIf="new.description !== null">
+                    {{ new.description }}
+                  </p>
+
                   <a href={{new.url}} style="color: #5e2129; margin-top: 5px;">¿Deseas obtener más
                     información?</a>
                   <p style="margin: 5px 0 30px 0;">Autor: {{new.author}}</p>

@@ -65,6 +65,9 @@ export class ForgotPasswordPage implements OnInit {
     }
   }
 
+
+
+
   async forgotPassword(form: any) {
     await loadingSpinner(this.loadingCtrl)
 
