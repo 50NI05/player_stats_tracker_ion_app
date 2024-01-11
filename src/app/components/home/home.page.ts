@@ -151,8 +151,8 @@ export class HomePage implements OnInit {
         console.log(error);
 
         alertModal({
-          title: 'Error',
-          text: 'Sesión Expirado',
+          title: 'Expiración de la Sesión: Han Pasado 24 Horas',
+          text: 'Tu sesión ha expirado debido a inactividad durante las últimas 24 horas. Por favor, vuelve a iniciar sesión para continuar.',
           button: [
             {
               cssClass: 'alert-button-cancel',

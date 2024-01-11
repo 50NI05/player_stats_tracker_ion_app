@@ -21,6 +21,7 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
   passwordVisibility: boolean = true;
   logged: any;
+  band = false;
 
   constructor(
     public fb: FormBuilder,
@@ -68,6 +69,10 @@ export class LoginPage implements OnInit {
     } else {
       this.passwordVisibility = true;
     }
+  }
+
+  nextStep() {
+    this.band = true
   }
 
   async login(loginForm: any) {

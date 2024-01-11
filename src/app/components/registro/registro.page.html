@@ -87,7 +87,7 @@
               </ion-note>
             </ion-item>
 
-            <ion-item counter="true" class="registerForm">
+            <ion-item counter="true" class="registerForm" *ngIf="band">
               <ion-label position="floating">Contraseña</ion-label>
               <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
               <div style="display: flex; flex-direction: row;">
@@ -123,7 +123,11 @@
               </div>
             </div>
 
-            <ion-button expand="block" shape="round" style="font-size: 15px;" [disabled]="form.invalid"
+            <ion-button *ngIf="!band" expand="block" shape="round" style="font-size: 15px;" [disabled]="form.controls['email'].invalid"
+              (click)="nextStep()">Continuar
+            </ion-button>
+
+            <ion-button *ngIf="band" expand="block" shape="round" style="font-size: 15px;" [disabled]="form.invalid"
               (click)="register(form.value)">Registrarte
             </ion-button>
 

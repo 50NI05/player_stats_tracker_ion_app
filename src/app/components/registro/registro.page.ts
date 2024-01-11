@@ -20,6 +20,7 @@ export class RegistroPage implements OnInit {
 
   form: FormGroup;
   passwordVisibility: boolean = true;
+  band = false;
 
   constructor(
     public fb: FormBuilder,
@@ -120,6 +121,23 @@ export class RegistroPage implements OnInit {
   //   localStorage.setItem('ingresado', 'true');
   //   this.navCtrl.navigateRoot('inicio');
   // }
+
+  nextStep() {
+    this.band = true
+
+    alertModal({
+      title: 'Aviso de Envío de Contraseña',
+      text: 'Se ha enviado un correo electrónico a la dirección asociada a tu cuenta. Por favor, revisa tu bandeja de entrada y sigue las instrucciones proporcionadas para completar el proceso. Para cualquier asistencia adicional, no dudes en contactarnos. ¡Gracias por confiar en nosotros!',
+      button: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+        },
+      ],
+      alertController: this.alertController
+    })
+  }
 
   async register(registerForm: any) {
     await loadingSpinner(this.loadingCtrl);
