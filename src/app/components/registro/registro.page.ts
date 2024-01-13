@@ -122,20 +122,55 @@ export class RegistroPage implements OnInit {
   //   this.navCtrl.navigateRoot('inicio');
   // }
 
-  nextStep() {
-    this.band = true
+  async nextStep(registerForm: any) {
+    await loadingSpinner(this.loadingCtrl);
 
-    alertModal({
-      title: 'Aviso de Envío de Contraseña',
-      text: 'Se ha enviado un correo electrónico a la dirección asociada a tu cuenta. Por favor, revisa tu bandeja de entrada y sigue las instrucciones proporcionadas para completar el proceso. Para cualquier asistencia adicional, no dudes en contactarnos. ¡Gracias por confiar en nosotros!',
-      button: [
-        {
-          text: 'Cerrar',
-          role: 'cancel',
-          cssClass: 'alert-button-cancel',
-        },
-      ],
-      alertController: this.alertController
+    let data = {
+      username: registerForm.username.trim(),
+    }
+    console.log(data);
+    this.loadingCtrl.dismiss();
+
+    this.auth.call(data, 'checkUser', 'POST', false).subscribe({
+      next: (response) => {
+        if (response.status === Constant.ERROR) {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+
+          alertModal({
+            title: 'Usuario Existente',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
+        } else {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+
+          this.band = true
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss();
+
+        alertModal({
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
+          alertController: this.alertController
+        })
+      }
     })
   }
 
@@ -160,7 +195,7 @@ export class RegistroPage implements OnInit {
           this.loadingCtrl.dismiss();
           alertModal({
             title: 'Registro Exitoso',
-            text: 'Usuario registrado exitosamente. ¿Deseas iniciar sesión?',
+            text: response.data,
             button: [
               {
                 text: 'Cerrar',
@@ -186,7 +221,7 @@ export class RegistroPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: response.status,
+            title: 'Usuario Existente',
             text: response.data,
             button: [
               {
@@ -203,8 +238,8 @@ export class RegistroPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: '¡Error en el Registro! Por favor, inténtalo de nuevo.',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

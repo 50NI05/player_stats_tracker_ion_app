@@ -98,8 +98,8 @@ export class AddTeamPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Error',
-            text: 'Falla en el servidor',
+            title: 'Error en la Plataforma',
+            text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
             button: [
               {
                 cssClass: 'alert-button-cancel',
@@ -162,8 +162,8 @@ export class AddTeamPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',
@@ -207,8 +207,8 @@ export class AddTeamPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

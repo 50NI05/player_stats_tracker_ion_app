@@ -71,7 +71,7 @@
               </ion-note>
             </ion-item>
 
-            <ion-item counter="true" class="registerForm">
+            <ion-item counter="true" class="registerForm" *ngIf="band">
               <ion-label position="floating">Correo Electrónico</ion-label>
               <ion-icon name="mail-outline" slot="start"></ion-icon>
               <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
@@ -123,8 +123,8 @@
               </div>
             </div>
 
-            <ion-button *ngIf="!band" expand="block" shape="round" style="font-size: 15px;" [disabled]="form.controls['email'].invalid"
-              (click)="nextStep()">Continuar
+            <ion-button *ngIf="!band" expand="block" shape="round" style="font-size: 15px;"
+              [disabled]="form.controls['username'].invalid " (click)="nextStep(form.value)">Continuar
             </ion-button>
 
             <ion-button *ngIf="band" expand="block" shape="round" style="font-size: 15px;" [disabled]="form.invalid"
