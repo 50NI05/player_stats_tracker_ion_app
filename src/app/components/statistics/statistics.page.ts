@@ -9,6 +9,12 @@ import { Constant } from 'src/app/shared/constant/constant.component';
 import { DatePipe } from '@angular/common';
 import { ChatBotPage } from '../chat-bot/chat-bot.page';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
+
 
 interface selectTeam1 {
   id: number;
@@ -256,6 +262,85 @@ export class StatisticsPage implements OnInit {
 
   confirm() {
     return this.modalCtrl.dismiss(null, 'confirm');
+  }
+
+  pdfDownload() {
+    let playersArray = []
+
+    playersArray.push([
+      { text: 'Minutos jugados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Goles', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Asistencias', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Pases precisos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Tiros totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' }
+    ]);
+
+    console.log(playersArray);
+
+    for (let item of this.players1) {
+      playersArray.push([
+        { text: item.game.minutes, alignment: 'center' },
+        { text: item.goal.total, alignment: 'center' },
+        { text: item.goal.assists, alignment: 'center' },
+        { text: item.passe.accuracy, alignment: 'center' },
+        { text: item.passe.total, alignment: 'center' }
+      ]);
+    }
+
+    for (let item of this.players2) {
+      playersArray.push([
+        { text: item.game.minutes, alignment: 'center' },
+        { text: item.goal.total, alignment: 'center' },
+        { text: item.goal.assists, alignment: 'center' },
+        { text: item.passe.accuracy, alignment: 'center' },
+        { text: item.passe.total, alignment: 'center' }
+      ]);
+    }
+
+    console.log(playersArray);
+
+
+    let pdfDefinition = {
+      pageMargins: 30,
+      pageSize: { height: 792, width: 612 },
+      content: [
+        {
+          text: `${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`,
+          style: 'header',
+          fontSize: 25,
+          border: [false, false, false, false]
+        },
+
+        'Official documentation is in progress, this document is just a glimpse of what is possible with pdfmake and its layout engine.',
+        { text: 'A simple table (no headers, no width specified, no spans, no styling)', style: 'subheader' },
+        'The following table has nothing more than a body array',
+
+        {
+          style: 'tableExample',
+          table: {
+            widths: ['*', '*', '*', '*', '*'],
+            body: [
+              playersArray[0],
+              playersArray[1]
+            ]
+          }
+        },
+
+        {
+          style: 'tableExample',
+          table: {
+            widths: ['*', '*', '*', '*', '*'],
+            body: [
+              playersArray[0],
+              playersArray[2]
+            ]
+          }
+        },
+
+      ]
+    }
+
+    pdfMake.createPdf(pdfDefinition).download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`);
   }
 
   ngOnInit() {
