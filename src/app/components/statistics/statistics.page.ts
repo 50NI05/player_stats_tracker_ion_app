@@ -10,6 +10,11 @@ import { DatePipe } from '@angular/common';
 import { ChatBotPage } from '../chat-bot/chat-bot.page';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
 interface selectTeam1 {
   id: number;
   name: string;
@@ -256,6 +261,869 @@ export class StatisticsPage implements OnInit {
 
   confirm() {
     return this.modalCtrl.dismiss(null, 'confirm');
+  }
+
+  pdfDownload() {
+    let playersArray = [];
+
+    playersArray.push([
+      { text: 'Minutos jugados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Goles', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Asistencias', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Pases precisos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Tiros totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Valor de mercado actual', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Última revisión', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Tiros totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Tiros al arcos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Goles totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Asistencias', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Recibidos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Salvados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Ingresos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Sustitutos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Banqueados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Pases totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Pases claves', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Pases precisos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Entradas totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Bloqueadas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Intercepciones', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Regates exitosos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Regates intentas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Regates Superados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Duelos totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Duelos ganados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Faltas Realizadas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Faltas Duras', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Tarjetas amarillas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Tarjetas rojas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    playersArray.push([
+      { text: 'Penaltis ganados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Penaltis cometidos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Penaltis marcados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Penaltis fallados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Penaltis parados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+    ])
+
+    for (let item of this.players1) {
+      playersArray.push([
+        { text: item.game.minutes, alignment: 'center' }, 
+        { text: item.goal.total, alignment: 'center' }, 
+        { text: item.goal.assists, alignment: 'center' }, 
+        { text: item.passe.accuracy, alignment: 'center' }, 
+        { text: item.shot.total, alignment: 'center' }, 
+      ]);
+
+      playersArray.push([
+        { text: item.market_value.market_value, alignment: 'center' },
+        { text: item.market_value.date, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.shot.total, alignment: 'center' },
+        { text: item.shot.on, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.goal.total, alignment: 'center' },
+        { text: item.goal.assists, alignment: 'center' },
+        { text: item.goal.conceded, alignment: 'center' },
+        { text: item.goal.saves, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.substitute.in, alignment: 'center' },
+        { text: item.substitute.out, alignment: 'center' },
+        { text: item.substitute.bench, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.passe.total, alignment: 'center' },
+        { text: item.passe.key, alignment: 'center' },
+        { text: item.passe.accuracy, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.tackle.total, alignment: 'center' },
+        { text: item.tackle.blocks, alignment: 'center' },
+        { text: item.tackle.interceptions, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.dribble.attempts, alignment: 'center' },
+        { text: item.dribble.success, alignment: 'center' },
+        { text: item.dribble.past, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.duel.total, alignment: 'center' },
+        { text: item.duel.won, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.foul.drawn, alignment: 'center' },
+        { text: item.foul.committed, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.card.yellow, alignment: 'center' },
+        { text: item.card.red, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.penalty.won, alignment: 'center' },
+        { text: item.penalty.committed, alignment: 'center' },
+        { text: item.penalty.scored, alignment: 'center' },
+        { text: item.penalty.missed, alignment: 'center' },
+        { text: item.penalty.saved, alignment: 'center' },
+      ]);
+    }
+
+    for (let item of this.players2) {
+      playersArray.push([
+        { text: item.game.minutes, alignment: 'center' },
+        { text: item.goal.total, alignment: 'center' },
+        { text: item.goal.assists, alignment: 'center' },
+        { text: item.passe.accuracy, alignment: 'center' },
+        { text: item.shot.total, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.market_value.market_value, alignment: 'center' },
+        { text: item.market_value.date, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.shot.total, alignment: 'center' },
+        { text: item.shot.on, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.goal.total, alignment: 'center' },
+        { text: item.goal.assists, alignment: 'center' },
+        { text: item.goal.conceded, alignment: 'center' },
+        { text: item.goal.saves, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.substitute.in, alignment: 'center' },
+        { text: item.substitute.out, alignment: 'center' },
+        { text: item.substitute.bench, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.passe.total, alignment: 'center' },
+        { text: item.passe.key, alignment: 'center' },
+        { text: item.passe.accuracy, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.tackle.total, alignment: 'center' },
+        { text: item.tackle.blocks, alignment: 'center' },
+        { text: item.tackle.interceptions, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.dribble.attempts, alignment: 'center' },
+        { text: item.dribble.success, alignment: 'center' },
+        { text: item.dribble.past, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.duel.total, alignment: 'center' },
+        { text: item.duel.won, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.foul.drawn, alignment: 'center' },
+        { text: item.foul.committed, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.card.yellow, alignment: 'center' },
+        { text: item.card.red, alignment: 'center' },
+      ]);
+
+      playersArray.push([
+        { text: item.penalty.won, alignment: 'center' },
+        { text: item.penalty.committed, alignment: 'center' },
+        { text: item.penalty.scored, alignment: 'center' },
+        { text: item.penalty.missed, alignment: 'center' },
+        { text: item.penalty.saved, alignment: 'center' },
+      ]);
+    }
+    
+    console.log(playersArray);
+    
+    const table1 = {
+      style: 'tableExample',
+      table: {
+        widths: [45, 40, 50, 40, 40],
+        body: [
+          playersArray[0],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table3 = {
+      style: 'tableExample',
+      table: {
+        widths: ['*', '*'],
+        body: [
+          playersArray[1],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+    
+    const table5 = {
+      style: 'tableExample',
+      table: {
+        widths: ['*', '*'],
+        body: [
+          playersArray[2],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table7 = {
+      style: 'tableExample',
+      table: {
+        widths: ['*', '*', '*', '*'],
+        body: [
+          playersArray[3],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table9 = {
+      style: 'tableExample',
+      table: {
+        widths: [40, 40, 40],
+        body: [
+          playersArray[4],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table11 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50, 50],
+        body: [
+          playersArray[5],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table13 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50, 50],
+        body: [
+          playersArray[6],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table15 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50, 50],
+        body: [
+          playersArray[7],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table17 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50],
+        body: [
+          playersArray[8],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table19 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50],
+        body: [
+          playersArray[9],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table21 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50],
+        body: [
+          playersArray[10],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const table23 = {
+      style: 'tableExample',
+      table: {
+        widths: [45, 40, 50, 40, 40],
+        body: [
+          playersArray[11],
+          ...playersArray.slice(1, this.players1.length + 1),
+        ]
+      },
+    };
+
+    const headerRowTop = playersArray[0].map(cell => ({ ...cell }));
+    const headerRowMarket = playersArray[1].map(cell => ({ ...cell }));
+    const headerRowShot = playersArray[2].map(cell => ({ ...cell }));
+    const headerRowGoal = playersArray[3].map(cell => ({ ...cell }));
+    const headerRowSubstitute = playersArray[4].map(cell => ({ ...cell }));
+    const headerRowPasse = playersArray[5].map(cell => ({ ...cell }));
+    const headerRowTackle = playersArray[6].map(cell => ({ ...cell }));
+    const headerRowDribble = playersArray[7].map(cell => ({ ...cell }));
+    const headerRowDuel = playersArray[8].map(cell => ({ ...cell }));
+    const headerRowFoul = playersArray[9].map(cell => ({ ...cell }));
+    const headerRowCard = playersArray[10].map(cell => ({ ...cell }));
+    const headerRowPenalty = playersArray[11].map(cell => ({ ...cell }));
+
+    const table2 = {
+      style: 'tableExample',
+      table: {
+        widths: [45, 40, 50, 40, 40],
+        body: [
+          headerRowTop,
+          ...playersArray.slice(1 + this.players2.length),
+        ]
+      },
+    };
+
+    const table4 = {
+      style: 'tableExample',
+      table: {
+        widths: ['*', '*'],
+        body: [
+          headerRowMarket,
+          ...playersArray.slice(2 + this.players2.length),
+        ]
+      },
+    };
+
+    const table6 = {
+      style: 'tableExample',
+      table: {
+        widths: ['*', '*'],
+        body: [
+          headerRowShot,
+          ...playersArray.slice(3 + this.players2.length),
+        ]
+      },
+    };
+
+    const table8 = {
+      style: 'tableExample',
+      table: {
+        widths: ['*', '*', '*', '*'],
+        body: [
+          headerRowGoal,
+          ...playersArray.slice(4 + this.players2.length),
+        ]
+      },
+    };
+
+    const table10 = {
+      style: 'tableExample',
+      table: {
+        widths: [40, 40, 40],
+        body: [
+          headerRowSubstitute,
+          ...playersArray.slice(5 + this.players2.length),
+        ]
+      },
+    };
+
+    const table12 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50, 50],
+        body: [
+          headerRowPasse,
+          ...playersArray.slice(6 + this.players2.length),
+        ]
+      },
+    };
+
+    const table14 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50, 50],
+        body: [
+          headerRowTackle,
+          ...playersArray.slice(7 + this.players2.length),
+        ]
+      },
+    };
+
+    const table16 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50, 50],
+        body: [
+          headerRowDribble,
+          ...playersArray.slice(8 + this.players2.length),
+        ]
+      },
+    };
+
+    const table18 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50],
+        body: [
+          headerRowDuel,
+          ...playersArray.slice(9 + this.players2.length),
+        ]
+      },
+    };
+
+    const table20 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50],
+        body: [
+          headerRowFoul,
+          ...playersArray.slice(10 + this.players2.length),
+        ]
+      },
+    };
+
+    const table22 = {
+      style: 'tableExample',
+      table: {
+        widths: [50, 50],
+        body: [
+          headerRowCard,
+          ...playersArray.slice(11 + this.players2.length),
+        ]
+      },
+    };
+
+    const table24 = {
+      style: 'tableExample',
+      table: {
+        widths: [45, 40, 50, 40, 40],
+        body: [
+          headerRowPenalty,
+          ...playersArray.slice(12 + this.players2.length),
+        ]
+      },
+    };
+
+
+    let docDef = {
+      pageSize: { height: 792, width: 612 },
+      content: [
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `${this.players1[0].name} vs ${this.players2[0].name}\n\n`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+
+        {
+          style: 'tableExample',
+          table: {
+            widths: [110, '*', 110, '*'],
+            body: [
+              [
+                { text: 'Nombre del Jugador: ', bold: true, border: [false, false, false, false] },
+                { text: this.players1[0].name || "No se encontraron datos registrados.", border: [false, false, true, false] },
+                { text: 'Nombre del Jugador: ', bold: true, border: [false, false, false, false] },
+                { text: this.players2[0].name || "No se encontraron datos registrados.", border: [false, false, false, false] },
+              ]
+            ]
+          }
+        },
+
+        {
+          style: 'tableExample',
+          table: {
+            widths: [32, '*', 32, '*', 32, '*', 32, '*', 32, '*', 32, '*'],
+            body: [
+              [
+                { text: 'Edad:', bold: true, border: [false, false, false, false] },
+                { text: this.players1[0].age || "0", border: [false, false, false, false] },
+                { text: 'Altura:', bold: true, border: [false, false, false, false] },
+                { text: this.players1[0].height + ' mts' || "0 mts", border: [false, false, false, false] },
+                { text: 'Peso:', bold: true, border: [false, false, false, false] },
+                { text: this.players1[0].weight + ' kg' || "0 kg", border: [false, false, true, false] },
+
+                { text: 'Edad:', bold: true, border: [false, false, false, false] },
+                { text: this.players2[0].age || "0", border: [false, false, false, false] },
+                { text: 'Altura:', bold: true, border: [false, false, false, false] },
+                { text: this.players2[0].height + ' mts' || "0 mts", border: [false, false, false, false] },
+                { text: 'Peso:', bold: true, border: [false, false, false, false] },
+                { text: this.players2[0].weight + ' kg' || "0 kg", border: [false, false, false, false] },
+              ],
+            ]
+          }
+        },
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nTop estadistísticas`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table1,
+            table2,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nValor de mercado`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table3,
+            table4,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nTiros`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table5,
+            table6,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nGoles`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table7,
+            table8,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nSustitutos`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table9,
+            table10,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nPases`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table11,
+            table12,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nEntradas`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table13,
+            table14,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nRegates`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table15,
+            table16,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nDuelos`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table17,
+            table18,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nFaltas`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table19,
+            table20,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nTarjetas`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table21,
+            table22,
+          ],
+        },
+
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [
+                {
+                  text: `\nPenaltis`,
+                  alignment: 'center',
+                  style: 'header',
+                  border: [false, false, false, false],
+                  bold: true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          columns: [
+            table23,
+            table24,
+          ],
+        },
+      ],
+
+      styles: {
+        header: {
+          fontSize: 20,
+          bold: true,
+        },
+        subheader: {
+          fontSize: 9,
+          bold: true,
+        },
+        quote: {
+          italics: true
+        },
+        small: {
+          fontSize: 8
+        },
+        tableExample: {
+          margin: 3,
+          fontSize: 9,
+        }
+      }
+    }
+
+    pdfMake.createPdf(docDef).download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`)
   }
 
   ngOnInit() {
@@ -858,6 +1726,7 @@ export class StatisticsPage implements OnInit {
             })
           },
           )
+          
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
           if (this.players2.length === 0) {
