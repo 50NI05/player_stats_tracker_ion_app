@@ -264,9 +264,8 @@ export class StatisticsPage implements OnInit {
   }
 
   pdfDownload() {
-    let playersArray = [];
-
-    playersArray.push([
+    let playersArrayTop = [];
+    playersArrayTop.push([
       { text: 'Minutos jugados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Goles', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Asistencias', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
@@ -274,63 +273,74 @@ export class StatisticsPage implements OnInit {
       { text: 'Tiros totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayMarket = [];
+    playersArrayMarket.push([
       { text: 'Valor de mercado actual', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Última revisión', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayShot = []
+    playersArrayShot.push([
       { text: 'Tiros totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Tiros al arcos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayGoal = []
+    playersArrayGoal.push([
       { text: 'Goles totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Asistencias', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Recibidos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Salvados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArraySubstitute = []
+    playersArraySubstitute.push([
       { text: 'Ingresos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Sustitutos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Banqueados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayPasse = []
+    playersArrayPasse.push([
       { text: 'Pases totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Pases claves', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Pases precisos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayTackle = []
+    playersArrayTackle.push([
       { text: 'Entradas totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Bloqueadas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Intercepciones', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayDribble = []
+    playersArrayDribble.push([
       { text: 'Regates exitosos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Regates intentas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Regates Superados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayDuel = []
+    playersArrayDuel.push([
       { text: 'Duelos totales', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Duelos ganados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayFoul = []
+    playersArrayFoul.push([
       { text: 'Faltas Realizadas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Faltas Duras', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayCard = []
+    playersArrayCard.push([
       { text: 'Tarjetas amarillas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Tarjetas rojas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
-    playersArray.push([
+    let playersArrayPenalty = []
+    playersArrayPenalty.push([
       { text: 'Penaltis ganados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Penaltis cometidos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
       { text: 'Penaltis marcados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
@@ -339,7 +349,7 @@ export class StatisticsPage implements OnInit {
     ])
 
     for (let item of this.players1) {
-      playersArray.push([
+      playersArrayTop.push([
         { text: item.game.minutes, alignment: 'center' }, 
         { text: item.goal.total, alignment: 'center' }, 
         { text: item.goal.assists, alignment: 'center' }, 
@@ -347,63 +357,63 @@ export class StatisticsPage implements OnInit {
         { text: item.shot.total, alignment: 'center' }, 
       ]);
 
-      playersArray.push([
+      playersArrayMarket.push([
         { text: item.market_value.market_value, alignment: 'center' },
         { text: item.market_value.date, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayShot.push([
         { text: item.shot.total, alignment: 'center' },
         { text: item.shot.on, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayGoal.push([
         { text: item.goal.total, alignment: 'center' },
         { text: item.goal.assists, alignment: 'center' },
         { text: item.goal.conceded, alignment: 'center' },
         { text: item.goal.saves, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArraySubstitute.push([
         { text: item.substitute.in, alignment: 'center' },
         { text: item.substitute.out, alignment: 'center' },
         { text: item.substitute.bench, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayPasse.push([
         { text: item.passe.total, alignment: 'center' },
         { text: item.passe.key, alignment: 'center' },
         { text: item.passe.accuracy, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayTackle.push([
         { text: item.tackle.total, alignment: 'center' },
         { text: item.tackle.blocks, alignment: 'center' },
         { text: item.tackle.interceptions, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayDribble.push([
         { text: item.dribble.attempts, alignment: 'center' },
         { text: item.dribble.success, alignment: 'center' },
         { text: item.dribble.past, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayDuel.push([
         { text: item.duel.total, alignment: 'center' },
         { text: item.duel.won, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayFoul.push([
         { text: item.foul.drawn, alignment: 'center' },
         { text: item.foul.committed, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayCard.push([
         { text: item.card.yellow, alignment: 'center' },
         { text: item.card.red, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayPenalty.push([
         { text: item.penalty.won, alignment: 'center' },
         { text: item.penalty.committed, alignment: 'center' },
         { text: item.penalty.scored, alignment: 'center' },
@@ -413,7 +423,7 @@ export class StatisticsPage implements OnInit {
     }
 
     for (let item of this.players2) {
-      playersArray.push([
+      playersArrayTop.push([
         { text: item.game.minutes, alignment: 'center' },
         { text: item.goal.total, alignment: 'center' },
         { text: item.goal.assists, alignment: 'center' },
@@ -421,63 +431,63 @@ export class StatisticsPage implements OnInit {
         { text: item.shot.total, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayMarket.push([
         { text: item.market_value.market_value, alignment: 'center' },
         { text: item.market_value.date, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayShot.push([
         { text: item.shot.total, alignment: 'center' },
         { text: item.shot.on, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayGoal.push([
         { text: item.goal.total, alignment: 'center' },
         { text: item.goal.assists, alignment: 'center' },
         { text: item.goal.conceded, alignment: 'center' },
         { text: item.goal.saves, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArraySubstitute.push([
         { text: item.substitute.in, alignment: 'center' },
         { text: item.substitute.out, alignment: 'center' },
         { text: item.substitute.bench, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayPasse.push([
         { text: item.passe.total, alignment: 'center' },
         { text: item.passe.key, alignment: 'center' },
         { text: item.passe.accuracy, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayTackle.push([
         { text: item.tackle.total, alignment: 'center' },
         { text: item.tackle.blocks, alignment: 'center' },
         { text: item.tackle.interceptions, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayDribble.push([
         { text: item.dribble.attempts, alignment: 'center' },
         { text: item.dribble.success, alignment: 'center' },
         { text: item.dribble.past, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayDuel.push([
         { text: item.duel.total, alignment: 'center' },
         { text: item.duel.won, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayFoul.push([
         { text: item.foul.drawn, alignment: 'center' },
         { text: item.foul.committed, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayCard.push([
         { text: item.card.yellow, alignment: 'center' },
         { text: item.card.red, alignment: 'center' },
       ]);
 
-      playersArray.push([
+      playersArrayPenalty.push([
         { text: item.penalty.won, alignment: 'center' },
         { text: item.penalty.committed, alignment: 'center' },
         { text: item.penalty.scored, alignment: 'center' },
@@ -486,15 +496,14 @@ export class StatisticsPage implements OnInit {
       ]);
     }
     
-    console.log(playersArray);
     
     const table1 = {
       style: 'tableExample',
       table: {
-        widths: [45, 40, 50, 40, 40],
+        widths: [45, '*', 50, 40, 40],
         body: [
-          playersArray[0],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayTop[0],
+          ...playersArrayTop.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -504,8 +513,8 @@ export class StatisticsPage implements OnInit {
       table: {
         widths: ['*', '*'],
         body: [
-          playersArray[1],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayMarket[0],
+          ...playersArrayMarket.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -515,8 +524,8 @@ export class StatisticsPage implements OnInit {
       table: {
         widths: ['*', '*'],
         body: [
-          playersArray[2],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayShot[0],
+          ...playersArrayShot.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -526,8 +535,8 @@ export class StatisticsPage implements OnInit {
       table: {
         widths: ['*', '*', '*', '*'],
         body: [
-          playersArray[3],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayGoal[0],
+          ...playersArrayGoal.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -535,10 +544,10 @@ export class StatisticsPage implements OnInit {
     const table9 = {
       style: 'tableExample',
       table: {
-        widths: [40, 40, 40],
+        widths: ['*', '*', '*'],
         body: [
-          playersArray[4],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArraySubstitute[0],
+          ...playersArraySubstitute.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -546,10 +555,10 @@ export class StatisticsPage implements OnInit {
     const table11 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50, 50],
+        widths: ['*', '*', '*'],
         body: [
-          playersArray[5],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayPasse[0],
+          ...playersArrayPasse.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -557,10 +566,10 @@ export class StatisticsPage implements OnInit {
     const table13 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50, 50],
+        widths: ['*', '*', '*'],
         body: [
-          playersArray[6],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayTackle[0],
+          ...playersArrayTackle.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -568,10 +577,10 @@ export class StatisticsPage implements OnInit {
     const table15 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50, 50],
+        widths: ['*', '*', '*'],
         body: [
-          playersArray[7],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayDribble[0],
+          ...playersArrayDribble.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -579,10 +588,10 @@ export class StatisticsPage implements OnInit {
     const table17 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50],
+        widths: ['*', '*'],
         body: [
-          playersArray[8],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayDuel[0],
+          ...playersArrayDuel.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -590,10 +599,10 @@ export class StatisticsPage implements OnInit {
     const table19 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50],
+        widths: ['*', '*'],
         body: [
-          playersArray[9],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayFoul[0],
+          ...playersArrayFoul.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -601,10 +610,10 @@ export class StatisticsPage implements OnInit {
     const table21 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50],
+        widths: ['*', '*'],
         body: [
-          playersArray[10],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayCard[0],
+          ...playersArrayCard.slice(1, this.players1.length + 1),
         ]
       },
     };
@@ -612,34 +621,34 @@ export class StatisticsPage implements OnInit {
     const table23 = {
       style: 'tableExample',
       table: {
-        widths: [45, 40, 50, 40, 40],
+        widths: [45, 45, 45, 40, 40],
         body: [
-          playersArray[11],
-          ...playersArray.slice(1, this.players1.length + 1),
+          playersArrayPenalty[0],
+          ...playersArrayPenalty.slice(1, this.players1.length + 1),
         ]
       },
     };
 
-    const headerRowTop = playersArray[0].map(cell => ({ ...cell }));
-    const headerRowMarket = playersArray[1].map(cell => ({ ...cell }));
-    const headerRowShot = playersArray[2].map(cell => ({ ...cell }));
-    const headerRowGoal = playersArray[3].map(cell => ({ ...cell }));
-    const headerRowSubstitute = playersArray[4].map(cell => ({ ...cell }));
-    const headerRowPasse = playersArray[5].map(cell => ({ ...cell }));
-    const headerRowTackle = playersArray[6].map(cell => ({ ...cell }));
-    const headerRowDribble = playersArray[7].map(cell => ({ ...cell }));
-    const headerRowDuel = playersArray[8].map(cell => ({ ...cell }));
-    const headerRowFoul = playersArray[9].map(cell => ({ ...cell }));
-    const headerRowCard = playersArray[10].map(cell => ({ ...cell }));
-    const headerRowPenalty = playersArray[11].map(cell => ({ ...cell }));
+    const headerRowTop = playersArrayTop[0].map(cell => ({ ...cell }));
+    const headerRowMarket = playersArrayMarket[0].map(cell => ({ ...cell }));
+    const headerRowShot = playersArrayShot[0].map(cell => ({ ...cell }));
+    const headerRowGoal = playersArrayGoal[0].map(cell => ({ ...cell }));
+    const headerRowSubstitute = playersArraySubstitute[0].map(cell => ({ ...cell }));
+    const headerRowPasse = playersArrayPasse[0].map(cell => ({ ...cell }));
+    const headerRowTackle = playersArrayTackle[0].map(cell => ({ ...cell }));
+    const headerRowDribble = playersArrayDribble[0].map(cell => ({ ...cell }));
+    const headerRowDuel = playersArrayDuel[0].map(cell => ({ ...cell }));
+    const headerRowFoul = playersArrayFoul[0].map(cell => ({ ...cell }));
+    const headerRowCard = playersArrayCard[0].map(cell => ({ ...cell }));
+    const headerRowPenalty = playersArrayPenalty[0].map(cell => ({ ...cell }));
 
     const table2 = {
       style: 'tableExample',
       table: {
-        widths: [45, 40, 50, 40, 40],
+        widths: [45, '*', 50, 40, 40],
         body: [
           headerRowTop,
-          ...playersArray.slice(1 + this.players2.length),
+          ...playersArrayTop.slice(1 + this.players2.length),
         ]
       },
     };
@@ -650,7 +659,7 @@ export class StatisticsPage implements OnInit {
         widths: ['*', '*'],
         body: [
           headerRowMarket,
-          ...playersArray.slice(2 + this.players2.length),
+          ...playersArrayMarket.slice(1 + this.players2.length),
         ]
       },
     };
@@ -661,7 +670,7 @@ export class StatisticsPage implements OnInit {
         widths: ['*', '*'],
         body: [
           headerRowShot,
-          ...playersArray.slice(3 + this.players2.length),
+          ...playersArrayShot.slice(1 + this.players2.length),
         ]
       },
     };
@@ -672,7 +681,7 @@ export class StatisticsPage implements OnInit {
         widths: ['*', '*', '*', '*'],
         body: [
           headerRowGoal,
-          ...playersArray.slice(4 + this.players2.length),
+          ...playersArrayGoal.slice(1 + this.players2.length),
         ]
       },
     };
@@ -680,10 +689,10 @@ export class StatisticsPage implements OnInit {
     const table10 = {
       style: 'tableExample',
       table: {
-        widths: [40, 40, 40],
+        widths: ['*', '*', '*'],
         body: [
           headerRowSubstitute,
-          ...playersArray.slice(5 + this.players2.length),
+          ...playersArraySubstitute.slice(1 + this.players2.length),
         ]
       },
     };
@@ -691,10 +700,10 @@ export class StatisticsPage implements OnInit {
     const table12 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50, 50],
+        widths: ['*', '*', '*'],
         body: [
           headerRowPasse,
-          ...playersArray.slice(6 + this.players2.length),
+          ...playersArrayPasse.slice(1 + this.players2.length),
         ]
       },
     };
@@ -702,10 +711,10 @@ export class StatisticsPage implements OnInit {
     const table14 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50, 50],
+        widths: ['*', '*', '*'],
         body: [
           headerRowTackle,
-          ...playersArray.slice(7 + this.players2.length),
+          ...playersArrayTackle.slice(1 + this.players2.length),
         ]
       },
     };
@@ -713,10 +722,10 @@ export class StatisticsPage implements OnInit {
     const table16 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50, 50],
+        widths: ['*', '*', '*'],
         body: [
           headerRowDribble,
-          ...playersArray.slice(8 + this.players2.length),
+          ...playersArrayDribble.slice(1 + this.players2.length),
         ]
       },
     };
@@ -724,10 +733,10 @@ export class StatisticsPage implements OnInit {
     const table18 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50],
+        widths: ['*', '*'],
         body: [
           headerRowDuel,
-          ...playersArray.slice(9 + this.players2.length),
+          ...playersArrayDuel.slice(1 + this.players2.length),
         ]
       },
     };
@@ -735,10 +744,10 @@ export class StatisticsPage implements OnInit {
     const table20 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50],
+        widths: ['*', '*'],
         body: [
           headerRowFoul,
-          ...playersArray.slice(10 + this.players2.length),
+          ...playersArrayFoul.slice(1 + this.players2.length),
         ]
       },
     };
@@ -746,10 +755,10 @@ export class StatisticsPage implements OnInit {
     const table22 = {
       style: 'tableExample',
       table: {
-        widths: [50, 50],
+        widths: ['*', '*'],
         body: [
           headerRowCard,
-          ...playersArray.slice(11 + this.players2.length),
+          ...playersArrayCard.slice(1 + this.players2.length),
         ]
       },
     };
@@ -757,14 +766,13 @@ export class StatisticsPage implements OnInit {
     const table24 = {
       style: 'tableExample',
       table: {
-        widths: [45, 40, 50, 40, 40],
+        widths: [45, 45, 45, 40, 40],
         body: [
           headerRowPenalty,
-          ...playersArray.slice(12 + this.players2.length),
+          ...playersArrayPenalty.slice(1 + this.players2.length),
         ]
       },
     };
-
 
     let docDef = {
       pageSize: { height: 792, width: 612 },
@@ -785,7 +793,6 @@ export class StatisticsPage implements OnInit {
             ]
           }
         },
-
         {
           style: 'tableExample',
           table: {
@@ -800,7 +807,6 @@ export class StatisticsPage implements OnInit {
             ]
           }
         },
-
         {
           style: 'tableExample',
           table: {
@@ -820,6 +826,44 @@ export class StatisticsPage implements OnInit {
                 { text: this.players2[0].height + ' mts' || "0 mts", border: [false, false, false, false] },
                 { text: 'Peso:', bold: true, border: [false, false, false, false] },
                 { text: this.players2[0].weight + ' kg' || "0 kg", border: [false, false, false, false] },
+              ],
+            ]
+          }
+        },
+        {
+          style: 'tableExample',
+          table: {
+            widths: [90, '*', 50, '*', 90, '*', 50, '*'],
+            body: [
+              [
+                { text: 'Partidos jugados:', bold: true, border: [false, false, false, false] },
+                { text: this.players1[0].game.appearences || "0", border: [false, false, false, false] },
+                { text: 'Valoración:', bold: true, border: [false, false, false, false] },
+                { text: this.players1[0].game.rating || "0", border: [false, false, true, false] },
+
+                { text: 'Partidos jugados:', bold: true, border: [false, false, false, false] },
+                { text: this.players2[0].game.appearences || "0", border: [false, false, false, false] },
+                { text: 'Valoración:', bold: true, border: [false, false, false, false] },
+                { text: this.players2[0].game.rating || "0", border: [false, false, false, false] },
+              ],
+            ]
+          }
+        },
+        {
+          style: 'tableExample',
+          table: {
+            widths: [50, '*', 40, '*', 50, '*', 40, '*'],
+            body: [
+              [
+                { text: 'Posición:', bold: true, border: [false, false, false, false] },
+                { text: this.players1[0].game.position || "No se encontraron datos registrados.", border: [false, false, false, false] },
+                { text: 'Capitán:', bold: true, border: [false, false, false, false] },
+                { text: this.players1[0].game.captain ? 'Si' : 'No' || "No se encontraron datos registrados.", border: [false, false, true, false] },
+
+                { text: 'Posición:', bold: true, border: [false, false, false, false] },
+                { text: this.players2[0].game.position || "No se encontraron datos registrados.", border: [false, false, false, false] },
+                { text: 'Capitán:', bold: true, border: [false, false, false, false] },
+                { text: this.players2[0].game.captain ? 'Si' : 'No' || "No se encontraron datos registrados.", border: [false, false, false, false] },
               ],
             ]
           }
@@ -968,7 +1012,7 @@ export class StatisticsPage implements OnInit {
             body: [
               [
                 {
-                  text: `\nEntradas`,
+                  text: `Entradas`,
                   alignment: 'center',
                   style: 'header',
                   border: [false, false, false, false],
