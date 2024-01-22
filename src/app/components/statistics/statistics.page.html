@@ -26,7 +26,7 @@
       <form [formGroup]="formTeams">
         <ion-card class="statistics" *ngIf="players1.length !== 0 && players2.length !== 0">
           <div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
-            <div> ¿Deseas un análisis estadísticos? </div>
+            <div> ¿Deseas un análisis comparativos? </div>
             <ion-button fill="clear" (click)="openModal()" style="color: rgb(198, 147, 16);">
               <ion-icon name="arrow-forward"></ion-icon>
             </ion-button>
@@ -52,8 +52,6 @@
               </ion-item>
             </ion-col>
           </ion-row>
-
-          <ion-button (click)="pdfDownload()">a</ion-button>
         </ion-card>
 
         <ion-card *ngIf="squads1.length !== 0 || squads2.length !== 0" class="statistics">
@@ -77,6 +75,10 @@
               </ion-item>
             </ion-col>
           </ion-row>
+
+          <ion-button shape="round" *ngIf="players1.length !== 0 && players2.length !== 0" (click)="pdfDownload()">
+            Descargar PDF <ion-icon name="download-outline"></ion-icon>
+          </ion-button>
         </ion-card>
 
         <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">

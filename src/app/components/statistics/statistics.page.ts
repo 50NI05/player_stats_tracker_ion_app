@@ -9,6 +9,10 @@ import { Constant } from 'src/app/shared/constant/constant.component';
 import { DatePipe } from '@angular/common';
 import { ChatBotPage } from '../chat-bot/chat-bot.page';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { Platform } from '@ionic/angular';
+import { File } from "@awesome-cordova-plugins/file";
+import { FileOpener } from "@awesome-cordova-plugins/file-opener";
+import { Filesystem, Directory } from "@capacitor/filesystem";
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -235,6 +239,7 @@ export class StatisticsPage implements OnInit {
   dataChart2: any;
   profile = this.authService.getProfile();
   band = false;
+  pdfObj: any;
 
   constructor(
     private authService: AuthService,
@@ -245,7 +250,8 @@ export class StatisticsPage implements OnInit {
     public alertController: AlertController,
     private datePipe: DatePipe,
     private modalCtrl: ModalController,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private platform: Platform,
   ) {
     this.formTeams = this.form.group({
       idTeams1: new FormControl('', [Validators.required, e => this.loadSquads1(e)]),
@@ -350,15 +356,15 @@ export class StatisticsPage implements OnInit {
 
     for (let item of this.players1) {
       playersArrayTop.push([
-        { text: item.game.minutes, alignment: 'center' }, 
-        { text: item.goal.total, alignment: 'center' }, 
-        { text: item.goal.assists, alignment: 'center' }, 
-        { text: item.passe.accuracy, alignment: 'center' }, 
-        { text: item.shot.total, alignment: 'center' }, 
+        { text: item.game.minutes, alignment: 'center' },
+        { text: item.goal.total, alignment: 'center' },
+        { text: item.goal.assists, alignment: 'center' },
+        { text: item.passe.accuracy, alignment: 'center' },
+        { text: item.shot.total, alignment: 'center' },
       ]);
 
       playersArrayMarket.push([
-        { text: item.market_value.market_value, alignment: 'center' },
+        { text: item.market_value.market_value + ' mil ' + item.market_value.market_value_currency, alignment: 'center' },
         { text: item.market_value.date, alignment: 'center' },
       ]);
 
@@ -432,7 +438,7 @@ export class StatisticsPage implements OnInit {
       ]);
 
       playersArrayMarket.push([
-        { text: item.market_value.market_value, alignment: 'center' },
+        { text: item.market_value.market_value + ' mil ' + item.market_value.market_value_currency, alignment: 'center' },
         { text: item.market_value.date, alignment: 'center' },
       ]);
 
@@ -495,8 +501,7 @@ export class StatisticsPage implements OnInit {
         { text: item.penalty.saved, alignment: 'center' },
       ]);
     }
-    
-    
+
     const table1 = {
       style: 'tableExample',
       table: {
@@ -518,7 +523,7 @@ export class StatisticsPage implements OnInit {
         ]
       },
     };
-    
+
     const table5 = {
       style: 'tableExample',
       table: {
@@ -1167,7 +1172,27 @@ export class StatisticsPage implements OnInit {
       }
     }
 
-    pdfMake.createPdf(docDef).download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`)
+    this.pdfObj = pdfMake.createPdf(docDef)
+      .download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`);
+    console.log(this.pdfObj);
+
+    // try {
+    //   if (this.platform.is('mobile')) {
+    //     this.pdfObj.getBuffer((buffer: any) => {
+    //       var blob = new Blob([buffer], { type: 'application/pdf' });
+
+    //       File.writeFile(File.dataDirectory, `${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`, blob, { replace: true })
+    //         .then((fileEntry: any) => {
+    //           FileOpener.open(File.dataDirectory + `${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`, 'application/pdf')
+    //         })
+    //         .catch((error: any) => alert('Error al escribir el archivo: ' + JSON.stringify(error)));
+    //     });
+    //   } else {
+    //     this.pdfObj.download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`);
+    //   }
+    // } catch (error) {
+    //   alert('Error en la generación del PDF: ' + JSON.stringify(error));
+    // }
   }
 
   ngOnInit() {
@@ -1770,7 +1795,7 @@ export class StatisticsPage implements OnInit {
             })
           },
           )
-          
+
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
           if (this.players2.length === 0) {

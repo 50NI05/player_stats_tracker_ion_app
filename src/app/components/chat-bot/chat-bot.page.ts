@@ -47,7 +47,7 @@ Lionel Messi, de ${this.dataStatistic1.age} años y nacionalidad ${this.dataStat
 
 Por otro lado, Test Prueba, de ${this.dataStatistic2.age} años y origen ${this.dataStatistic2.nationality}, también compite en la ${this.dataStatistic2.league.name} de ${this.dataStatistic2.league.country} en la temporada ${this.dataStatistic2.league.season}. En su única aparición, ha tenido ${this.dataStatistic2.game.lineups} titularidades y ha jugado ${this.dataStatistic2.game.minutes} minutos como ${this.dataStatistic2.game.position}, con el número ${this.dataStatistic2.game.number}. Su valoración es de ${this.dataStatistic2.game.rating}, habiendo anotado ${this.dataStatistic2.goal.total} goles y realizado ${this.dataStatistic2.goal.assists} asistencias. Test Prueba ha registrado ${this.dataStatistic2.goal.saves} atajadas y ha evitado ${this.dataStatistic2.penalty.saved} penales como parte de su destacada actuación.
 
-Ambos jugadores tienen características únicas y contribuyen de manera significativa a sus respectivos equipos.` + '\n\n\n' + 'Un análisis estadístico')
+Ambos jugadores tienen características únicas y contribuyen de manera significativa a sus respectivos equipos.` + '\n\n\n' + 'Deseo un análisis comparativos')
     }
     this.listQuestions()
   }
