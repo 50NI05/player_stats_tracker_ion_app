@@ -201,7 +201,7 @@
 
             <ion-item counter="true">
               <ion-label position="floating">URL imagen</ion-label>
-              <ion-input placeholder="Ej: https://google.com" formControlName="photo" maxlength="50">
+              <ion-input placeholder="Ej: https://google.com" formControlName="photo" maxlength="450">
               </ion-input>
               <ion-note slot="error" style="color: white;" *ngIf="form.get('player.photo')?.hasError('pattern')">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
