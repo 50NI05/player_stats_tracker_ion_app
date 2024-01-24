@@ -1173,26 +1173,48 @@ export class StatisticsPage implements OnInit {
     }
 
     this.pdfObj = pdfMake.createPdf(docDef)
-      .download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`);
+    // .download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`);
     console.log(this.pdfObj);
 
-    // try {
-    //   if (this.platform.is('mobile')) {
-    //     this.pdfObj.getBuffer((buffer: any) => {
-    //       var blob = new Blob([buffer], { type: 'application/pdf' });
+    try {
+      if (this.platform.is('mobile')) {
+        this.pdfObj.getBuffer((buffer: any) => {
+          var blob = new Blob([buffer], { type: 'application/pdf' });
 
-    //       File.writeFile(File.dataDirectory, `${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`, blob, { replace: true })
-    //         .then((fileEntry: any) => {
-    //           FileOpener.open(File.dataDirectory + `${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`, 'application/pdf')
-    //         })
-    //         .catch((error: any) => alert('Error al escribir el archivo: ' + JSON.stringify(error)));
-    //     });
-    //   } else {
-    //     this.pdfObj.download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`);
-    //   }
-    // } catch (error) {
-    //   alert('Error en la generación del PDF: ' + JSON.stringify(error));
-    // }
+          File.writeFile(File.dataDirectory, `${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`, blob, { replace: true })
+            .then((fileEntry: any) => {
+              FileOpener.open(File.dataDirectory + `${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`, 'application/pdf')
+            })
+            .catch((error: any) => {
+              alertModal({
+                title: 'Error de Descarga del PDF',
+                text: 'Se ha producido un error al intentar descargar el PDF. Por favor, verifica tu conexión a internet y vuelve a intentarlo.',
+                button: [
+                  {
+                    cssClass: 'alert-button-cancel',
+                    text: 'Cerrar',
+                  }
+                ],
+                alertController: this.alertController
+              })
+            });
+        });
+      } else {
+        this.pdfObj.download(`${this.players1.map(e => e.name)[0]} vs ${this.players2.map(e => e.name)[0]}`);
+      }
+    } catch (error) {
+      alertModal({
+        title: 'Error de Descarga del PDF',
+        text: 'Se ha producido un error al intentar descargar el PDF. Por favor, verifica tu conexión a internet y vuelve a intentarlo.',
+        button: [
+          {
+            cssClass: 'alert-button-cancel',
+            text: 'Cerrar',
+          }
+        ],
+        alertController: this.alertController
+      })
+    }
   }
 
   ngOnInit() {
