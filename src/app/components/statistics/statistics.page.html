@@ -76,8 +76,9 @@
             </ion-col>
           </ion-row>
 
-          <ion-button shape="round" *ngIf="players1.length !== 0 && players2.length !== 0" (click)="pdfDownload()">
-            Ver PDF <ion-icon name="download-outline"></ion-icon>
+          <ion-button class="viewPDF" shape="round" *ngIf="players1.length !== 0 && players2.length !== 0"
+            (click)="pdfDownload()">
+            Ver PDF
           </ion-button>
         </ion-card>
 

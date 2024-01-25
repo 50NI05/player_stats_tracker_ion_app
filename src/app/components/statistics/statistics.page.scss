@@ -68,6 +68,7 @@ ion-button {
   background: rgb(198, 147, 16);
   border-radius: 20px;
   padding: 5px 0;
+  margin-bottom: 15px;
 }
 
 .text-middle-20 {
@@ -117,9 +118,14 @@ ion-item::part(native) {
   background: rgb(198, 147, 16);
   color: white;
   padding: 5px 0;
+  margin-bottom: 15px;
 }
 
 canvas {
   width: 100% !important;
   height: 250px !important;
+}
+
+.viewPDF {
+  margin-top: 10px;
 }
