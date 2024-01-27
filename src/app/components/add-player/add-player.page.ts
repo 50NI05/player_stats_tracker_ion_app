@@ -176,7 +176,7 @@ export class AddPlayerPage implements OnInit {
         } else {
           console.log(response)
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -293,7 +293,7 @@ export class AddPlayerPage implements OnInit {
       next: async (response) => {
         if (response.status === Constant.SUCCESS) {
           alertModal({
-            title: 'Nuevo Jugador Agregado',
+            title: 'Jugador Agregado Exitosamente',
             text: response.data,
             button: [
               {
@@ -313,7 +313,7 @@ export class AddPlayerPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: response.status,
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {

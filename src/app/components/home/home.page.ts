@@ -31,19 +31,19 @@ export class HomePage implements OnInit {
     //   route: '/chat-bot',
     // },
     {
-      title: 'Agregar Equipo',
+      title: 'Registrar Equipo',
       route: '/add-team',
     },
     {
-      title: 'Agregar Jugador',
+      title: 'Registrar Jugador',
       route: '/add-player',
     },
     {
-      title: 'Ver Jugadores',
+      title: 'Lista de Jugador',
       route: '/table-players',
     },
     {
-      title: 'Ver Usuarios',
+      title: 'Lista de Usuario',
       route: '/users',
     },
   ]

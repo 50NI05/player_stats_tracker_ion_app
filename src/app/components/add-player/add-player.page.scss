@@ -74,10 +74,12 @@ ion-modal {
   background-position: 85% 50%;
   background-size: cover;
   height: 100%;
+  overflow-y: scroll;
 }
 
 .wallpaper-opacity {
   background: rgb(94, 33, 41, 0.8);
+  overflow-y: scroll;
 }
 
 ion-note {
@@ -95,4 +97,14 @@ ion-item::part(native) {
   background: rgb(198, 147, 16);
   margin-bottom: 35px;
   padding: 5px 0;
+}
+
+.alert-tappable.alert-radio {
+  height: auto;
+  contain: content;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+  white-space: normal;
 }

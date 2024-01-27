@@ -1507,7 +1507,7 @@ export class StatisticsPage implements OnInit {
         } else {
           console.log(response)
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -1560,7 +1560,7 @@ export class StatisticsPage implements OnInit {
           console.log(response)
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -1619,7 +1619,7 @@ export class StatisticsPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -1679,7 +1679,7 @@ export class StatisticsPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -1830,7 +1830,7 @@ export class StatisticsPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -1975,7 +1975,7 @@ export class StatisticsPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {

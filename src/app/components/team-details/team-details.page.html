@@ -43,13 +43,12 @@
           </ion-item>
 
           <ion-item counter="true" class="form">
-            <ion-label position="floating">País</ion-label>
-            <ion-input formControlName="country" maxlength="30"></ion-input>
-            <ion-note *ngIf="form.controls['country'].hasError('pattern')" slot="error">
+            <ion-label position="floating">Estado</ion-label>
+            <ion-input formControlName="state" maxlength="30"></ion-input>
+            <ion-note *ngIf="form.controls['state'].hasError('pattern')" slot="error">
               {{ 'CHARACTER_NOT_ALLOWED' | translate }}
             </ion-note>
-            <ion-note *ngIf="form.controls['country'].hasError('required') && form.get('country')?.touched"
-              slot="error">
+            <ion-note *ngIf="form.controls['state'].hasError('required') && form.get('state')?.touched" slot="error">
               {{ 'REQUIRED' | translate }}
             </ion-note>
           </ion-item>

@@ -110,7 +110,7 @@ export class UserInformationPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: response.status,
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -184,7 +184,7 @@ export class UserInformationPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Succes',
+            title: 'Actualización de Datos Exitosa',
             text: 'Usuario actualizado exitosamente',
             button: [
               {
@@ -200,7 +200,7 @@ export class UserInformationPage implements OnInit {
         } else {
           this.loadingCtrl.dismiss()
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {

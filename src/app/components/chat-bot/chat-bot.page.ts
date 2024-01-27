@@ -112,10 +112,9 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
 
           } else {
             console.log(response)
-            this.loadingCtrl.dismiss()
 
             alertModal({
-              title: response.status,
+              title: 'Error en la Pregunta',
               text: response.data,
               button: [
                 {
@@ -162,6 +161,8 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
       this.authService.call(data, 'message', 'POST', true).subscribe({
         next: (response) => {
           console.log(response)
+          this.loadingCtrl.dismiss()
+
           if (response.status === Constant.SUCCESS) {
             setTimeout(() => {
               this.messages.push({
@@ -169,14 +170,11 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
                 isSender: false,
               });
             }, 1000);
-
-            this.loadingCtrl.dismiss()
           } else {
             console.log(response)
-            this.loadingCtrl.dismiss()
 
             alertModal({
-              title: response.status,
+              title: 'Error en la Plataforma',
               text: response.data,
               button: [
                 {
@@ -228,8 +226,8 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: response.status,
-            text: response.data,
+            title: 'Error en la Plataforma',
+            text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
             button: [
               {
                 cssClass: 'alert-button-cancel',

@@ -284,7 +284,7 @@ export class TablePlayersPage implements OnInit {
             this.loadingCtrl.dismiss()
 
             alertModal({
-              title: 'Error',
+              title: 'Error en la Plataforma',
               text: response.data,
               button: [
                 {
@@ -329,7 +329,7 @@ export class TablePlayersPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -373,7 +373,7 @@ export class TablePlayersPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {

@@ -132,7 +132,7 @@ export class UsersPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: response.status,
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -223,7 +223,7 @@ export class UsersPage implements OnInit {
         this.loadingCtrl.dismiss();
         if (response.status === Constant.SUCCESS) {
           alertModal({
-            title: response.status,
+            title: 'Eliminación de Usuario',
             text: 'Usuario eliminado exitosamente',
             button: [
               {
@@ -238,7 +238,7 @@ export class UsersPage implements OnInit {
         } else {
           this.loadingCtrl.dismiss();
           alertModal({
-            title: response.status,
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {

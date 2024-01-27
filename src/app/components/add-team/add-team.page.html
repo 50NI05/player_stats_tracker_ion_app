@@ -14,44 +14,65 @@
         <!-- <ion-icon name="football" class="equipo-icon"></ion-icon> -->
         <h4 class="title">Agregar Equipo</h4>
         <form [formGroup]="addTeamForm">
-          <ion-item>
+          <ion-item counter="true">
             <ion-label position="floating">Nombre del Equipo</ion-label>
-            <ion-input formControlName="teamName" maxlength="50"></ion-input>
+            <ion-input type="text" formControlName="teamName" maxlength="50"></ion-input>
             <ion-note
               *ngIf="addTeamForm.controls['teamName'].hasError('required') && addTeamForm.get('teamName')?.touched"
               slot="error" style="color: white;">
               {{ 'REQUIRED' | translate }}
             </ion-note>
+            <ion-note slot="error" style="color: white;"
+              *ngIf="addTeamForm.get('teamName')?.hasError('maxDigitsExceeded')">
+              {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+            </ion-note>
+            <ion-note slot="error" style="color: white;" *ngIf="addTeamForm.get('teamName')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
           </ion-item>
 
           <ion-row style="margin: 0 -5px;">
             <ion-col style="margin-right: 20px;">
-              <ion-item>
-                <ion-label position="floating">País</ion-label>
-                <ion-input formControlName="teamCountry" maxlength="25"></ion-input>
+              <ion-item counter="true">
+                <ion-label position="floating">Estado</ion-label>
+                <ion-input type="text" formControlName="teamState" maxlength="25"></ion-input>
                 <ion-note
-                  *ngIf="addTeamForm.controls['teamCountry'].hasError('required') && addTeamForm.get('teamCountry')?.touched"
+                  *ngIf="addTeamForm.controls['teamState'].hasError('required') && addTeamForm.get('teamState')?.touched"
                   slot="error" style="color: white;">
                   {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="addTeamForm.get('teamState')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;" *ngIf="addTeamForm.get('teamState')?.hasError('pattern')">
+                  {{ 'CHARACTER_NOT_ALLOWED' | translate }}
                 </ion-note>
               </ion-item>
             </ion-col>
             <ion-col>
-              <ion-item>
-                <ion-label position="floating">Fundación</ion-label>
-                <ion-input formControlName="teamFounded" maxlength="4"></ion-input>
+              <ion-item counter="true">
+                <ion-label position="floating">Año de Fundación</ion-label>
+                <ion-input type="number" formControlName="teamFounded" maxlength="4"></ion-input>
                 <ion-note
                   *ngIf=" addTeamForm.controls['teamFounded'].hasError('required') && addTeamForm.get('teamFounded')?.touched"
                   slot="error" style="color: white;">
                   {{ 'REQUIRED' | translate }}
+                </ion-note>
+                <ion-note slot="error" style="color: white;"
+                  *ngIf="addTeamForm.get('teamFounded')?.hasError('maxDigitsExceeded')">
+                  {{ 'MAX_CHARACTER_REQUIRED' | translate }}
                 </ion-note>
               </ion-item>
             </ion-col>
           </ion-row>
 
           <ion-item>
-            <ion-label position="floating">Logo URL</ion-label>
+            <ion-label position="floating">URL del logo del equipo</ion-label>
             <ion-input formControlName="teamLogoUrl" maxlength="100"></ion-input>
+            <ion-note slot="error" style="color: white;" *ngIf="addTeamForm.get('teamLogoUrl')?.hasError('pattern')">
+              {{ 'CHARACTER_NOT_ALLOWED' | translate }}
+            </ion-note>
           </ion-item>
 
           <ion-button expand="full" color="primary" shape="round" [disabled]="addTeamForm.invalid"

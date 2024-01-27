@@ -28,7 +28,7 @@ export class ForgotPasswordPage implements OnInit {
     public navCtrl: NavController
   ) {
     this.forgotPasswordForm = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern), Validators.minLength(6)]),
+      username: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.Username), Validators.minLength(6)]),
       password: new FormControl('', [Validators.required, Validators.pattern(this.passwordPattern), Validators.minLength(6)])
     })
   }
@@ -37,13 +37,13 @@ export class ForgotPasswordPage implements OnInit {
 
   }
 
-  validateEmail(event: KeyboardEvent) {
+  validateUsername(event: KeyboardEvent) {
     return !(event.key === ' ');
   }
 
-  checkEmail() {
-    if (this.forgotPasswordForm.controls['email'].value[0] === ' ') {
-      this.forgotPasswordForm.controls['email'].reset();
+  checkUsername() {
+    if (this.forgotPasswordForm.controls['username'].value[0] === ' ') {
+      this.forgotPasswordForm.controls['username'].reset();
     }
   }
 
@@ -75,7 +75,7 @@ export class ForgotPasswordPage implements OnInit {
       next: async (response) => {
         if (response.status === Constant.SUCCESS) {
           alertModal({
-            title: response.status,
+            title: 'Cambio de Contraseña Exitoso',
             text: response.data,
             button: [
               {
@@ -95,7 +95,7 @@ export class ForgotPasswordPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: response.status,
+            title: 'Usuario no Encontrado',
             text: response.data,
             button: [
               {

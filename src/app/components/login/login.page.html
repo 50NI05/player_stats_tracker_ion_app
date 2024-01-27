@@ -34,7 +34,7 @@
               </ion-note>
             </ion-item>
 
-            <ion-item class="loginForm" *ngIf="band">
+            <ion-item class="loginForm">
               <ion-label position="floating">Contraseña</ion-label>
               <ion-icon name="lock-closed-outline" fill="clear" slot="start"></ion-icon>
               <div style="display: flex; flex-direction: row;">
@@ -67,12 +67,7 @@
           </div>
         </div>
 
-        <ion-button *ngIf="!band" shape="round" expand="full" [disabled]="formularioLogin.controls['username'].invalid"
-          (keyup.enter)="login(formularioLogin.value)" (click)="nextStep()" class="loginButton"
-          color="primary">Continuar
-        </ion-button>
-
-        <ion-button *ngIf="band" shape="round" expand="full" [disabled]="formularioLogin.invalid"
+        <ion-button shape="round" expand="full" [disabled]="formularioLogin.invalid"
           (keyup.enter)="login(formularioLogin.value)" (click)="login(formularioLogin.value)" class="loginButton"
           color="primary">Iniciar Sesión
         </ion-button>

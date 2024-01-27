@@ -365,8 +365,8 @@ export class PlayerDetailsPage implements OnInit {
       next: async (response) => {
         if (response.status === Constant.SUCCESS) {
           alertModal({
-            title: response.status,
-            text: response.data,
+            title: 'Actualización Exitosa',
+            text: '¡Los datos del jugador se han actualizado con éxito!. La información del jugador ha sido modificada según tus especificaciones.',
             button: [
               {
                 cssClass: 'alert-button-confirm',
@@ -386,7 +386,7 @@ export class PlayerDetailsPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: response.status,
+            title: 'Jugador no Encontrado',
             text: response.data,
             button: [
               {
