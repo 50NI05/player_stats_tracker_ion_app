@@ -171,6 +171,7 @@ export class PlayerDetailsPage implements OnInit {
     this.form.get('player.nationality')!.setValue(this.navParams.get('detailsPlayer')[0].nationality)
     this.form.get('player.height')!.setValue(this.navParams.get('detailsPlayer')[0].height)
     this.form.get('player.weight')!.setValue(this.navParams.get('detailsPlayer')[0].weight)
+    this.form.get('player.photo')!.setValue(this.navParams.get('detailsPlayer')[0].photo)
     this.form.get('player.id_team')!.setValue(this.navParams.get('detailsPlayer')[0].team.id)
 
     this.form.get('game.appearences')!.setValue(this.navParams.get('detailsPlayer')[0].game.appearences)
@@ -263,8 +264,8 @@ export class PlayerDetailsPage implements OnInit {
         console.log(error)
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',
@@ -274,6 +275,31 @@ export class PlayerDetailsPage implements OnInit {
           alertController: this.alertController
         })
       }
+    })
+  }
+
+  alert(form: any) {
+    alertModal({
+      title: 'Confirmar Actualización de Información del Jugador',
+      text: '¿Estás seguro de que deseas actualizar la información de este jugador? Una vez confirmado, los cambios se guardarán y la información del jugador se actualizará oficialmente en el sistema.',
+      button: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.updatePlayer(form)
+          }
+        }
+      ],
+      alertController: this.alertController
     })
   }
 
@@ -339,8 +365,8 @@ export class PlayerDetailsPage implements OnInit {
       next: async (response) => {
         if (response.status === Constant.SUCCESS) {
           alertModal({
-            title: response.status,
-            text: response.data,
+            title: 'Actualización Exitosa',
+            text: '¡Los datos del jugador se han actualizado con éxito!. La información del jugador ha sido modificada según tus especificaciones.',
             button: [
               {
                 cssClass: 'alert-button-confirm',
@@ -360,7 +386,7 @@ export class PlayerDetailsPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: response.status,
+            title: 'Jugador no Encontrado',
             text: response.data,
             button: [
               {
@@ -377,8 +403,8 @@ export class PlayerDetailsPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

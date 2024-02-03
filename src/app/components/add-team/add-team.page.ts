@@ -48,15 +48,25 @@ export class AddTeamPage implements OnInit {
     private modalCtrl: ModalController,
   ) {
     this.addTeamForm = this.form.group({
-      teamName: new FormControl('', [Validators.required]),
-      teamCountry: new FormControl('', [Validators.required]),
-      teamFounded: new FormControl('', [Validators.required]),
-      teamLogoUrl: new FormControl(''),
+      teamName: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.Name), this.validateMaxDigits(50)]),
+      teamState: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.Name), this.validateMaxDigits(25)]),
+      teamFounded: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
+      teamLogoUrl: new FormControl('', [Validators.pattern(Constant.Pattern.Form.HTTP)]),
     })
   }
 
   ngOnInit() {
     this.getAllTeams()
+  }
+
+  validateMaxDigits(maxDigits: number) {
+    return (control: { value: any; }) => {
+      const value = control.value;
+      if (value && value.toString().length > maxDigits) {
+        return { maxDigitsExceeded: true };
+      }
+      return null;
+    };
   }
 
   async openModal(idTeam: any) {
@@ -98,8 +108,8 @@ export class AddTeamPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Error',
-            text: 'Falla en el servidor',
+            title: 'Error en la Plataforma',
+            text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
             button: [
               {
                 cssClass: 'alert-button-cancel',
@@ -119,7 +129,7 @@ export class AddTeamPage implements OnInit {
 
     let data = {
       name: form.teamName,
-      country: form.teamCountry,
+      country: form.teamState,
       founded: form.teamFounded,
       logo: form.teamLogoUrl
     }
@@ -130,8 +140,8 @@ export class AddTeamPage implements OnInit {
           this.loadingCtrl.dismiss();
           this.getAllTeams()
           alertModal({
-            title: response.status,
-            text: 'Equipo agregado exitosamente',
+            title: 'Equipo Agregado Exitosamente',
+            text: 'Felicidades, has agregado el equipo exitosamente',
             button: [
               {
                 cssClass: 'alert-button-confirm',
@@ -145,7 +155,7 @@ export class AddTeamPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: response.status,
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -162,8 +172,8 @@ export class AddTeamPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',
@@ -190,7 +200,7 @@ export class AddTeamPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: response.status,
+            title: 'Error en la Plataforma.',
             text: response.data,
             button: [
               {
@@ -207,8 +217,8 @@ export class AddTeamPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

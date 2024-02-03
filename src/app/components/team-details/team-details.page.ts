@@ -26,7 +26,7 @@ export class TeamDetailsPage implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.Name), this.validateMaxDigits(50)]),
-      country: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.Name), this.validateMaxDigits(30)]),
+      state: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.Name), this.validateMaxDigits(30)]),
       founded: new FormControl('', [Validators.required, Validators.pattern(Constant.Pattern.Form.Phone), this.validateMaxDigits(4)]),
       logo: new FormControl('', [Validators.pattern(Constant.Pattern.Form.HTTP)]),
     })
@@ -39,7 +39,7 @@ export class TeamDetailsPage implements OnInit {
 
   setInformation() {
     this.form.controls['name'].setValue(this.navParams.get('team').name)
-    this.form.controls['country'].setValue(this.navParams.get('team').country)
+    this.form.controls['state'].setValue(this.navParams.get('team').country)
     this.form.controls['founded'].setValue(this.navParams.get('team').founded)
     this.form.controls['logo'].setValue(this.navParams.get('team').logo)
   }
@@ -106,7 +106,7 @@ export class TeamDetailsPage implements OnInit {
 
     let data = {
       name: form.name,
-      country: form.country,
+      country: form.state,
       founded: form.founded,
       logo: form.logo
     }
@@ -117,8 +117,8 @@ export class TeamDetailsPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: response.status,
-            text: 'Equipo actualizado exitosamente',
+            title: 'Actualización Exitosa',
+            text: '¡La información del jugador se ha actualizado con éxito!. Los datos del jugador han sido modificados según tus especificaciones.',
             button: [
               {
                 cssClass: 'alert-button-confirm',
@@ -133,7 +133,7 @@ export class TeamDetailsPage implements OnInit {
         } else {
           this.loadingCtrl.dismiss()
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -150,8 +150,8 @@ export class TeamDetailsPage implements OnInit {
         this.loadingCtrl.dismiss()
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

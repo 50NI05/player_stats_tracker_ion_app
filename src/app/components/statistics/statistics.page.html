@@ -26,7 +26,7 @@
       <form [formGroup]="formTeams">
         <ion-card class="statistics" *ngIf="players1.length !== 0 && players2.length !== 0">
           <div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
-            <div> ¿Deseas un análisis estadísticos? </div>
+            <div> ¿Deseas un análisis comparativos? </div>
             <ion-button fill="clear" (click)="openModal()" style="color: rgb(198, 147, 16);">
               <ion-icon name="arrow-forward"></ion-icon>
             </ion-button>
@@ -38,7 +38,7 @@
           <ion-row>
             <ion-col col-6>
               <ion-item fill="outline">
-                <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams1">
+                <ion-select placeholder="Seleccionar equipo" formControlName="idTeams1">
                   <ion-select-option *ngFor="let team of teams1" [value]="team.id">{{team.name}}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -46,7 +46,7 @@
 
             <ion-col col-6 *ngIf="formTeams.get('idTeams1')?.value !== ''">
               <ion-item fill="outline">
-                <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams2">
+                <ion-select placeholder="Seleccionar equipo" formControlName="idTeams2">
                   <ion-select-option *ngFor="let team of teams2" [value]="team.id">{{team.name}}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -59,7 +59,7 @@
           <ion-row>
             <ion-col col-6 *ngIf="squads1.length !== 0">
               <ion-item fill="outline">
-                <ion-select interface="popover" placeholder="Seleccionar jugador" formControlName="idSquad1">
+                <ion-select placeholder="Seleccionar jugador" formControlName="idSquad1">
                   <ion-select-option *ngFor="let squad of squads1" [value]="squad.id">{{squad.number}} {{
                     squad.name }}</ion-select-option>
                 </ion-select>
@@ -68,13 +68,18 @@
 
             <ion-col col-6 *ngIf="squads2.length !== 0">
               <ion-item fill="outline">
-                <ion-select interface="popover" placeholder="Seleccionar jugador" formControlName="idSquad2">
+                <ion-select placeholder="Seleccionar jugador" formControlName="idSquad2">
                   <ion-select-option *ngFor="let squad of squads2" [value]="squad.id">{{squad.number}}
                     {{squad.name}}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-col>
           </ion-row>
+
+          <ion-button class="viewPDF" shape="round" *ngIf="players1.length !== 0 && players2.length !== 0"
+            (click)="pdfDownload()">
+            Ver PDF
+          </ion-button>
         </ion-card>
 
         <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
@@ -133,16 +138,16 @@
 
             <ion-row class="text-justify" *ngIf="players2.length === 0">
               <div class="text-middle-20">Altura</div>
-              <div *ngFor="let player of players1">{{ player.height }} m</div>
+              <div *ngFor="let player of players1">{{ player.height }} mts</div>
             </ion-row>
             <ion-row *ngIf="players1.length !== 0 && players2.length !== 0" class="text-justify">
-              <div *ngFor="let player of players1">{{ player.height }} m</div>
+              <div *ngFor="let player of players1">{{ player.height }} mts</div>
               <div class="text-middle-20">Altura</div>
-              <div *ngFor="let player of players2">{{ player.height }} m</div>
+              <div *ngFor="let player of players2">{{ player.height }} mts</div>
             </ion-row>
             <ion-row class="text-justify" *ngIf="players1.length === 0">
               <div class="text-middle-20">Altura</div>
-              <div *ngFor="let player of players2">{{ player.height }} m</div>
+              <div *ngFor="let player of players2">{{ player.height }} mts</div>
             </ion-row>
 
             <ion-row class="text-justify" *ngIf="players2.length === 0">
@@ -483,7 +488,7 @@
         <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" class="statistics">
           <ion-card-content>
             <!-- Sustitutos -->
-            <div class="title">Sustitutos</div>
+            <div class="title">Sustituciones</div>
             <ion-row class="text-justify" *ngIf="players2.length === 0">
               <div class="text-middle-40">Ingresos</div>
               <div *ngFor="let player of players1">
@@ -671,7 +676,7 @@
             </ion-row>
 
             <ion-row class="text-justify" *ngIf="players2.length === 0">
-              <div class="text-middle-55">Intercepción</div>
+              <div class="text-middle-55">Intercepciones</div>
               <div *ngFor="let player of players1">
                 {{ player.tackle.interceptions === null ? 0 : player.tackle.interceptions }}
               </div>
@@ -744,7 +749,7 @@
             </ion-row>
 
             <ion-row class="text-justify" *ngIf="players2.length === 0">
-              <div class="text-middle-55">Regates pasados</div>
+              <div class="text-middle-55">Promedio de regates</div>
               <div *ngFor="let player of players1">
                 {{ player.dribble.past === null ? 0 : player.dribble.past }}
               </div>
@@ -753,13 +758,13 @@
               <div *ngFor="let player of players1">
                 {{ player.dribble.past === null ? 0 : player.dribble.past }}
               </div>
-              <div class="text-middle-55">Regates pasados</div>
+              <div class="text-middle-55">Promedio de regates</div>
               <div *ngFor="let player of players2">
                 {{ player.dribble.past === null ? 0 : player.dribble.past }}
               </div>
             </ion-row>
             <ion-row class="text-justify" *ngIf="players1.length === 0">
-              <div class="text-middle-55">Regates pasados</div>
+              <div class="text-middle-55">Promedio de regates</div>
               <div *ngFor="let player of players2">
                 {{ player.dribble.past === null ? 0 : player.dribble.past }}
               </div>

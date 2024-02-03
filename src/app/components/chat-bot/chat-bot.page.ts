@@ -41,13 +41,13 @@ export class ChatBotPage implements OnInit {
       console.log(this.dataStatistic1);
       console.log(this.dataStatistic2);
 
-      this.assistant(`A continuación, se presenta un resumen comparativo de las estadísticas de Lionel Messi y Test Prueba:
+      this.assistant(`A continuación, se presenta un resumen comparativo de las estadísticas de ${this.dataStatistic1.name} y ${this.dataStatistic2.name}:
 
-Lionel Messi, de ${this.dataStatistic1.age} años y nacionalidad ${this.dataStatistic1.nationality}, destaca en la ${this.dataStatistic1.league.name} de ${this.dataStatistic1.league.country}. Durante la temporada ${this.dataStatistic1.league.season}, ha participado en ${this.dataStatistic1.game.appearences} partidos, acumulando ${this.dataStatistic1.game.lineups} titularidades y jugando un total de ${this.dataStatistic1.game.minutes} minutos. Messi, con el dorsal número ${this.dataStatistic1.game.number}, desempeña la posición de ${this.dataStatistic1.game.position} y ha logrado una valoración destacada de ${this.dataStatistic1.game.rating}. Además, ha contribuido con ${this.dataStatistic1.goal.total} goles, ${this.dataStatistic1.goal.assists} asistencias y ${this.dataStatistic1.goal.saves} atajadas como capitán.
+${this.dataStatistic1.name}, de ${this.dataStatistic1.age} años y nacionalidad ${this.dataStatistic1.nationality}, destaca en la ${this.dataStatistic1.league.name} de ${this.dataStatistic1.league.country}. Durante la temporada ${this.dataStatistic1.league.season}, ha participado en ${this.dataStatistic1.game.appearences} partidos, acumulando ${this.dataStatistic1.game.lineups} titularidades y jugando un total de ${this.dataStatistic1.game.minutes} minutos. ${this.dataStatistic1.name}, con el dorsal número ${this.dataStatistic1.game.number}, desempeña la posición de ${this.dataStatistic1.game.position} y ha logrado una valoración destacada de ${this.dataStatistic1.game.rating}. Además, ha contribuido con ${this.dataStatistic1.goal.total} goles, ${this.dataStatistic1.goal.assists} asistencias y ${this.dataStatistic1.goal.saves} atajadas.
 
-Por otro lado, Test Prueba, de ${this.dataStatistic2.age} años y origen ${this.dataStatistic2.nationality}, también compite en la ${this.dataStatistic2.league.name} de ${this.dataStatistic2.league.country} en la temporada ${this.dataStatistic2.league.season}. En su única aparición, ha tenido ${this.dataStatistic2.game.lineups} titularidades y ha jugado ${this.dataStatistic2.game.minutes} minutos como ${this.dataStatistic2.game.position}, con el número ${this.dataStatistic2.game.number}. Su valoración es de ${this.dataStatistic2.game.rating}, habiendo anotado ${this.dataStatistic2.goal.total} goles y realizado ${this.dataStatistic2.goal.assists} asistencias. Test Prueba ha registrado ${this.dataStatistic2.goal.saves} atajadas y ha evitado ${this.dataStatistic2.penalty.saved} penales como parte de su destacada actuación.
+Por otro lado, ${this.dataStatistic2.name}, de ${this.dataStatistic2.age} años y origen ${this.dataStatistic2.nationality}, también compite en la ${this.dataStatistic2.league.name} de ${this.dataStatistic2.league.country} en la temporada ${this.dataStatistic2.league.season}. En su única aparición, ha tenido ${this.dataStatistic2.game.lineups} titularidades y ha jugado ${this.dataStatistic2.game.minutes} minutos como ${this.dataStatistic2.game.position}, con el número ${this.dataStatistic2.game.number}. Su valoración es de ${this.dataStatistic2.game.rating}, habiendo anotado ${this.dataStatistic2.goal.total} goles y realizado ${this.dataStatistic2.goal.assists} asistencias. ${this.dataStatistic2.name} ha registrado ${this.dataStatistic2.goal.saves} atajadas y ha evitado ${this.dataStatistic2.penalty.saved} penales como parte de su destacada actuación.
 
-Ambos jugadores tienen características únicas y contribuyen de manera significativa a sus respectivos equipos.` + '\n\n\n' + 'Un análisis estadístico')
+Ambos jugadores tienen características únicas y contribuyen de manera significativa a sus respectivos equipos.` + '\n\n\n' + 'Deseo un análisis comparativos')
     }
     this.listQuestions()
   }
@@ -100,6 +100,8 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
       this.authService.call(this.data, 'assistant', 'POST', true).subscribe({
         next: (response) => {
           console.log(response)
+          this.loadingCtrl.dismiss()
+
           if (response.status === Constant.SUCCESS) {
             setTimeout(() => {
               this.messages.push({
@@ -108,13 +110,11 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
               });
             }, 1000);
 
-            this.loadingCtrl.dismiss()
           } else {
             console.log(response)
-            this.loadingCtrl.dismiss()
 
             alertModal({
-              title: response.status,
+              title: 'Error en la Pregunta',
               text: response.data,
               button: [
                 {
@@ -131,8 +131,8 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Error',
-            text: 'Falla en el servidor',
+            title: 'Error en la Plataforma',
+            text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
             button: [
               {
                 cssClass: 'alert-button-cancel',
@@ -161,6 +161,8 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
       this.authService.call(data, 'message', 'POST', true).subscribe({
         next: (response) => {
           console.log(response)
+          this.loadingCtrl.dismiss()
+
           if (response.status === Constant.SUCCESS) {
             setTimeout(() => {
               this.messages.push({
@@ -168,14 +170,11 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
                 isSender: false,
               });
             }, 1000);
-
-            this.loadingCtrl.dismiss()
           } else {
             console.log(response)
-            this.loadingCtrl.dismiss()
 
             alertModal({
-              title: response.status,
+              title: 'Error en la Plataforma',
               text: response.data,
               button: [
                 {
@@ -192,8 +191,8 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Error',
-            text: 'Falla en el servidor',
+            title: 'Error en la Plataforma',
+            text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
             button: [
               {
                 cssClass: 'alert-button-cancel',
@@ -217,17 +216,18 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
       next: (response) => {
         console.log(response)
         this.questions = []
+        this.loadingCtrl.dismiss()
+
         if (response.status === Constant.SUCCESS) {
           this.questions = response.data
 
-          this.loadingCtrl.dismiss()
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: response.status,
-            text: response.data,
+            title: 'Error en la Plataforma',
+            text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
             button: [
               {
                 cssClass: 'alert-button-cancel',
@@ -243,8 +243,8 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
         this.loadingCtrl.dismiss()
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

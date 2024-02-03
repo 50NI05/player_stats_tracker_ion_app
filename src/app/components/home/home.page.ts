@@ -31,19 +31,19 @@ export class HomePage implements OnInit {
     //   route: '/chat-bot',
     // },
     {
-      title: 'Agregar Equipo',
+      title: 'Registrar Equipo',
       route: '/add-team',
     },
     {
-      title: 'Agregar Jugador',
+      title: 'Registrar Jugador',
       route: '/add-player',
     },
     {
-      title: 'Ver Jugadores',
+      title: 'Lista de Jugador',
       route: '/table-players',
     },
     {
-      title: 'Ver Usuarios',
+      title: 'Lista de Usuario',
       route: '/users',
     },
   ]
@@ -96,6 +96,24 @@ export class HomePage implements OnInit {
     }
   }
 
+  isOverThreeLines(text: string): boolean {
+    const lineHeight = 16; // Ajusta esto según tu tamaño de línea
+    const maxHeight = 3 * lineHeight; // Máximo permitido para tres líneas
+    const dummyElement = document.createElement('div');
+    dummyElement.style.visibility = 'hidden';
+    dummyElement.style.position = 'absolute';
+    dummyElement.style.width = '300px'; // Ajusta esto según el ancho del contenedor
+    dummyElement.innerHTML = text;
+    document.body.appendChild(dummyElement);
+
+    const isOverThreeLines = dummyElement.clientHeight > maxHeight;
+
+    document.body.removeChild(dummyElement);
+
+    return isOverThreeLines;
+  }
+
+
   async openModalStatistic() {
     const modal = await this.modalCtrl.create({
       component: StatisticsPage,
@@ -133,8 +151,8 @@ export class HomePage implements OnInit {
         console.log(error);
 
         alertModal({
-          title: 'Error',
-          text: 'Sesión Expirado',
+          title: 'Expiración de la Sesión: Han Pasado 24 Horas',
+          text: 'Tu sesión ha expirado debido a inactividad durante las últimas 24 horas. Por favor, vuelve a iniciar sesión para continuar.',
           button: [
             {
               cssClass: 'alert-button-cancel',
@@ -168,8 +186,8 @@ export class HomePage implements OnInit {
         this.loadingCtrl.dismiss()
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',
@@ -219,8 +237,8 @@ export class HomePage implements OnInit {
         this.loadingCtrl.dismiss()
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',
@@ -337,8 +355,8 @@ export class HomePage implements OnInit {
         this.loadingCtrl.dismiss()
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

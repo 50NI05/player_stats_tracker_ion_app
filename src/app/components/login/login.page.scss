@@ -14,7 +14,7 @@
 .forgot-password {
   margin-bottom: 20px;
   text-align: end;
-  color: white;
+  color: black;
   // font-weight: bold;
   font-size: 15px;
   display: flex;
@@ -34,7 +34,7 @@
 
 .register-text {
   // font-weight: bold;
-  color: white;
+  color: black;
   margin-left: 5px;
   background: rgb(198, 147, 16);
   border-radius: 20px;
@@ -83,7 +83,8 @@ ion-item::part(native) {
 }
 
 ion-icon {
-  font-size: 30px;
+  font-size: 35px;
+  color: black;
 }
 
 ion-note {

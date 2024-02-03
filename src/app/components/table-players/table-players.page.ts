@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonModal, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
@@ -117,7 +117,7 @@ export class TablePlayersPage implements OnInit {
     private modalCtrl: ModalController,
   ) {
     this.form = this.fb.group({
-      filter: new FormControl(''),
+      filter: new FormControl('', [Validators.required]),
     })
   }
 
@@ -284,7 +284,7 @@ export class TablePlayersPage implements OnInit {
             this.loadingCtrl.dismiss()
 
             alertModal({
-              title: 'Error',
+              title: 'Error en la Plataforma',
               text: response.data,
               button: [
                 {
@@ -301,8 +301,8 @@ export class TablePlayersPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Error',
-            text: 'Falla en el servidor',
+            title: 'Error en la Plataforma',
+            text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
             button: [
               {
                 cssClass: 'alert-button-cancel',
@@ -329,7 +329,7 @@ export class TablePlayersPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -346,8 +346,8 @@ export class TablePlayersPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',
@@ -373,7 +373,7 @@ export class TablePlayersPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: 'Error',
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -390,8 +390,8 @@ export class TablePlayersPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

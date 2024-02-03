@@ -56,7 +56,7 @@ export class UsersPage implements OnInit {
     private modalCtrl: ModalController,
   ) {
     this.form = this.fb.group({
-      filter: new FormControl(''),
+      filter: new FormControl('', [Validators.required]),
     })
   }
 
@@ -132,7 +132,7 @@ export class UsersPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: response.status,
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -149,8 +149,8 @@ export class UsersPage implements OnInit {
         this.loadingCtrl.dismiss()
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',
@@ -199,8 +199,8 @@ export class UsersPage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: 'Error',
-            text: 'Falla en el servidor',
+            title: 'Error en la Plataforma',
+            text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
             button: [
               {
                 cssClass: 'alert-button-cancel',
@@ -223,7 +223,7 @@ export class UsersPage implements OnInit {
         this.loadingCtrl.dismiss();
         if (response.status === Constant.SUCCESS) {
           alertModal({
-            title: response.status,
+            title: 'Eliminación de Usuario',
             text: 'Usuario eliminado exitosamente',
             button: [
               {
@@ -238,7 +238,7 @@ export class UsersPage implements OnInit {
         } else {
           this.loadingCtrl.dismiss();
           alertModal({
-            title: response.status,
+            title: 'Error en la Plataforma',
             text: response.data,
             button: [
               {
@@ -255,8 +255,8 @@ export class UsersPage implements OnInit {
         this.loadingCtrl.dismiss()
 
         alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

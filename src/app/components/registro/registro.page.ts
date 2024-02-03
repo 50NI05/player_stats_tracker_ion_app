@@ -20,6 +20,7 @@ export class RegistroPage implements OnInit {
 
   form: FormGroup;
   passwordVisibility: boolean = true;
+  band = false;
 
   constructor(
     public fb: FormBuilder,
@@ -121,6 +122,58 @@ export class RegistroPage implements OnInit {
   //   this.navCtrl.navigateRoot('inicio');
   // }
 
+  async nextStep(registerForm: any) {
+    await loadingSpinner(this.loadingCtrl);
+
+    let data = {
+      username: registerForm.username.trim(),
+    }
+    console.log(data);
+    this.loadingCtrl.dismiss();
+
+    this.auth.call(data, 'checkUser', 'POST', false).subscribe({
+      next: (response) => {
+        if (response.status === Constant.ERROR) {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+
+          alertModal({
+            title: 'Usuario Existente',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
+        } else {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+
+          this.band = true
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss();
+
+        alertModal({
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
+          alertController: this.alertController
+        })
+      }
+    })
+  }
+
   async register(registerForm: any) {
     await loadingSpinner(this.loadingCtrl);
 
@@ -142,7 +195,7 @@ export class RegistroPage implements OnInit {
           this.loadingCtrl.dismiss();
           alertModal({
             title: 'Registro Exitoso',
-            text: 'Usuario registrado exitosamente. ¿Deseas iniciar sesión?',
+            text: response.data,
             button: [
               {
                 text: 'Cerrar',
@@ -168,7 +221,7 @@ export class RegistroPage implements OnInit {
           this.loadingCtrl.dismiss();
 
           alertModal({
-            title: response.status,
+            title: 'Usuario Existente',
             text: response.data,
             button: [
               {
@@ -185,8 +238,8 @@ export class RegistroPage implements OnInit {
         this.loadingCtrl.dismiss();
 
         alertModal({
-          title: 'Error',
-          text: '¡Error en el Registro! Por favor, inténtalo de nuevo.',
+          title: 'Error en la Plataforma',
+          text: 'Lo sentimos, ha ocurrido un error en la plataforma. Por favor, intenta nuevamente más tarde.',
           button: [
             {
               cssClass: 'alert-button-cancel',

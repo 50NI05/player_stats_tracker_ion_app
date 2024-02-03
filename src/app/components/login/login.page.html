@@ -11,13 +11,19 @@
         </div>
         <form [formGroup]="formularioLogin">
           <ion-list style="background-color: transparent;">
-            <ion-item class="loginForm">
+            <!-- <ion-item lines="none">
+              <ion-input placeholder="This is placeholder text"></ion-input>
+              <ion-icon name="trophy-outline" slot="start"></ion-icon>
+            </ion-item> -->
+
+            <ion-item class="loginForm" lines="none">
               <ion-label position="floating">Usuario</ion-label>
-              <div style="display: flex; flex-direction: row;">
-                <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="username"
-                  maxlength="15"></ion-input>
-                <ion-icon name="person-outline" fill="clear"></ion-icon>
-              </div>
+              <ion-icon name="person-outline" fill="clear" slot="start"></ion-icon>
+              <!-- <div style="display: flex; flex-direction: row;"> -->
+              <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="username"
+                maxlength="15"></ion-input>
+              <!-- </div> -->
+
               <ion-note *ngIf="formularioLogin.controls['username'].hasError('pattern')" slot="error">
                 {{ 'CHARACTER_NOT_ALLOWED' | translate }}
               </ion-note>
@@ -30,14 +36,16 @@
 
             <ion-item class="loginForm">
               <ion-label position="floating">Contraseña</ion-label>
-
+              <ion-icon name="lock-closed-outline" fill="clear" slot="start"></ion-icon>
               <div style="display: flex; flex-direction: row;">
                 <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
                   [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
                 </ion-input>
                 <div (click)="showPassword()">
-                  <ion-icon fill="clear" *ngIf="passwordVisibility === false" name="eye-outline"></ion-icon>
-                  <ion-icon fill="clear" *ngIf="passwordVisibility === true" name="eye-off-outline"></ion-icon>
+                  <ion-icon fill="clear" *ngIf="passwordVisibility === false" name="eye-outline"
+                    slot="start"></ion-icon>
+                  <ion-icon fill="clear" *ngIf="passwordVisibility === true" name="eye-off-outline"
+                    slot="start"></ion-icon>
                 </div>
               </div>
 
