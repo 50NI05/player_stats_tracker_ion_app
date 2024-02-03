@@ -323,8 +323,8 @@ export class StatisticsPage implements OnInit {
     let playersArrayDribble = []
     playersArrayDribble.push([
       { text: 'Regates exitosos', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
-      { text: 'Regates intentas', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
-      { text: 'Regates Superados', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Intentos de Regates', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
+      { text: 'Promedio de Regates', style: 'subheader', fillColor: '#2B5178', color: 'white', alignment: 'center' },
     ])
 
     let playersArrayDuel = []
