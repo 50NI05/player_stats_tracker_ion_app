@@ -401,7 +401,7 @@ export class StatisticsPage implements OnInit {
       playersArrayDribble.push([
         { text: item.dribble.attempts, alignment: 'center' },
         { text: item.dribble.success, alignment: 'center' },
-        { text: item.dribble.past, alignment: 'center' },
+        { text: item.dribble.past + '%', alignment: 'center' },
       ]);
 
       playersArrayDuel.push([
@@ -475,7 +475,7 @@ export class StatisticsPage implements OnInit {
       playersArrayDribble.push([
         { text: item.dribble.attempts, alignment: 'center' },
         { text: item.dribble.success, alignment: 'center' },
-        { text: item.dribble.past, alignment: 'center' },
+        { text: item.dribble.past + '%', alignment: 'center' },
       ]);
 
       playersArrayDuel.push([
