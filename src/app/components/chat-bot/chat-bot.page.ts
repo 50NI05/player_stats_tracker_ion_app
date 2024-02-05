@@ -91,10 +91,6 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
           prompt: form
         }
       }
-
-      console.log(this.data);
-
-
       this.form.reset()
 
       this.authService.call(this.data, 'assistant', 'POST', true).subscribe({
@@ -209,21 +205,17 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
     }
   }
 
-  async listQuestions() {
-    await loadingSpinner(this.loadingCtrl)
+  listQuestions() {
 
     this.authService.call(null, 'listQuestions', 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
         this.questions = []
-        this.loadingCtrl.dismiss()
-
         if (response.status === Constant.SUCCESS) {
           this.questions = response.data
 
         } else {
           console.log(response)
-          this.loadingCtrl.dismiss()
 
           alertModal({
             title: 'Error en la Plataforma',
@@ -240,7 +232,6 @@ Ambos jugadores tienen características únicas y contribuyen de manera signific
       },
       error: (error) => {
         console.log(error)
-        this.loadingCtrl.dismiss()
 
         alertModal({
           title: 'Error en la Plataforma',
